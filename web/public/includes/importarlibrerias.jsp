@@ -8,8 +8,9 @@
 <!-- styles -->
 <link href="public/css/font-awesome.css" rel="stylesheet">
 <link href="public/css/bootstrap.min.css" rel="stylesheet">
+<link href="public/css/animate.min.css" rel="stylesheet">
+<link href="public/css/owl.carousel.css" rel="stylesheet">
+<link href="public/css/owl.theme.css" rel="stylesheet">
 
 <!-- theme stylesheet -->
 <link href="public/css/style.pink.css" rel="stylesheet" id="theme-stylesheet">
-
-<link rel="shortcut icon" href="public/images/favicon.png">

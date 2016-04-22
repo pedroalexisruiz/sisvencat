@@ -10,8 +10,6 @@
         </title>
 
         <jsp:include page="public/includes/importarlibrerias.jsp" />
-        <jsp:include page="public/js/ventanaregistro.js" />
-
     </head>
 
     <body>
@@ -495,10 +493,6 @@
 
             <!-- /#content -->
         </div>
-
-        <jsp:include page="public/includes/ventanaregistro.jsp" />
-
-
         <!-- /#all -->
         <!-- *** SCRIPTS TO INCLUDE ***
      _________________________________________________________ -->
@@ -510,61 +504,6 @@
         <script src="<%= request.getContextPath()%>/public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
         <script src="<%= request.getContextPath()%>/public/js/owl.carousel.min.js"></script>
         <script src="<%= request.getContextPath()%>/public/js/front.js"></script>
-
-        <script>
-            $(function () {
-
-                $('#signUpBtn').click(function (e) {
-                    e.preventDefault();
-                    signUp();
-                });
-
-                $('#signInBtn').click(function (e) {
-                    e.preventDefault();
-                    signIn();
-                });
-
-            });
-
-
-            function signUp() {
-                var name = $('form[name=signUp] input[name=name]')[0].value;
-                var username = $('form[name=signUp] input[name=username]')[0].value;
-                var email = $('form[name=signUp] input[name=email]')[0].value;
-                var password = $('form[name=signUp] input[name=password]')[0].value;
-
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo URL; ?>User/signUp",
-                    data: {name: name, username: username, email: email, password: password}
-                }).done(function (respuesta) {
-                    if (respuesta == true) {
-                        location.reload();
-                    } else {
-                        alert(respuesta);
-                    }
-
-                });
-            }
-
-            function signIn() {
-                var username = $('form[name=signIn] input[name=username]')[0].value;
-                var password = $('form[name=signIn] input[name=password]')[0].value;
-
-                $.ajax({
-                    type: "POST",
-                    url: "<?php echo URL; ?>User/signIn",
-                    data: {username: username, password: password}
-                }).done(function (respuesta) {
-                    //alert(respuesta);
-                    if (respuesta == 1) {
-                        location.reload();
-                    } else {
-                        alert(respuesta);
-                    }
-                });
-            }
-        </script>
     </body>
 
 </html>

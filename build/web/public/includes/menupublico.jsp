@@ -1,11 +1,11 @@
 <div class="navbar-header">
 
-                <a class="navbar-brand home" href="<%= request.getContextPath()%>/" data-animate-hover="bounce">
-                    <img src="<%= request.getContextPath()%>/public/img/logo.png" alt="Obaju logo" class="hidden-xs">
-                    <img src="<%= request.getContextPath()%>/public/img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
-                </a>
-                
-            </div>
+    <a class="navbar-brand home" href="<%= request.getContextPath()%>/" data-animate-hover="bounce">
+        <img src="<%= request.getContextPath()%>/public/img/logo.png" alt="Obaju logo" class="hidden-xs">
+        <img src="<%= request.getContextPath()%>/public/img/logo-small.png" alt="Obaju logo" class="visible-xs"><span class="sr-only">Obaju - go to homepage</span>
+    </a>
+
+</div>
 <div class="navbar-collapse collapse" id="navigation">
 
     <ul class="nav navbar-nav navbar-left">
@@ -119,7 +119,7 @@
                                 <h5>Prendas</h5>
                                 <div class="banner">
                                     <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/3-1">
-                                        <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/ropaniños.jpg" class="img img-responsive" alt="">
+                                        <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/ropaninos.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -127,7 +127,7 @@
                                 <h5>Zapatos</h5>
                                 <div class="banner">
                                     <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/3-2">
-                                        <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/zapatosniños.png" class="img img-responsive" alt="">
+                                        <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/zapatosninos.png" class="img img-responsive" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                                 <h5>Accessorios</h5>
                                 <div class="banner">
                                     <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/3-3">
-                                        <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/accesoriosniños.jpg" class="img img-responsive" alt="">
+                                        <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/accesoriosninos.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
                             </div>

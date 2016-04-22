@@ -1,4 +1,3 @@
-<script>
 
             function openVentanaRegistro() {
                 $("#all").slideUp("fast");
@@ -9,5 +8,3 @@
                 $("#ventanaregistro").slideUp("fast");
                 $("#all").slideDown("slow");
             }
-            
-</script>
