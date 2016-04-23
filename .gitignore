@@ -1,3 +1,5 @@
+*.class
+*.xml
 project-root-directory/
 + build/
 + dist/
