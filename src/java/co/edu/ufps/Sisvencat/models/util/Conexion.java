@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * clase para conectar, cerrar y gestionar las bases de datos
+ * @author oso
+ */
 public class Conexion {
 
     private Statement consulta;
@@ -20,7 +24,9 @@ public class Conexion {
     private final String db_driver = "com.mysql.jdbc.Driver";
     private final String db_username = "ufps_98";
     private final String db_password = "ufps_98";
-
+    /**
+     * además de crear el objeto sde genera la conexion y se crea la consulta
+     */
     public Conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -36,7 +42,9 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * cierra la conexion a la base de datos.
+     */
     public void close() {
         if (resultado != null) {
             try {
@@ -72,7 +80,11 @@ public class Conexion {
         }
 
     }
-
+    /**
+     * carga un enunciado de tipo preparedStatement
+     * @param sentencia es la sentencia sql a utilizar, puede ser parametrizada
+     * y además se deber usar para insersiones, actualizaciones y eliminaciones. 
+     */
     public void CargaEnunciado(String sentencia) {
         try {
             enunciado = conexion.prepareStatement(sentencia);
@@ -80,7 +92,10 @@ public class Conexion {
             e.printStackTrace();
         }
     }
-
+    /**
+     * obtiene el enunciado preparedStatemet que se habia cargado antes.
+     * @return un enunciado PreparedStetement
+     */
     public PreparedStatement getEnunciado() {
         return enunciado;
     }
@@ -99,11 +114,17 @@ public class Conexion {
         }
         return resultado;
     }
-
+    /**
+     * se obtine la consulta ya cargada en el constructor
+     * @return una consulta Statement
+     */
     public Statement getConsulta() {
         return consulta;
     }
-
+    /**
+     * se obtine un el objeto connection y aintanciado en el contructor
+     * @return 
+     */
     public Connection getConexion() {
         return conexion;
     }
