@@ -16,10 +16,10 @@ public class Conexion {
     private ResultSet resultado;
     private PreparedStatement enunciado;
     private Connection conexion;
-    private final String db_url = "jdbc:mysql://sandbox2.ufps.edu.co/ufps_";
+    private final String db_url = "jdbc:mysql://sandbox2.ufps.edu.co/ufps_98";
     private final String db_driver = "com.mysql.jdbc.Driver";
-    private final String db_username = "ufps_";
-    private final String db_password = "ufps_";
+    private final String db_username = "ufps_98";
+    private final String db_password = "ufps_98";
 
     public Conexion() {
         try {
