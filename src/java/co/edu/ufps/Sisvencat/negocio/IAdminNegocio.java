@@ -9,7 +9,7 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.AdministradorDTO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.CampañaDTO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.VendedorDTO;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.ZonaDTO;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,34 +72,34 @@ public interface IAdminNegocio {
      * @param zona zona con todos los datos necesarios
      * @return codigo de respuesta
      */
-    public int registrarZona(ZonaDTO zona);
+    public int registrarZona(Zona zona);
     
     /**
      * Seleccionar Campaña con todos sus datos
      * @param codigoZona codigo de la zona
      * @return zona seleccionada
      */
-    public ZonaDTO getZona(String codigoZona);
+    public Zona getZona(String codigoZona);
     
     /**
      * Obtiene el listado de zonas en el sistema
      * @return arraylist de zonas
      */
-    public ArrayList<ZonaDTO> getListadoDeZonas();
+    public ArrayList<Zona> getListadoDeZonas();
     
     /**
      * Cambia los datos de la zona, el id NO SE CAMBIA
      * @param zona recibe la zona con los datos ya establecidos
      * @return codigo de respuesta
      */
-    public int modificarZona(ZonaDTO zona);
+    public int modificarZona(Zona zona);
     
     /**
      * Desactiva una zona cambiando su estado
      * @param zona zona con el estado ya modificado
      * @return codigo de respuesta
      */
-    public int desactivarZona(ZonaDTO zona);
+    public int desactivarZona(Zona zona);
     
     //Gestion de Gerentes
     /**

@@ -122,7 +122,7 @@ public class Conexion {
         return consulta;
     }
     /**
-     * se obtine un el objeto connection y aintanciado en el contructor
+     * se obtine un el objeto connection y aintanciado en el
      * @return 
      */
     public Connection getConexion() {
