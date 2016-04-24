@@ -16,4 +16,5 @@ public interface IDAOZona {
     public int eliminar(Zona zona);
     public List<Zona> listar();
     public List<Zona> listar(String where);
+    public boolean closeConn() throws Exception;
 }

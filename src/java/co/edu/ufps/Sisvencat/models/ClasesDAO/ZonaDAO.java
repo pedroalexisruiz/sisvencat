@@ -20,8 +20,12 @@ import java.util.List;
 public class ZonaDAO implements IDAOZona{
     
     private Conexion con;
+    private boolean keepOpenConn;
 
     public ZonaDAO() {
+    }
+    
+    public ZonaDAO(boolean keepOpenConn) {
         this.con = new Conexion();
     }
 
@@ -80,5 +84,14 @@ public class ZonaDAO implements IDAOZona{
            
         return lista;
     }
+    
+    @Override
+    public boolean closeConn() throws Exception {
+        
+        con.close();
+        con = null;
+        keepOpenConn = false;
 
+        return keepOpenConn;
+    }
 }
