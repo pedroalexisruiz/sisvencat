@@ -17,7 +17,22 @@ public class Persona {
     private String Direccion;//direccion de la persona.
     private String telefono;//telefono de la persona.
     private String contraseña;//contraseña de acceso al sistema de la persona.
+    private int tipoUsr;//tipo de usurio de la persona.
+    private int estado;// es in valor para indicar si se encuentra eliminado.
 
+    public Persona() {
+    }
+    
+    public Persona(int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña) {
+        this.cedula = cedula;
+        this.nombre = nombre;
+        this.Apellido = Apellido;
+        this.correo = correo;
+        this.Direccion = Direccion;
+        this.telefono = telefono;
+        this.contraseña = contraseña;
+    }
+    
     public int getCedula() {
         return cedula;
     }
@@ -72,6 +87,22 @@ public class Persona {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public int getTipoUsr() {
+        return tipoUsr;
+    }
+
+    public void setTipoUsr(int tipoUsr) {
+        this.tipoUsr = tipoUsr;
+    }
+    
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
     
 }

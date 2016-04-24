@@ -10,5 +10,5 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  * @author estudiante
  */
 public class ImagenPremioDTO extends Imagen {
-    
+
 }

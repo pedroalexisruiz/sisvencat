@@ -19,6 +19,26 @@ public class Pedido {
     private int valorTotal;//valor total del producto.
     private Date fecha;//fecha en que se realiza el pedido.
 
+    public Pedido() {
+    }
+
+    public Pedido(Premio premio, Vendedor vendedor, Campaña campaña, int valorTotal, Date fecha) {
+        this.premio = premio;
+        this.vendedor = vendedor;
+        this.campaña = campaña;
+        this.valorTotal = valorTotal;
+        this.fecha = fecha;
+    }
+
+    public Pedido(int codigo_pedido, Premio premio, Vendedor vendedor, Campaña campaña, int valorTotal, Date fecha) {
+        this.codigo_pedido = codigo_pedido;
+        this.premio = premio;
+        this.vendedor = vendedor;
+        this.campaña = campaña;
+        this.valorTotal = valorTotal;
+        this.fecha = fecha;
+    }
+    
     public int getCodigo_pedido() {
         return codigo_pedido;
     }

@@ -10,6 +10,22 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  * @author estudiante
  */
 public class Categoria {
+    
+    private int id;//identidicador de la categoria del producto
+    private String nombre;//nombre de la categoria (mujeres, hombres, niños)
+
+    public Categoria() {
+    }
+
+    public Categoria(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Categoria(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+        
 
     public int getId() {
         return id;
@@ -26,7 +42,5 @@ public class Categoria {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    private int id;//identidicador de la categoria del producto
-    private String nombre;//nombre de la categoria (mujeres, hombres, niños)
-    
+   
 }

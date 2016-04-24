@@ -19,9 +19,25 @@ public class Campaña {
     private Date fechaIni;//fecha de inicio de la campaña
     private Date fechaFin;//fecha de finalizacion de la campaña
     private String tema;//(este falto colocarlo en la base de datos) es el tema relacionado a lal campaña: san valentin etc.
-    private List<Producto> productosAso;//son las lista de procutos asociados a la campaña (si cree que esto no va pues borrelo)
-    private List<Premio> premiosAso;//son las listas de productos asociados a la campaña (si cree que esto no va pues borrelo)
 
+    public Campaña() {
+    }
+
+    public Campaña(Date fechaIni, Date fechaFin, String tema) {
+        this.fechaIni = fechaIni;
+        this.fechaFin = fechaFin;
+        this.tema = tema;
+    }
+
+    public Campaña(int codigo_cam, Date fechaIni, Date fechaFin, String tema) {
+        this.codigo_cam = codigo_cam;
+        this.fechaIni = fechaIni;
+        this.fechaFin = fechaFin;
+        this.tema = tema;
+    }
+   
+    
+       
     public int getCodigo_cam() {
         return codigo_cam;
     }
@@ -54,21 +70,6 @@ public class Campaña {
         this.tema = tema;
     }
 
-    public List<Producto> getProductosAso() {
-        return productosAso;
-    }
-
-    public void setProductosAso(List<Producto> productosAso) {
-        this.productosAso = productosAso;
-    }
-
-    public List<Premio> getPremiosAso() {
-        return premiosAso;
-    }
-
-    public void setPremiosAso(List<Premio> premiosAso) {
-        this.premiosAso = premiosAso;
-    }
-    
+      
    
 }

@@ -10,17 +10,16 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  * @author estudiante
  */
 public class Vendedor extends Persona{
-    private int tipoPersona;//tipo de persona.
+    
     private int PuntajeAcumulado;//puntaje acumulado por el vendedor
+    private Gerente ger;//gerente asociado al vendedor
 
-    public int getTipoPersona() {
-        return tipoPersona;
+    public Vendedor(int PuntajeAcumulado, Gerente ger, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña) {
+        super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña);
+        this.PuntajeAcumulado = PuntajeAcumulado;
+        this.ger = ger;
     }
-
-    public void setTipoPersona(int tipoPersona) {
-        this.tipoPersona = tipoPersona;
-    }
-
+    
     public int getPuntajeAcumulado() {
         return PuntajeAcumulado;
     }

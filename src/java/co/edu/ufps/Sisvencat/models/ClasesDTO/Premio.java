@@ -16,6 +16,24 @@ public class Premio {
     private int puntosRequeridos;//cantidad de productos requeridos para reclamar premio.
     private int cantidadDisponible;//cantidad Disponible en el stock del producto.
 
+    public Premio() {
+    }
+
+    public Premio(String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.puntosRequeridos = puntosRequeridos;
+        this.cantidadDisponible = cantidadDisponible;
+    }
+
+    public Premio(int condigo_premio, String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible) {
+        this.condigo_premio = condigo_premio;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.puntosRequeridos = puntosRequeridos;
+        this.cantidadDisponible = cantidadDisponible;
+    }
+
     public int getCondigo_premio() {
         return condigo_premio;
     }

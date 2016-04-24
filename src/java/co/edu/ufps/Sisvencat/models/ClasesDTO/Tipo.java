@@ -13,6 +13,14 @@ public class Tipo {
     private int id;//identificador del tipo de producto.
     private String descripcion;//descripcion del tipo de producto.
 
+    public Tipo() {
+    }
+
+    public Tipo(int id, String descripcion) {
+        this.id = id;
+        this.descripcion = descripcion;
+    }
+    
     public int getId() {
         return id;
     }

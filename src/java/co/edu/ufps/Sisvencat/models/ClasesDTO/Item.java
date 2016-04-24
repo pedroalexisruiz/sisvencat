@@ -11,7 +11,26 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  */
 public class Item {
     private int codigo_item;//codigo que identifica al item.
+    private Producto producto;//producto al cual esta asociado el item.
+    private int cantidad;//cantidad del iten.
+    private int valorTotal;//valor total del item;
 
+    public Item() {
+    }
+
+    public Item(Producto producto, int cantidad, int valorTotal) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.valorTotal = valorTotal;
+    }
+
+    public Item(int codigo_item, Producto producto, int cantidad, int valorTotal) {
+        this.codigo_item = codigo_item;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.valorTotal = valorTotal;
+    }
+    
     public int getCodigo_item() {
         return codigo_item;
     }
@@ -43,7 +62,5 @@ public class Item {
     public void setValorTotal(int valorTotal) {
         this.valorTotal = valorTotal;
     }
-    private Producto producto;//producto al cual esta asociado el item.
-    private int cantidad;//cantidad del iten.
-    private int valorTotal;//valor total del item;
+    
 }

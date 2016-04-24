@@ -10,8 +10,23 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  * @author estudiante
  */
 public class Imagen {
+       
     private int id;//identificador de imagen
+    private String urlImagen;//direccion de la imagen
 
+    public Imagen() {
+    }
+
+    public Imagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+
+    public Imagen(int id, String urlImagen) {
+        this.id = id;
+        this.urlImagen = urlImagen;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -27,5 +42,5 @@ public class Imagen {
     public void setUrlImagen(String urlImagen) {
         this.urlImagen = urlImagen;
     }
-    private String urlImagen;//direccion de la imagen
+    
 }

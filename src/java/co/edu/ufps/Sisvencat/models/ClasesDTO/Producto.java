@@ -17,6 +17,30 @@ public class Producto {
     private int cantidad;//cantidad que hay en el inventario.
     private Categoria categoria;//categoria del producto (mujeres hombre niños);
     private Tipo tipoProducto;//es el tipo de porducto 
+
+    public Producto() {
+    }
+
+    public Producto(String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.valor = valor;
+        this.cantidad = cantidad;
+        this.categoria = categoria;
+        this.tipoProducto = tipoProducto;
+    }
+
+    public Producto(int codigo_p, String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto) {
+        this.codigo_p = codigo_p;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.valor = valor;
+        this.cantidad = cantidad;
+        this.categoria = categoria;
+        this.tipoProducto = tipoProducto;
+    }
+    
+    
     public int getCodigo_p() {
         return codigo_p;
     }
