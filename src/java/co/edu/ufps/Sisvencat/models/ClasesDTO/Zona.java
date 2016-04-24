@@ -17,6 +17,18 @@ public class Zona{
         return codigo_z;
     }
 
+    public Zona() {
+    }
+
+    public Zona(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    public Zona(int codigo_z, String nombre) {
+        this.codigo_z = codigo_z;
+        this.nombre = nombre;
+    }
+
     public void setCodigo_z(int codigo_z) {
         this.codigo_z = codigo_z;
     }
