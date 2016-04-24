@@ -5,13 +5,14 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
-import java.util.List;
+/**
+ *
+ * @author estudiante
+ */
+public class Vendedor extends Persona{
+    private int tipoPersona;//tipo de persona.
+    private int PuntajeAcumulado;//puntaje acumulado por el vendedor
 
-
-public class Gerente extends Persona{
-    ////como tal el administrador no tiene nada que lo diferencie de la persona asi que eso es para separarlo de los demás
-    private int tipoPersona;//tipo de persona es 
-    private List<Vendedor> vendedoresAso;//son lo vendedores asociados al gerente
     public int getTipoPersona() {
         return tipoPersona;
     }
@@ -19,4 +20,13 @@ public class Gerente extends Persona{
     public void setTipoPersona(int tipoPersona) {
         this.tipoPersona = tipoPersona;
     }
+
+    public int getPuntajeAcumulado() {
+        return PuntajeAcumulado;
+    }
+
+    public void setPuntajeAcumulado(int PuntajeAcumulado) {
+        this.PuntajeAcumulado = PuntajeAcumulado;
+    }
+    
 }

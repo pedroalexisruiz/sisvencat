@@ -9,8 +9,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  *
  * @author estudiante
  */
-public class Imagen {
-    private int id;//identificador de imagen
+public class Categoria {
 
     public int getId() {
         return id;
@@ -20,12 +19,14 @@ public class Imagen {
         this.id = id;
     }
 
-    public String getUrlImagen() {
-        return urlImagen;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setUrlImagen(String urlImagen) {
-        this.urlImagen = urlImagen;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-    private String urlImagen;//direccion de la imagen
+    private int id;//identidicador de la categoria del producto
+    private String nombre;//nombre de la categoria (mujeres, hombres, niños)
+    
 }

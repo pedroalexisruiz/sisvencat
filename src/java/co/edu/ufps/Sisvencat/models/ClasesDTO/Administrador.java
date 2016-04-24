@@ -5,13 +5,14 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
-import java.util.List;
+/**
+ *
+ * @author estudiante
+ */
+public class Administrador extends Persona{
+    //como tal el administrador no tiene nada que lo diferencie de la persona asi que eso es para separarlo de los demás
+    private int tipoPersona;
 
-
-public class Gerente extends Persona{
-    ////como tal el administrador no tiene nada que lo diferencie de la persona asi que eso es para separarlo de los demás
-    private int tipoPersona;//tipo de persona es 
-    private List<Vendedor> vendedoresAso;//son lo vendedores asociados al gerente
     public int getTipoPersona() {
         return tipoPersona;
     }

@@ -10,5 +10,14 @@ package co.edu.ufps.Sisvencat.models.ClasesDTO;
  * @author estudiante
  */
 public class ImagenProductoDTO extends Imagen {
+    private Producto producto;//producto asociado a la imagen;
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
     
 }

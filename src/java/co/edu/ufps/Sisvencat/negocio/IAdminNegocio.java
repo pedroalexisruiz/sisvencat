@@ -5,10 +5,10 @@
  */
 package co.edu.ufps.Sisvencat.negocio;
 
-import co.edu.ufps.Sisvencat.models.ClasesDTO.AdministradorDTO;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.CampañaDTO;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.VendedorDTO;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +22,14 @@ public interface IAdminNegocio {
      * @return un entero con la respuesta que devuelva la DAO: 0 correcto, cualquier
      * otro codigo es el codigo de error de SQL 
      */
-    public int actualizarDatos(AdministradorDTO admin, int numDocumento);
+    public int actualizarDatos(Administrador admin, int numDocumento);
     
     /**
      * Cambia la password del admin
      * @param admin objeto administrador con codigo y password nueva
      * @return codigo de respuesta
      */
-    public int cambiarPassword(AdministradorDTO admin);
+    public int cambiarPassword(Administrador admin);
     
     //Gestion de campañas
     /**
@@ -37,34 +37,34 @@ public interface IAdminNegocio {
      * @param campaña campaña con todos los datos necesarios
      * @return codigo de respuesta
      */
-    public int iniciarCampaña(CampañaDTO campaña);
+    public int iniciarCampaña(Campaña campaña);
     
     /**
      * Seleccionar Campaña con todos sus datos
      * @param codigoCampaña codigo de la campaña
      * @return campaña seleccionada
      */
-    public CampañaDTO getCampaña(String codigoCampaña);
+    public Campaña getCampaña(String codigoCampaña);
     
     /**
      * Obtiene el listado de campañas en el sistema
      * @return arraylist de campañas
      */
-    public ArrayList<CampañaDTO> getListadoDeCampañas();
+    public ArrayList<Campaña> getListadoDeCampañas();
     
     /**
      * Cambia los datos de la campaña, el id NO SE CAMBIA
      * @param campaña recibe la campaña con los datos ya establecidos
      * @return codigo de respuesta
      */
-    public int modificarCampaña(CampañaDTO campaña);
+    public int modificarCampaña(Campaña campaña);
     
     /**
      * Desactiva una campaña cambiando su estado
      * @param campaña campaña con el estado ya modificado
      * @return codigo de respuesta
      */
-    public int desactivarCampaña(CampañaDTO campaña);
+    public int desactivarCampaña(Campaña campaña);
     
     //Gestion de Zonas
     /**
@@ -143,26 +143,26 @@ public interface IAdminNegocio {
      * No recibe nada, me devuelve el listado de todos los Vendedores
      * @return 
      */
-    public List<VendedorDTO> getListadoDeVendedores();
+    public List<Vendedor> getListadoDeVendedores();
     
     /**
      * No recibe nada, me devuelve el listado de todos los Vendedores
      * @return 
      */
-    public List<VendedorDTO> getListadoDeVendedoresPorZona(String codigoZona);
+    public List<Vendedor> getListadoDeVendedoresPorZona(String codigoZona);
     /**
      * Registra un nuevo Vendedor 
      * @param vendedor
      * @return el codigo de respuesta
      */
-    public int registrarVendedor(VendedorDTO vendedor);
+    public int registrarVendedor(Vendedor vendedor);
     
     /**
      * Devuelve un Vendedor con todos sus datos
      * @param numDocVendedor num de Documento del vendedor
      * @return Vendedor con todos sus datos
      */
-    public VendedorDTO getVendedor(String numDocVendedor);
+    public Vendedor getVendedor(String numDocVendedor);
     /**
      * Recibe un Vendedor ya con los datos a modificar, y el num de Documento del Vendedor Actual
      * @param vendedor Vendedor con los datos a Modificar ya establecidos
@@ -170,14 +170,14 @@ public interface IAdminNegocio {
      * @return un entero con la respuesta que devuelva la DAO: 0 correcto, cualquier
      * otro codigo es el codigo de error de SQL 
      */
-    public int actualizarVendedor(VendedorDTO vendedor, int numDocumento);
+    public int actualizarVendedor(Vendedor vendedor, int numDocumento);
     
     /**
      * Recibe el Vendedor con su estado ya modificado y retorna en entero la respuesta de la DAO
      * @param vendedor
      * @return codigod e respuesta
      */
-    public int desactivarVendedor(VendedorDTO vendedor);
+    public int desactivarVendedor(Vendedor vendedor);
     
     
 }
