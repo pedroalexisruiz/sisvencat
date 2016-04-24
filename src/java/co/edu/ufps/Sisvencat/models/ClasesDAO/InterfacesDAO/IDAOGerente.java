@@ -4,17 +4,19 @@
  * and open the template in the editor.
  */
 package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
+
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import java.util.List;
+
 /**
- *comportamineto de un IDAOZona
+ *
  * @author oso
  */
-public interface IDAOZona {
-    public int insertar(Zona zona);
-    public int modificar(Zona zona);
-    public int Desactivar(Zona zona);
-    public List<Zona> listar();
-    public List<Zona> listar(String where);
+public interface IDAOGerente {
+    public int insertar(Gerente ger);
+    public int modificar(Gerente ger);
+    public int Desactivar(Gerente ger);
+    public List<Gerente> listar();
+    public List<Gerente> listar(String where);
     public boolean closeConn() throws Exception;
 }

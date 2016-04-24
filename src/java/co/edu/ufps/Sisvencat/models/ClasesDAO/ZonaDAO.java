@@ -58,7 +58,7 @@ public class ZonaDAO implements IDAOZona{
      * error devolvera un -1
      */
     @Override
-    public int eliminar(Zona zona) {
+    public int Desactivar(Zona zona) {
         
        return 0;
     }
