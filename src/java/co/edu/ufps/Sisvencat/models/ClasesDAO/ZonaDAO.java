@@ -52,10 +52,11 @@ public class ZonaDAO implements IDAOZona {
                 keepOpenConn = true;
             }
 
-            String insertar = "INSERT INTO zona VALUES(?,?)";
+            String insertar = "INSERT INTO zona VALUES(?,?,?)";
             state = con.getConexion().prepareStatement(insertar);
             state.setInt(1, zona.getCodigo_z());
             state.setString(2, zona.getNombre());
+            state.setInt(3, zona.getEstado());
             state.execute();
         } catch (SQLException ex) {
             ex.getErrorCode();
@@ -87,8 +88,42 @@ public class ZonaDAO implements IDAOZona {
      */
     @Override
     public int modificar(Zona zona) {
+        
+        int respuesta = 0;
 
-        return 0;
+        PreparedStatement state = null;
+
+        try {
+
+            if (!keepOpenConn) {
+                con = new Conexion();
+                keepOpenConn = true;
+            }
+
+            String modificar = "UPDATE zona SET Nombre=? WHERE Codigo_z=?";
+            state = con.getConexion().prepareStatement(modificar);
+            state.setString(1, zona.getNombre());
+            state.setInt(2, zona.getCodigo_z());
+            state.executeUpdate();
+        } catch (SQLException ex) {
+            ex.getErrorCode();
+        } finally {
+            try {
+                
+                state.close();
+
+                if (!keepOpenConn) {
+                    if (con != null) {
+                        con.close();
+                    }
+                }
+                
+            } catch (SQLException ex) {
+                respuesta = ex.getErrorCode();
+            }
+        }
+
+        return respuesta;
     }
 
     /**
@@ -99,9 +134,43 @@ public class ZonaDAO implements IDAOZona {
      * error devolvera un -1
      */
     @Override
-    public int Desactivar(Zona zona) {
+    public int cambiarEstado(Zona zona) {
+        
+        int respuesta = 0;
 
-        return 0;
+        PreparedStatement state = null;
+
+        try {
+
+            if (!keepOpenConn) {
+                con = new Conexion();
+                keepOpenConn = true;
+            }
+
+            String modificar = "UPDATE zona SET estado=? WHERE Codigo_z=?";
+            state = con.getConexion().prepareStatement(modificar);
+            state.setInt(1, zona.getEstado());
+            state.setInt(2, zona.getCodigo_z());
+            state.executeUpdate();
+        } catch (SQLException ex) {
+            ex.getErrorCode();
+        } finally {
+            try {
+                
+                state.close();
+
+                if (!keepOpenConn) {
+                    if (con != null) {
+                        con.close();
+                    }
+                }
+                
+            } catch (SQLException ex) {
+                respuesta = ex.getErrorCode();
+            }
+        }
+
+        return respuesta;
     }
 
     /**
@@ -112,7 +181,38 @@ public class ZonaDAO implements IDAOZona {
     @Override
     public List<Zona> listar() {
         List<Zona> lista = new ArrayList();
+        
+        PreparedStatement state = null;
 
+        try {
+
+            if (!keepOpenConn) {
+                con = new Conexion();
+                keepOpenConn = true;
+            }
+            state = con.getConexion().prepareStatement("SELECT * FROM zona");
+            ResultSet resultado = state.executeQuery();
+            
+            while(resultado.next()){
+                lista.add(new Zona(resultado.getInt("Codigo_z"), resultado.getString("Nombre"), resultado.getInt("estado")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                
+                state.close();
+
+                if (!keepOpenConn) {
+                    if (con != null) {
+                        con.close();
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
         return lista;
     }
 
@@ -126,6 +226,38 @@ public class ZonaDAO implements IDAOZona {
     public List<Zona> listar(String where) {
         List<Zona> lista = new ArrayList();
 
+        PreparedStatement state = null;
+
+        try {
+
+            if (!keepOpenConn) {
+                con = new Conexion();
+                keepOpenConn = true;
+            }
+            state = con.getConexion().prepareStatement("SELECT * FROM zona WHERE=?");
+            state.setString(1, where);
+            ResultSet resultado = state.executeQuery();
+            
+            while(resultado.next()){
+                lista.add(new Zona(resultado.getInt("Codigo_z"), resultado.getString("Nombre"), resultado.getInt("estado")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                
+                state.close();
+
+                if (!keepOpenConn) {
+                    if (con != null) {
+                        con.close();
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
         return lista;
     }
 

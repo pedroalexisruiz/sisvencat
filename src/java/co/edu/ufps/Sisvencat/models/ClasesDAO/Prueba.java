@@ -6,6 +6,7 @@
 package co.edu.ufps.Sisvencat.models.ClasesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
+import java.util.List;
 
 /**
  *
@@ -14,12 +15,14 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 public class Prueba {
 
     public static void main(String[] args) {
-        Zona zona = new Zona("Medellín");
+        Zona zona = new Zona(7,"Barrancabermeja", 2);
         ZonaDAO zdao = new ZonaDAO();
-        int x = zdao.insertar(zona);
+        int x = zdao.cambiarEstado(zona);
         
-        if(x==0){
-            System.out.println("Si Inserté esa meirda");
+        List<Zona> zonas = zdao.listar();
+        
+        for (Zona zona1 : zonas) {
+            System.out.println(zona1.getCodigo_z()+"-"+zona1.getNombre());
         }
     }
 
