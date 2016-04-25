@@ -13,8 +13,11 @@ public class Administrador extends Persona{
     //como tal el administrador no tiene nada que lo diferencie de la persona asi que eso es para separarlo de los demás
     private int tipoPersona;
 
-    public Administrador(int tipoPersona, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña) {
-        super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña);
+    public Administrador() {
+    }
+
+    public Administrador(int tipoPersona, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int estado) {
+        super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, estado);
         this.tipoPersona = tipoPersona;
     }
     

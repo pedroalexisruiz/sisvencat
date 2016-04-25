@@ -13,10 +13,18 @@ public class Gerente extends Persona{
     private int tipoPersona;//tipo de persona es 
     private List<Vendedor> vendedoresAso;//son lo vendedores asociados al gerente
 
-    public Gerente(int tipoPersona, List<Vendedor> vendedoresAso, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña) {
-        super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña);
+    public Gerente() {
+    }
+
+    public Gerente(int tipoPersona, List<Vendedor> vendedoresAso, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int estado) {
+        super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, estado);
         this.tipoPersona = tipoPersona;
         this.vendedoresAso = vendedoresAso;
+    }
+
+    public Gerente(int tipoPersona, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int estado) {
+        super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, estado);
+        this.tipoPersona = tipoPersona;
     }
     
     public Gerente(int tipoPersona, List<Vendedor> vendedoresAso) {
