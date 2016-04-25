@@ -22,8 +22,8 @@ public class Persona {
 
     public Persona() {
     }
-    
-    public Persona(int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int estado) {
+
+    public Persona(int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.Apellido = Apellido;
@@ -31,7 +31,7 @@ public class Persona {
         this.Direccion = Direccion;
         this.telefono = telefono;
         this.contraseña = contraseña;
-        this.estado = estado;
+        this.tipoUsr = tipoUsr;
     }
     
     public int getCedula() {
