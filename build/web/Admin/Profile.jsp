@@ -42,7 +42,7 @@
                                             </div>
                                             <!-- /#content -->
 
-                                            <jsp:include page="../public/includes/footer.jsp" />
+                                            <jsp:include page="../public/includes/footerLogin.jsp" />
                                             </div>
                                             <!-- /#all -->
                                             </div>

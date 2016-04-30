@@ -13,10 +13,10 @@ import java.util.List;
  * @author oso
  */
 public interface IDAOGerente {
-    public int insertar(Gerente ger);
-    public int modificar(Gerente ger);
-    public int Desactivar(Gerente ger);
-    public List<Gerente> listar();
-    public List<Gerente> listar(String where);
+    public boolean insertar(Gerente ger) throws Exception;
+    public int modificar(Gerente ger) throws Exception;
+    public boolean Desactivar(Gerente ger) throws Exception;
+    public List<Gerente> listar() throws Exception;
+    public List<Gerente> listar(String where) throws Exception;
     public boolean closeConn() throws Exception;
 }

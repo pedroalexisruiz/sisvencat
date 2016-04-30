@@ -1,8 +1,4 @@
-<%-- 
-    Document   : ModificarDatos
-    Created on : 22-abr-2016, 12:09:29
-    Author     : Administrador
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,7 +25,7 @@
 
                     </div>
 
-                    <jsp:include page="../public/includes/admin/panelAdmin.jsp" />
+                    <jsp:include page="../public/includes/vendedor/panelVendedor.jsp" />
                     <div>
                         <div class="col-md-9">
                             <div id="results" class="box">

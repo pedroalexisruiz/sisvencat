@@ -1,5 +1,3 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,7 +23,7 @@
 
                     </div>
 
-                    <jsp:include page="../public/includes/admin/panelAdmin.jsp" />
+                    <jsp:include page="../public/includes/vendedor/panelVendedor.jsp" />
                     <div>
 
                         <div>

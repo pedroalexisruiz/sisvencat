@@ -95,7 +95,7 @@
                 </div>
                 <!-- /#content -->
 
-                <jsp:include page="../public/includes/footer.jsp" />
+                <jsp:include page="../public/includes/footerLogin.jsp" />
             </div>
             <!-- /#all -->
             <script src="../public/js/jquery-1.11.0.min.js"></script>
