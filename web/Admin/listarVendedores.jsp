@@ -3,7 +3,7 @@
 <html>
     <head>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
-        <title>Admin - Gerentes</title>
+        <title>Admin - Vendedores</title>
     </head>
     <body>
         <jsp:include page="../public/includes/admin/header.jsp" />
@@ -18,7 +18,7 @@
                         <ul class="breadcrumb">
                             <li><a href="#">Inicio</a>
                             </li>
-                            <li>Gerentes</li>
+                            <li>Vendedores</li>
                         </ul>
 
                     </div>
@@ -29,13 +29,13 @@
                         <div>
                             <div class="col-md-9">
                                 <div id="results" class="box">
-                                    <h1 class="text-primary">Listado de Gerentes</h1>
+                                    <h1 class="text-primary">Listado de Vendedores</h1>
 
-                                    <p class="lead">Desde esta sección podrás desactivar o modificar la información de cualquier gerente que desees.</p>
+                                    <p class="lead">Desde esta sección podrás desactivar o modificar la información de cualquier vendor que desees.</p>
 
                                     </br>
                                     </br>
-                                    <p class="text-muted">Digita el nombre del Gerente o su Cédula y te simplificaremos la búsqueda.</p>
+                                    <p class="text-muted">Digita el nombre del Vendedor o su Cédula y te simplificaremos la búsqueda.</p>
 
                                     <div class="row">
                                         <div class="col-xs-12 col-md-8">

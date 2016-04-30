@@ -13,7 +13,7 @@
     </head>
     <body>
         <jsp:include page="../public/includes/admin/header.jsp" />
-        
+
         <div id="all">
 
             <div id="content">
@@ -130,23 +130,23 @@
                             </div>
                         </div>
                     </div>
-                                            <!-- /.container -->
-                                            </div>
-                                            <!-- /#content -->
+                    <!-- /.container -->
+                </div>
+                <!-- /#content -->
 
-                                            <jsp:include page="../public/includes/footerLogin.jsp" />
-                                            </div>
-                                            <!-- /#all -->
-                                            </div>
+                <jsp:include page="../public/includes/footerLogin.jsp" />
+            </div>
+            <!-- /#all -->
+        </div>
 
-                                            <script src="../public/js/jquery-1.11.0.min.js"></script>
-                                            <script src="../public/js/fileinput/fileinput.js"></script>
-                                            <script src="../public/js/bootstrap/bootstrap.min.js"></script>
-                                            <script src="../public/js/jquery.cookie.js"></script>
-                                            <script src="../public/js/waypoints.min.js"></script>
-                                            <script src="../public/js/modernizr.js"></script>
-                                            <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
-                                            <script src="../public/js/owl.carousel.min.js"></script>
-                                            <script src="../public/js/front.js"></script>
+        <script src="../public/js/jquery-1.11.0.min.js"></script>
+        <script src="../public/js/fileinput/fileinput.js"></script>
+        <script src="../public/js/bootstrap/bootstrap.min.js"></script>
+        <script src="../public/js/jquery.cookie.js"></script>
+        <script src="../public/js/waypoints.min.js"></script>
+        <script src="../public/js/modernizr.js"></script>
+        <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
+        <script src="../public/js/owl.carousel.min.js"></script>
+        <script src="../public/js/front.js"></script>
     </body>
 </html>

@@ -15,7 +15,7 @@ import java.util.List;
 public class Prueba {
 
     public static void main(String[] args) {
-        Zona zona = new Zona(7,"Barrancabermeja", 2);
+        Zona zona = new Zona(7,"Barrancabermeja", 1);
         ZonaDAO zdao = new ZonaDAO();
         int x = zdao.cambiarEstado(zona);
         

@@ -5,9 +5,7 @@
 
     <head>
 
-        <title>
-            Sisvencat
-        </title>
+        <title>Sisvencat</title>
 
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
     </head>
