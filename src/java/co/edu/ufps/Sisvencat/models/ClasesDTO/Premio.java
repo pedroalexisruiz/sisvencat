@@ -5,6 +5,8 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.util.List;
+
 /**
  *
  * @author estudiante
@@ -15,23 +17,26 @@ public class Premio {
     private String descripcion;//descripcion asociada al producto (medidas, marca, etc.).
     private int puntosRequeridos;//cantidad de productos requeridos para reclamar premio.
     private int cantidadDisponible;//cantidad Disponible en el stock del producto.
+    private List<ImagenPremioDTO> imagenes;//imagenes asociadas al premio.
 
     public Premio() {
     }
 
-    public Premio(String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible) {
+    public Premio(String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible, List<ImagenPremioDTO> imagenes) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.puntosRequeridos = puntosRequeridos;
         this.cantidadDisponible = cantidadDisponible;
+        this.imagenes = imagenes;
     }
 
-    public Premio(int condigo_premio, String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible) {
+    public Premio(int condigo_premio, String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible, List<ImagenPremioDTO> imagenes) {
         this.condigo_premio = condigo_premio;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.puntosRequeridos = puntosRequeridos;
         this.cantidadDisponible = cantidadDisponible;
+        this.imagenes = imagenes;
     }
 
     public int getCondigo_premio() {
@@ -73,5 +78,12 @@ public class Premio {
     public void setCantidadDisponible(int cantidadDisponible) {
         this.cantidadDisponible = cantidadDisponible;
     }
-    
+
+    public List<ImagenPremioDTO> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<ImagenPremioDTO> imagenes) {
+        this.imagenes = imagenes;
+    }
 }

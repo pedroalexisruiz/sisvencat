@@ -5,6 +5,8 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.util.List;
+
 /**
  *
  * @author estudiante
@@ -17,20 +19,22 @@ public class Producto {
     private int cantidad;//cantidad que hay en el inventario.
     private Categoria categoria;//categoria del producto (mujeres hombre niños);
     private Tipo tipoProducto;//es el tipo de porducto 
+    private List<ImagenProductoDTO> imagenes;//imagenes asociadas al producto
 
     public Producto() {
     }
 
-    public Producto(String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto) {
+    public Producto(String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto, List<ImagenProductoDTO> imagenes) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.valor = valor;
         this.cantidad = cantidad;
         this.categoria = categoria;
         this.tipoProducto = tipoProducto;
+        this.imagenes = imagenes;
     }
 
-    public Producto(int codigo_p, String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto) {
+    public Producto(int codigo_p, String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto, List<ImagenProductoDTO> imagenes) {
         this.codigo_p = codigo_p;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -38,9 +42,9 @@ public class Producto {
         this.cantidad = cantidad;
         this.categoria = categoria;
         this.tipoProducto = tipoProducto;
+        this.imagenes = imagenes;
     }
-    
-    
+
     public int getCodigo_p() {
         return codigo_p;
     }
@@ -97,6 +101,12 @@ public class Producto {
         this.tipoProducto = tipoProducto;
     }
 
-  
-    
+    public List<ImagenProductoDTO> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<ImagenProductoDTO> imagenes) {
+        this.imagenes = imagenes;
+    }
+
 }
