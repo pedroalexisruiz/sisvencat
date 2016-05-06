@@ -19,7 +19,8 @@ public class Persona {
     private String contraseña;//contraseña de acceso al sistema de la persona.
     private int tipoUsr;//tipo de usurio de la persona.
     private int estado;// es in valor para indicar si se encuentra eliminado.
-
+    private boolean valido; //si el usuario es valido
+    
     public Persona() {
     }
 
@@ -32,6 +33,14 @@ public class Persona {
         this.telefono = telefono;
         this.contraseña = contraseña;
         this.tipoUsr = tipoUsr;
+    }
+
+    public boolean isValido() {
+        return valido;
+    }
+
+    public void setValido(boolean valido) {
+        this.valido = valido;
     }
     
     public int getCedula() {

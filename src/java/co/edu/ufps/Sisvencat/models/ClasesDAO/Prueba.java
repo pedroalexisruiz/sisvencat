@@ -5,8 +5,16 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDAO;
 
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,15 +23,22 @@ import java.util.List;
 public class Prueba {
 
     public static void main(String[] args) {
-        Zona zona = new Zona(7,"Barrancabermeja", 1);
-        ZonaDAO zdao = new ZonaDAO();
-        int x = zdao.cambiarEstado(zona);
-        
-        List<Zona> zonas = zdao.listar();
-        
-        for (Zona zona1 : zonas) {
-            System.out.println(zona1.getCodigo_z()+"-"+zona1.getNombre());
-        }
-    }
 
+        Campaña ca = new Campaña();
+        ca.setCodigo_cam(2);
+        CampañaDAO caDAO = new CampañaDAO();
+
+        ProductoDAO pDAO = new ProductoDAO();
+
+        List<Producto> productos;
+        try {
+            productos = pDAO.listarDisponibleoNo(ca, false);
+            for (Producto producto : productos) {
+                System.out.println(producto.toString());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

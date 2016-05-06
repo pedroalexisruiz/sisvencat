@@ -12,9 +12,16 @@ import java.util.List;
  */
 public interface IDAOZona {
     public int insertar(Zona zona);
+    
     public int modificar(Zona zona);
+    
     public int cambiarEstado(Zona zona);
+    
     public List<Zona> listar();
-    public List<Zona> listar(String where);
-    public boolean closeConn() throws Exception;
+    
+    public List<Zona> listarPorEstado(int estado);
+    
+    public Zona getZona(Zona zona) throws Exception;
+    
+    public void closeConn() throws Exception;
 }

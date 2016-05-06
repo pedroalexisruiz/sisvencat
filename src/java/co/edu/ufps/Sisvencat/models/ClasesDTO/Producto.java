@@ -109,4 +109,9 @@ public class Producto {
         this.imagenes = imagenes;
     }
 
+    @Override
+    public String toString() {
+        return "Producto{" + "codigo_p=" + codigo_p + ", nombre=" + nombre + ", descripcion=" + descripcion + ", valor=" + valor + ", cantidad=" + cantidad + ", categoria=" + categoria.getNombre() + ", tipoProducto=" + tipoProducto.getDescripcion() + '}';
+    }
+    
 }

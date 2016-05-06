@@ -13,6 +13,9 @@ public class Vendedor extends Persona{
     
     private int PuntajeAcumulado;//puntaje acumulado por el vendedor
 
+    public Vendedor() {
+    }
+
     public Vendedor(int PuntajeAcumulado, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
         super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, tipoUsr);
         this.PuntajeAcumulado = PuntajeAcumulado;
@@ -27,5 +30,11 @@ public class Vendedor extends Persona{
     public void setPuntajeAcumulado(int PuntajeAcumulado) {
         this.PuntajeAcumulado = PuntajeAcumulado;
     }
+
+    @Override
+    public String toString() {
+        return "Vendedor{"+this.getNombre()+" "+this.getApellido() + "PuntajeAcumulado=" + PuntajeAcumulado + '}';
+    }
+    
     
 }
