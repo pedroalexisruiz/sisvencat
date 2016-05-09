@@ -5,18 +5,20 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author estudiante
  */
-public class Vendedor extends Persona{
+public class Vendedor extends Persona implements Serializable{
     
     private int PuntajeAcumulado;//puntaje acumulado por el vendedor
 
     public Vendedor() {
     }
 
-    public Vendedor(int PuntajeAcumulado, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
+    public Vendedor(int PuntajeAcumulado, String cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
         super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, tipoUsr);
         this.PuntajeAcumulado = PuntajeAcumulado;
     }

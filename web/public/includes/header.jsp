@@ -5,9 +5,9 @@
                 </div>
                 <div class="col-md-6" data-animate="fadeInDown">
                     <ul class="menu">
-                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Acceder</a>
+                        <li><a href="login.jsp">Acceder</a>
                         </li>
-                        <li><a href="javaScript:openVentanaRegistro();">Registro</a>
+                        <li><a href="">Registro</a>
                         </li>
                         <li><a href="contact.html">Contáctanos</a>
                         </li>

@@ -7,35 +7,33 @@ import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class PersonaDAO implements Serializable, IDAOPersona {
 
     private Conexion con;
-    private boolean conexionAbierta;
 
-    public PersonaDAO(boolean conexionAbierta) {
+    public PersonaDAO() {
         this.con = new Conexion();
-        this.conexionAbierta = conexionAbierta;
     }
 
     @Override
-    public Persona login(Persona p) throws Exception{
+    public Persona login(Persona p) throws SQLException{
 
-        PreparedStatement stmt = null;
         
         String contrasenaencriptada = new Encriptador().encriptar(p.getContraseña());
-        String consulta = "select * from usuario where numDocumento=? AND contrasena=?";
+        String consulta = "SELECT * FROM persona WHERE Cedula=? AND contrasena=?";
         
-        if (!conexionAbierta) {
+        if (con == null) {
             con = new Conexion();
-            conexionAbierta = true;
         }
-        //connect to DB 
-        con = new Conexion();
-        stmt = con.getConexion().prepareStatement(consulta);
-        stmt.setInt(1, p.getCedula());
-        stmt.setString(2, contrasenaencriptada);
-        ResultSet resultado = stmt.executeQuery(consulta);
+
+        PreparedStatement state = con.getConexion().prepareStatement(consulta);
+        
+        state.setString(1, p.getCedula());
+        state.setString(2, p.getContraseña());
+        
+        ResultSet resultado = state.executeQuery();
         
         boolean more = resultado.next();
         // if user does not exist set the isValid variable to false
@@ -43,52 +41,44 @@ public class PersonaDAO implements Serializable, IDAOPersona {
             p.setValido(false);
         } //if user exists set the isValid variable to true
         else if (more) {
-            p.setCedula(resultado.getInt("numDocumento"));
-            p.setNombre(resultado.getString("nombre"));
-            p.setApellido(resultado.getString("apellido"));
-            p.setCorreo(resultado.getString("correo"));
-            p.setDireccion(resultado.getString("direccion"));
-            p.setEstado(resultado.getInt("estado"));
-            p.setTelefono(resultado.getString("telefono"));
-            p.setTipoUsr(resultado.getInt("tipoUsuario"));
+            p.setCedula(resultado.getString("Cedula"));
+            p.setNombre(resultado.getString("Nombre"));
+            p.setApellido(resultado.getString("Apellido"));
+            p.setCorreo(resultado.getString("Correo"));
+            p.setDireccion(resultado.getString("Direccion"));
+            p.setTelefono(resultado.getString("Telefono"));
+            p.setTipoUsr(resultado.getInt("TipoUsuario"));
             p.setEstado(resultado.getInt("estado"));
             p.setValido(true);
         }
 
-        stmt.close();
+        state.close();
         resultado.close();
 
-        if (!conexionAbierta) {
-            if (con != null) {
-                con.close();
-            }
-        }
+        this.closeConn();
 
         return p;
     }
 
     @Override
-    public boolean modificarDatos(Persona p) throws Exception {
+    public boolean modificarDatos(Persona p, int cedula) throws SQLException {
 
-        if (con.getConexion() == null) {
+        if (con == null) {
             con = new Conexion();
         }
         PreparedStatement enunciado = con.getConexion().prepareStatement("update persona set "
-                + "nombre=?,apellido=?,correo=? WHERE numDocumento=?");
+                + "Nombre=?,Apellido=?,Correo=?, Cedula=? WHERE Cedula=?");
 
         enunciado.setString(1,p.getNombre());
         enunciado.setString(2,p.getApellido());
         enunciado.setString(3,p.getCorreo());
-        enunciado.setInt(4,p.getCedula());
+        enunciado.setString(4,p.getCedula());
+        enunciado.setInt(5, cedula);
         
         enunciado.execute();
 
         enunciado.close();
-        if (!conexionAbierta) {
-            if (con != null) {
-                con.close();
-            }
-        }
+        this.closeConn();
 
         return true;
     }
@@ -96,22 +86,27 @@ public class PersonaDAO implements Serializable, IDAOPersona {
     @Override
     public boolean cambiarContrasena(Persona p) throws Exception {
         
-        if (con.getConexion() == null) {
+        if (con == null) {
             con = new Conexion();
         }
         PreparedStatement enunciado = con.getConexion().prepareStatement("update persona set "
                 + "contrasena=? WHERE numDocumento=?");
         enunciado.setString(1, p.getContraseña());
-        enunciado.setInt(2, p.getCedula());
+        enunciado.setString(2, p.getCedula());
         enunciado.execute();
 
         enunciado.close();
-        if (!conexionAbierta) {
-            if (con != null) {
-                con.close();
-            }
-        }
+        
+        this.closeConn();
 
         return true;
+    }
+    
+    @Override
+    public void closeConn(){
+
+        con.close();
+        con = null;
+
     }
 }

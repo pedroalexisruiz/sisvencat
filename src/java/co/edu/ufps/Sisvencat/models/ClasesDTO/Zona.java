@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *zona que administra cada cliente y a la que tambien pertenecen los vendedores
  * @author estudiante
  */
-public class Zona{
+public class Zona implements Serializable{
     private int codigo_z;//codigo que identifica la zona
     private String nombre;//nombre de la zona
     private int estado;

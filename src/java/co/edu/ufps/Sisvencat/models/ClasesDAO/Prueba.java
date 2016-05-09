@@ -6,6 +6,7 @@
 package co.edu.ufps.Sisvencat.models.ClasesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
@@ -27,17 +28,16 @@ public class Prueba {
         Campaña ca = new Campaña();
         ca.setCodigo_cam(2);
         CampañaDAO caDAO = new CampañaDAO();
-
-        ProductoDAO pDAO = new ProductoDAO();
-
-        List<Producto> productos;
+        PedidoDAO pDAO = new PedidoDAO();
+        
         try {
-            productos = pDAO.listarDisponibleoNo(ca, false);
-            for (Producto producto : productos) {
-                System.out.println(producto.toString());
+            List<Pedido> pedidos = pDAO.listarPorCampaña(ca);
+            
+            for (Pedido pedido : pedidos) {
+                System.out.println(pedido.toString());
             }
         } catch (Exception ex) {
-            Logger.getLogger(Prueba.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }

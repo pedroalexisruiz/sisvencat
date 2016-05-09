@@ -5,13 +5,14 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author estudiante
  */
-public class Premio {
+public class Premio implements Serializable {
     private int condigo_premio;//codigo del premio.
     private String nombre;//nombre del producto.
     private String descripcion;//descripcion asociada al producto (medidas, marca, etc.).

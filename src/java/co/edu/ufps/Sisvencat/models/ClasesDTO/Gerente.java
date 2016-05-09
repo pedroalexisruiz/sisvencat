@@ -5,10 +5,11 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class Gerente extends Persona{
+public class Gerente extends Persona implements Serializable{
     ////como tal el administrador no tiene nada que lo diferencie de la persona asi que eso es para separarlo de los demás
     private List<Vendedor> vendedoresAso;//son lo vendedores asociados al gerente
     private Zona zona;//zona que adminstra el vendedor
@@ -16,7 +17,7 @@ public class Gerente extends Persona{
     public Gerente() {
     }
 
-    public Gerente(List<Vendedor> vendedoresAso, Zona zona, int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
+    public Gerente(List<Vendedor> vendedoresAso, Zona zona, String cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
         super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, tipoUsr);
         this.vendedoresAso = vendedoresAso;
         this.zona = zona;

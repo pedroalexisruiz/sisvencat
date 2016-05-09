@@ -40,7 +40,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
             state = con.getConexion().prepareStatement(sentencia);
             state2 = con.getConexion().prepareStatement(sentencia2);
 
-            state.setInt(1, ger.getCedula());
+            state.setString(1, ger.getCedula());
             state.setString(2, ger.getNombre());
             state.setString(3, ger.getApellido());
             state.setString(4, ger.getCorreo());
@@ -48,7 +48,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
             state.setString(6, ger.getTelefono());
             state.setString(7, ger.getContraseña());
 
-            state2.setInt(1, ger.getCedula());
+            state2.setString(1, ger.getCedula());
             state2.setInt(2, ger.getZona().getCodigo_z());
             state.execute();
             state2.execute();
@@ -93,7 +93,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
         state.setString(3, ger.getCorreo());
         state.setString(4, ger.getDireccion());
         state.setString(5, ger.getTelefono());
-        state.setInt(6, ger.getCedula());
+        state.setString(6, ger.getCedula());
         state.execute();
 
         state.close();
@@ -113,7 +113,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
         }
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         state.setInt(1, ger.getEstado());
-        state.setInt(2, ger.getCedula());
+        state.setString(2, ger.getCedula());
 
         state.execute();
         state.close();
@@ -138,7 +138,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
         ResultSet resultado = state.executeQuery();
 
         while (resultado.next()) {
-            Gerente g = new Gerente(null, null, resultado.getInt("Cedula"), resultado.getString("Nombre"),
+            Gerente g = new Gerente(null, null, resultado.getString("Cedula"), resultado.getString("Nombre"),
                     resultado.getString("Apellido"), resultado.getString("Correo"),
                     resultado.getString("Direccion"), resultado.getString("Telefono"),
                     resultado.getString("contrasena"), resultado.getInt("TipoUsuario"));
@@ -171,13 +171,13 @@ public class GerenteDAO implements Serializable, IDAOGerente {
         }
 
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, ger.getCedula());
+        state.setString(1, ger.getCedula());
         ResultSet rs = state.executeQuery();
         Vendedor vendedor = null;
 
         while (rs.next()) {
 
-            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"), rs.getInt("Cedula"),
+            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"), rs.getString("Cedula"),
                     rs.getString("Nombre"), rs.getString("Apellido"), rs.getString("Correo"),
                     rs.getString("Direccion"), rs.getString("Telefono"), rs.getString("contrasena"),
                     rs.getInt("TipoUsuario"));
@@ -200,7 +200,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
             con = new Conexion();
         }
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, ger.getCedula());
+        state.setString(1, ger.getCedula());
 
         ResultSet resultado = state.executeQuery();
 
@@ -208,7 +208,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
 
         while (resultado.next()) {
 
-            g = new Gerente(null, null, resultado.getInt("Cedula"), resultado.getString("Nombre"),
+            g = new Gerente(null, null, resultado.getString("Cedula"), resultado.getString("Nombre"),
                     resultado.getString("Apellido"), resultado.getString("Correo"),
                     resultado.getString("Direccion"), resultado.getString("Telefono"),
                     resultado.getString("contrasena"), resultado.getInt("TipoUsuario"));
@@ -238,7 +238,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
 
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         state.setString(1, ger.getContraseña());
-        state.setInt(2, ger.getCedula());
+        state.setString(2, ger.getCedula());
         state.execute();
 
         state.close();
@@ -267,7 +267,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
 
         while (rs.next()) {
 
-            gerente = new Gerente(null, null, rs.getInt("Cedula"),
+            gerente = new Gerente(null, null, rs.getString("Cedula"),
                     rs.getString("Nombre"), rs.getString("Apellido"), rs.getString("Correo"),
                     rs.getString("Direccion"), rs.getString("Telefono"), rs.getString("contrasena"),
                     rs.getInt("TipoUsuario"));

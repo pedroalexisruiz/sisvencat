@@ -6,6 +6,7 @@
 package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
+import java.sql.SQLException;
 
 /**
  *
@@ -13,9 +14,11 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
  */
 public interface IDAOPersona {
     
-    public Persona login(Persona p)throws Exception;
+    public Persona login(Persona p)throws SQLException;
     
-    public boolean modificarDatos(Persona p) throws Exception;
+    public boolean modificarDatos(Persona p, int cedula) throws Exception;
     
     public boolean cambiarContrasena(Persona p) throws Exception;
+    
+    public void closeConn();
 }

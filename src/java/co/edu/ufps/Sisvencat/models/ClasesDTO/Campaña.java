@@ -1,6 +1,7 @@
 
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class Campaña {
+public class Campaña implements Serializable{
     private int codigo_cam;//codigo de la campaña
     //tener cuidado con este tipo de datos en los DAOs
     private Calendar fechaIni;//fecha de inicio de la campaña
@@ -18,6 +19,7 @@ public class Campaña {
     private String tema;//(este falto colocarlo en la base de datos) es el tema relacionado a lal campaña: san valentin etc.
     private int estado;
     private List<Producto> productos;
+    private List<Pedido> pedidos;
     public static final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
     
     public Campaña() {
@@ -34,6 +36,14 @@ public class Campaña {
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
         this.tema = tema;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public List<Producto> getProductos() {

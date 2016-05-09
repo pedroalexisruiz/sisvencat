@@ -5,12 +5,14 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author oso
  */
-public class Persona {
-    private int cedula;//pedula de la persona.
+public class Persona implements Serializable{
+    private String cedula;//pedula de la persona.
     private String nombre;//nombres de la persona.
     private String Apellido;//apellidos de la persona.
     private String correo;//correo asociado a la persona.
@@ -24,7 +26,7 @@ public class Persona {
     public Persona() {
     }
 
-    public Persona(int cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
+    public Persona(String cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.Apellido = Apellido;
@@ -43,11 +45,11 @@ public class Persona {
         this.valido = valido;
     }
     
-    public int getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(int cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 

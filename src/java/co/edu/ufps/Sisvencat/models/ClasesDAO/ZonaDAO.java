@@ -8,6 +8,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOZona;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author estudiante
  */
-public class ZonaDAO implements IDAOZona {
+public class ZonaDAO implements Serializable,IDAOZona {
 
     private Conexion con;
 

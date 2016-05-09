@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author oso
  */
-public class Tipo {
+public class Tipo implements Serializable{
     private int id;//identificador del tipo de producto.
     private String descripcion;//descripcion del tipo de producto.
 

@@ -47,7 +47,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             con.getConexion().setAutoCommit(false);
             
             state = con.getConexion().prepareStatement(consulta1);
-            state.setInt(1, ven.getCedula());
+            state.setString(1, ven.getCedula());
             state.setString(2, ven.getNombre());
             state.setString(3, ven.getApellido());
             state.setString(4, ven.getCorreo());
@@ -57,8 +57,8 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             state.execute();
             
             state2 = con.getConexion().prepareStatement(consulta2);
-            state2.setInt(1, ven.getCedula());
-            state2.setInt(2, ger.getCedula());
+            state2.setString(1, ven.getCedula());
+            state2.setString(2, ger.getCedula());
             state2.execute();
             
             con.getConexion().commit();
@@ -99,7 +99,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         state.setString(3, ven.getCorreo());
         state.setString(4, ven.getDireccion());
         state.setString(5, ven.getTelefono());
-        state.setInt(6, ven.getCedula());
+        state.setString(6, ven.getCedula());
         state.execute();
         
         state.close();
@@ -142,7 +142,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         state.setInt(1, 2);
-        state.setInt(2, ven.getCedula());
+        state.setString(2, ven.getCedula());
         state.execute();
         
         state.close();
@@ -169,7 +169,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         
         while(rs.next()){
             
-            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getInt("Cedula"),
+            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getString("Cedula"),
                     rs.getString("Nombre"),rs.getString("Apellido"),rs.getString("Correo"),
                     rs.getString("Direccion"),rs.getString("Telefono"),rs.getString("contrasena"),
                     rs.getInt("TipoUsuario"));
@@ -204,7 +204,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         
         while(rs.next()){
             vendedores = new ArrayList();
-            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getInt("Cedula"),
+            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getString("Cedula"),
                     rs.getString("Nombre"),rs.getString("Apellido"),rs.getString("Correo"),
                     rs.getString("Direccion"),rs.getString("Telefono"),rs.getString("contrasena"),
                     rs.getInt("TipoUsuario"));
@@ -232,11 +232,11 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         }
         
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, ven.getCedula());
+        state.setString(1, ven.getCedula());
         ResultSet rs = state.executeQuery();
         
         while(rs.next()){
-            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getInt("Cedula"),
+            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getString("Cedula"),
                     rs.getString("Nombre"),rs.getString("Apellido"),rs.getString("Correo"),
                     rs.getString("Direccion"),rs.getString("Telefono"),rs.getString("contrasena"),
                     rs.getInt("TipoUsuario"));

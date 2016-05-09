@@ -8,8 +8,10 @@ package co.edu.ufps.Sisvencat.negocio;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,19 +19,29 @@ public interface IAdminNegocio {
     
     //Datos del Admin
     
+    public boolean login(Persona p) throws SQLException;
+    
+    public Administrador getAdmin();
+    
+    public void setAdmin(Administrador admin);
+    
+     public Campaña getCampañaActiva();
+
+    public void setCampañaActiva(Campaña campañaActiva);
+    
     /**
      * Recibe un Administrador ya con los datos a modificar, y el num de Documento Actual del Administrador 
      * @return un entero con la respuesta que devuelva la DAO: 0 correcto, cualquier
      * otro codigo es el codigo de error de SQL 
      */
-    public int actualizarDatos(Administrador admin, int numDocumento);
+    public boolean actualizarDatos(Administrador admin)throws SQLException;
     
     /**
      * Cambia la password del admin
      * @param admin objeto administrador con codigo y password nueva
      * @return codigo de respuesta
      */
-    public int cambiarPassword(Administrador admin);
+    public boolean cambiarPassword(String contrasena, String contrasenanueva)throws SQLException;
     
     //Gestion de campañas
     /**

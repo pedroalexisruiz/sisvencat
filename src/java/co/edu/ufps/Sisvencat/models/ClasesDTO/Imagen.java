@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author estudiante
  */
-public class Imagen {
+public class Imagen implements Serializable{
        
     private int id;//identificador de imagen
     private String urlImagen;//direccion de la imagen

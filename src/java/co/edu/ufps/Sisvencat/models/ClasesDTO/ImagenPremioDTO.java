@@ -5,10 +5,12 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author estudiante
  */
-public class ImagenPremioDTO extends Imagen {
+public class ImagenPremioDTO extends Imagen implements Serializable{
 
 }

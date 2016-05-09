@@ -5,14 +5,11 @@
  */
 package co.edu.ufps.Sisvencat.models.util;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- *
- * @author Herman Alonso Barrates Víquez
- */
-public class Encriptador {
+public class Encriptador implements Serializable{
 
     /***
      * Convierte un arreglo de bytes a String usando valores hexadecimales

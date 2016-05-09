@@ -1,9 +1,15 @@
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="co.edu.ufps.Sisvencat.facade.SisvencatFacade"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
+
+        <jsp:include page="validarAdmin.jsp"></jsp:include>
+        <%
+            try {
+        %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
         <title>Profile - Admin</title>
     </head>
@@ -18,8 +24,7 @@
                     <div class="col-md-12">
 
                         <ul class="breadcrumb">
-                            <li><a href="#">Inicio</a>
-                            </li>
+                            <li><a href="Profile.jsp">Inicio</a></li>
                             <li>Mi Cuenta</li>
                         </ul>
 
@@ -55,4 +60,13 @@
                                             <script src="../public/js/owl.carousel.min.js"></script>
                                             <script src="../public/js/front.js"></script>
                                             </body>
+                                            <%                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            %>
+                                            <script>
+                                                location = "../General/index.jsp";
+                                            </script>
+                                            <%
+                                                }
+                                            %>
                                             </html>

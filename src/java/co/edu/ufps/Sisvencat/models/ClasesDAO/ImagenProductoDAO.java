@@ -5,10 +5,12 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDAO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author estudiante
  */
-public class ImagenProductoDAO {
+public class ImagenProductoDAO implements Serializable{
     
 }

@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
+import java.io.Serializable;
+
 /**
  *
  * @author estudiante
  */
-public class Categoria {
+public class Categoria implements Serializable {
     
     private int id;//identidicador de la categoria del producto
     private String nombre;//nombre de la categoria (mujeres, hombres, niños)

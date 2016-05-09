@@ -1,5 +1,6 @@
 package co.edu.ufps.Sisvencat.models.util;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
  * clase para conectar, cerrar y gestionar las bases de datos
  * @author oso
  */
-public class Conexion {
+public class Conexion implements Serializable{
 
     private Statement consulta;
     private Connection conexion;
