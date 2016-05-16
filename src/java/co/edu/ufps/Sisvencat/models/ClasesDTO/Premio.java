@@ -13,7 +13,7 @@ import java.util.List;
  * @author estudiante
  */
 public class Premio implements Serializable {
-    private int condigo_premio;//codigo del premio.
+    private long codigo_premio;//codigo del premio.
     private String nombre;//nombre del producto.
     private String descripcion;//descripcion asociada al producto (medidas, marca, etc.).
     private int puntosRequeridos;//cantidad de productos requeridos para reclamar premio.
@@ -31,8 +31,8 @@ public class Premio implements Serializable {
         this.imagenes = imagenes;
     }
 
-    public Premio(int condigo_premio, String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible, List<ImagenPremioDTO> imagenes) {
-        this.condigo_premio = condigo_premio;
+    public Premio(long codigo_premio, String nombre, String descripcion, int puntosRequeridos, int cantidadDisponible, List<ImagenPremioDTO> imagenes) {
+        this.codigo_premio = codigo_premio;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.puntosRequeridos = puntosRequeridos;
@@ -40,12 +40,12 @@ public class Premio implements Serializable {
         this.imagenes = imagenes;
     }
 
-    public int getCondigo_premio() {
-        return condigo_premio;
+    public long getCodigo_premio() {
+        return codigo_premio;
     }
 
-    public void setCondigo_premio(int condigo_premio) {
-        this.condigo_premio = condigo_premio;
+    public void setCodigo_premio(long codigo_premio) {
+        this.codigo_premio = codigo_premio;
     }
 
     public String getNombre() {

@@ -7,6 +7,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -14,21 +15,21 @@ import java.util.List;
  * @author oso
  */
 public interface IDAOGerente {
-    public int insertar(Gerente ger);
+    public boolean insertar(Gerente ger) throws SQLException;
 
-    public boolean modificar(Gerente ger) throws Exception;
+    public boolean modificar(Gerente ger) throws SQLException;
     
-    public boolean cambiarContraseña(Gerente ger) throws Exception;
+    public boolean cambiarContraseña(Gerente ger) throws SQLException;
 
-    public boolean cambiarEstado(Gerente ger) throws Exception;
+    public boolean cambiarEstado(Gerente ger) throws SQLException;
 
-    public List<Gerente> listar() throws Exception;
+    public List<Gerente> listar() throws SQLException;
 
-    public List<Gerente> listarPorEstado(int estado) throws Exception;
+    public List<Gerente> listarPorEstado(int estado) throws SQLException;
 
-    public Gerente getGerente(Gerente ger) throws Exception;
+    public Gerente getGerente(String cedula) throws SQLException;
     
-    public List<Vendedor> getVendedoresDeGerente(Gerente ger)throws Exception;
+    public List<Vendedor> getVendedoresDeGerente(Gerente ger)throws SQLException;
     
-    public void closeConn() throws Exception;
+    public void closeConn();
 }

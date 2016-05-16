@@ -2,17 +2,24 @@ package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDAO.AdministradorDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.CampañaDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.GerenteDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOAdministrador;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOCampana;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOVendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.PersonaDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.PremioDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.VendedorDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.ZonaDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.List;
 
 public class AdminNegocio implements Serializable, IAdminNegocio {
@@ -33,22 +40,27 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
         }
     }
 
+    @Override
     public Administrador getAdmin() {
         return admin;
     }
 
+    @Override
     public void setAdmin(Administrador admin) {
         this.admin = admin;
     }
 
+    @Override
     public Campaña getCampañaActiva() {
         return campañaActiva;
     }
 
+    @Override
     public void setCampañaActiva(Campaña campañaActiva) {
         this.campañaActiva = campañaActiva;
     }
 
+    @Override
     public boolean login(Persona p) throws SQLException {
 
         Persona pe = new PersonaDAO().login(p);
@@ -75,7 +87,7 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
 
         if (this.admin.getContraseña().equals(contrasena)) {
 
-            AdministradorDAO aDAO = new AdministradorDAO();
+            IDAOAdministrador aDAO = new AdministradorDAO();
             this.admin.setContraseña(contrasenanueva);
 
             return aDAO.cambiarContrasena(admin);
@@ -86,7 +98,7 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
     }
 
     @Override
-    public int iniciarCampaña(Campaña campaña) {
+    public int iniciarCampaña(Campaña campaña)throws SQLException {
 
         int respuesta = 0;
         IDAOCampana campañaDAO = new CampañaDAO();
@@ -102,103 +114,188 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
     }
 
     @Override
-    public Campaña getCampaña(String codigoCampaña) {
+    public Campaña getCampaña(String codigoCampaña)throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Campaña> getListadoDeCampañas() {
+    public List<Campaña> getListadoDeCampañas() throws SQLException,ParseException {
+        
+        IDAOCampana cDAO = new CampañaDAO();
+        
+        return cDAO.listarCampañas();
+    }
+    
+    @Override
+    public List<Campaña> getListadoDeCampañasPorEstado(int est) throws SQLException,ParseException {
+        
+        IDAOCampana cDAO = new CampañaDAO();
+        
+        return cDAO.listarCampañasPorEstado(est);
+    }
+
+    @Override
+    public int modificarCampaña(Campaña campaña)throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int modificarCampaña(Campaña campaña) {
+    public int desactivarCampaña(Campaña campaña)throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int desactivarCampaña(Campaña campaña) {
+    public int registrarZona(Zona zona)throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int registrarZona(Zona zona) {
+    public Zona getZona(int codigoZona)throws SQLException {
+        
+        ZonaDAO zDAO = new ZonaDAO();
+        Zona zona = new Zona(codigoZona,null,0);
+        
+        return zDAO.getZona(zona);
+    }
+
+    @Override
+    public List<Zona> getListadoDeZonas()throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public List<Zona> getListadoDeZonasPorEstado(int estado)throws SQLException{
+        
+        return new ZonaDAO().listarPorEstado(estado);
+    }
+
+    @Override
+    public boolean modificarZona(Zona zona) throws SQLException{
+        
+        return new ZonaDAO().modificar(zona);
+    }
+    
+    @Override
+    public boolean poseeGerente(int Zona_Codigo_z) throws SQLException{
+        
+        return new ZonaDAO().poseeGerente(Zona_Codigo_z);
+        
+    }
+
+    @Override
+    public boolean desactivarZona(Zona zona) throws SQLException{
+        return new ZonaDAO().cambiarEstado(zona);
+    }
+
+    @Override
+    public List<Gerente> getListadoDeGerentes() throws SQLException{
+        
+        GerenteDAO gDAO = new GerenteDAO();
+        
+        return gDAO.listar();
+        
+    }
+    
+    @Override
+    public List<Gerente> getListadoDeGerentesPorEstado(int estado)throws SQLException{
+        
+        GerenteDAO gDAO = new GerenteDAO();
+        
+        return gDAO.listarPorEstado(estado);
+    }
+
+    @Override
+    public boolean registrarGerente(Gerente gerente) throws SQLException{
+        
+        GerenteDAO gDAO = new GerenteDAO();
+        
+        return gDAO.insertar(gerente);
+        
+    }
+
+    @Override
+    public Gerente getGerente(String numDocumentoGerente)throws SQLException {
+        
+        GerenteDAO gDAO = new GerenteDAO();
+        
+        Gerente ge = gDAO.getGerente(numDocumentoGerente);
+        
+        return ge;
+    }
+
+    @Override
+    public boolean actualizarGerente(Gerente gerente) throws SQLException{
+        
+        return new GerenteDAO().modificar(gerente);
+    }
+
+    @Override
+    public boolean cambiarEstadoGerente(String cedula, int estado) throws SQLException{
+        
+        Gerente ger = new Gerente();
+        ger.setCedula(cedula);
+        ger.setEstado(estado);
+        
+        return new GerenteDAO().cambiarEstado(ger);
+    }
+
+    @Override
+    public List<Vendedor> getListadoDeVendedores() throws SQLException {
+        
+        IDAOVendedor vDAO = new VendedorDAO();
+        
+        return vDAO.listar();
+    }
+    
+    @Override
+    public List<Vendedor> getListadoDeVendedoresPorEstado(int est) throws SQLException{
+        
+        IDAOVendedor vDAO = new VendedorDAO();
+        
+        return vDAO.listarPorEstado(est);
+    }
+
+    @Override
+    public List<Vendedor> getListadoDeVendedoresPorZona(String codigoZona) throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Zona getZona(String codigoZona) {
+    public int registrarVendedor(Vendedor vendedor) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<Zona> getListadoDeZonas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Vendedor getVendedor(String numDocVendedor) throws SQLException{
+        
+        Vendedor ven = new Vendedor();
+        
+        ven.setCedula(numDocVendedor);
+        
+        return new VendedorDAO().getVendedor(ven);
     }
 
     @Override
-    public int modificarZona(Zona zona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean actualizarVendedor(Vendedor vendedor) throws SQLException{
+        
+        return new VendedorDAO().modificar(vendedor);
+        
     }
 
     @Override
-    public int desactivarZona(Zona zona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean cambiarEstadoVendedor(String cedula, int estado) throws SQLException{
+        
+        Vendedor vendedor = new Vendedor();
+        vendedor.setCedula(cedula);
+        vendedor.setEstado(estado);
+        
+        return new VendedorDAO().cambiarEstado(vendedor);
     }
 
     @Override
-    public List<Gerente> getListadoDeGerentes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int registrarGerente(Gerente gerente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Gerente getGerente(String numDocumentoGerente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int actualizarGerente(Gerente gerente, int numDocumento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int desactivarGerente(Gerente gerente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Vendedor> getListadoDeVendedores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Vendedor> getListadoDeVendedoresPorZona(String codigoZona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int registrarVendedor(Vendedor vendedor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Vendedor getVendedor(String numDocVendedor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int actualizarVendedor(Vendedor vendedor, int numDocumento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int desactivarVendedor(Vendedor vendedor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Premio> getListadoPremios() throws SQLException {
+        
+        return new PremioDAO().listar();
     }
 
 }

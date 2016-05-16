@@ -21,7 +21,9 @@ public class Producto implements Serializable {
     private Categoria categoria;//categoria del producto (mujeres hombre niños);
     private Tipo tipoProducto;//es el tipo de porducto 
     private List<ImagenProductoDTO> imagenes;//imagenes asociadas al producto
-
+    private List<String> talla;
+    private List<String> color;
+    
     public Producto() {
     }
 
@@ -46,6 +48,22 @@ public class Producto implements Serializable {
         this.imagenes = imagenes;
     }
 
+    public List<String> getTalla() {
+        return talla;
+    }
+
+    public void setTalla(List<String> talla) {
+        this.talla = talla;
+    }
+
+    public List<String> getColor() {
+        return color;
+    }
+
+    public void setColor(List<String> color) {
+        this.color = color;
+    }
+    
     public int getCodigo_p() {
         return codigo_p;
     }
@@ -113,6 +131,31 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "Producto{" + "codigo_p=" + codigo_p + ", nombre=" + nombre + ", descripcion=" + descripcion + ", valor=" + valor + ", cantidad=" + cantidad + ", categoria=" + categoria.getNombre() + ", tipoProducto=" + tipoProducto.getDescripcion() + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + this.codigo_p;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Producto other = (Producto) obj;
+        if (this.codigo_p != other.codigo_p) {
+            return false;
+        }
+        return true;
     }
     
 }

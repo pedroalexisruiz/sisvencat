@@ -5,23 +5,27 @@
  */
 package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
+import java.sql.SQLException;
 import java.util.List;
 /**
  *comportamineto de un IDAOZona
  * @author oso
  */
 public interface IDAOZona {
-    public int insertar(Zona zona);
     
-    public int modificar(Zona zona);
+    public int insertar(Zona zona)throws SQLException;
     
-    public int cambiarEstado(Zona zona);
+    public boolean modificar(Zona zona)throws SQLException;
     
-    public List<Zona> listar();
+    public boolean cambiarEstado(Zona zona)throws SQLException;
     
-    public List<Zona> listarPorEstado(int estado);
+    public List<Zona> listar()throws SQLException;
     
-    public Zona getZona(Zona zona) throws Exception;
+    public List<Zona> listarPorEstado(int estado)throws SQLException;
     
-    public void closeConn() throws Exception;
+    public Zona getZona(Zona zona) throws SQLException;
+    
+    public boolean poseeGerente(int Zona_Codigo_Z)throws  SQLException;
+    
+    public void closeConn();
 }

@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * gestion de los datos de zona
@@ -84,9 +82,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * error devolvera un -1
      */
     @Override
-    public int modificar(Zona zona) {
-
-        int respuesta = 0;
+    public boolean modificar(Zona zona) throws SQLException {
 
         PreparedStatement state = null;
 
@@ -102,7 +98,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
             state.setInt(2, zona.getCodigo_z());
             state.executeUpdate();
         } catch (SQLException ex) {
-            ex.getErrorCode();
+            throw ex;
         } finally {
             try {
 
@@ -111,13 +107,11 @@ public class ZonaDAO implements Serializable,IDAOZona {
                 this.closeConn();
 
             } catch (SQLException ex) {
-                respuesta = ex.getErrorCode();
-            } catch (Exception ex) {
-                Logger.getLogger(ZonaDAO.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
             }
         }
 
-        return respuesta;
+        return true;
     }
 
     /**
@@ -128,9 +122,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * error devolvera un -1
      */
     @Override
-    public int cambiarEstado(Zona zona) {
-
-        int respuesta = 0;
+    public boolean cambiarEstado(Zona zona) throws SQLException  {
 
         PreparedStatement state = null;
 
@@ -146,7 +138,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
             state.setInt(2, zona.getCodigo_z());
             state.executeUpdate();
         } catch (SQLException ex) {
-            ex.getErrorCode();
+            throw ex;
         } finally {
             try {
 
@@ -155,13 +147,11 @@ public class ZonaDAO implements Serializable,IDAOZona {
                 this.closeConn();
 
             } catch (SQLException ex) {
-                respuesta = ex.getErrorCode();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                throw ex;
             }
         }
 
-        return respuesta;
+        return true;
     }
 
     /**
@@ -170,7 +160,8 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * @return
      */
     @Override
-    public List<Zona> listar() {
+    public List<Zona> listar()throws SQLException{
+        
         List<Zona> lista = new ArrayList();
 
         PreparedStatement state = null;
@@ -187,7 +178,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
                 lista.add(new Zona(resultado.getInt("Codigo_z"), resultado.getString("Nombre"), resultado.getInt("estado")));
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw ex;
         } finally {
             try {
 
@@ -195,9 +186,9 @@ public class ZonaDAO implements Serializable,IDAOZona {
 
                 this.closeConn();
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                throw ex;
             } catch (Exception ex) {
-                ex.printStackTrace();
+                throw ex;
             }
         }
 
@@ -211,7 +202,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * @return una lista condicionada
      */
     @Override
-    public List<Zona> listarPorEstado(int estado) {
+    public List<Zona> listarPorEstado(int estado) throws SQLException{
         List<Zona> lista = new ArrayList();
 
         PreparedStatement state = null;
@@ -229,7 +220,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
                 lista.add(new Zona(resultado.getInt("Codigo_z"), resultado.getString("Nombre"), resultado.getInt("estado")));
             }
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            throw ex;
         } finally {
             try {
 
@@ -237,17 +228,15 @@ public class ZonaDAO implements Serializable,IDAOZona {
 
                 this.closeConn();
             } catch (SQLException ex) {
-                ex.printStackTrace();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+                throw ex;
+            } 
         }
 
         return lista;
     }
 
     @Override
-    public Zona getZona(Zona zona) throws Exception {
+    public Zona getZona(Zona zona) throws SQLException {
 
         String consulta = "SELECT * FROM zona WHERE Codigo_z=?";
 
@@ -268,9 +257,33 @@ public class ZonaDAO implements Serializable,IDAOZona {
     }
 
     @Override
-    public void closeConn() throws Exception {
+    public void closeConn(){
 
         con.close();
         con = null;
+    }
+
+    @Override
+    public boolean poseeGerente(int Zona_Codigo_Z) throws SQLException {
+        
+        String consulta = "SELECT * FROM gerente WHERE Codigo_z=?";
+        boolean respuesta = false;
+        
+        if (con == null) {
+            con = new Conexion();
+        }
+        PreparedStatement state = con.getConexion().prepareStatement(consulta);
+        state.setInt(1, Zona_Codigo_Z);
+        ResultSet rs = state.executeQuery();
+
+        Zona z = null;
+        
+        if(rs.next()){
+            respuesta = true;
+        }
+        rs.close();
+        this.closeConn();
+        
+        return respuesta;
     }
 }

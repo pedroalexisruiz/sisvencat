@@ -21,9 +21,9 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public int insertar(Gerente ger) {
+    public boolean insertar(Gerente ger) throws SQLException{
 
-        int respuesta = 0;
+        boolean respuesta = false;
 
         String sentencia = "INSERT INTO persona VALUES(?,?,?,?,?,?,?,2,1)";
         String sentencia2 = "INSERT INTO gerente VALUES (?,?)";
@@ -58,12 +58,15 @@ public class GerenteDAO implements Serializable, IDAOGerente {
         } catch (SQLException ex) {
             System.out.println("Error Insertando. Revirtiendo Cambios");
             ex.printStackTrace();
+            
             try {
                 con.getConexion().rollback();
             } catch (SQLException ex1) {
                 System.out.println("Error en el rollback");
                 ex1.printStackTrace();
+                throw ex1;
             }
+            throw ex;
         }
         try {
             state.close();
@@ -71,15 +74,14 @@ public class GerenteDAO implements Serializable, IDAOGerente {
             this.closeConn();
         } catch (SQLException ex) {
             ex.printStackTrace();
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            throw ex;
         }
 
         return respuesta;
     }
 
     @Override
-    public boolean modificar(Gerente ger) throws Exception {
+    public boolean modificar(Gerente ger) throws SQLException {
 
         String consulta = "UPDATE persona SET Nombre=?, Apellido=?, Correo=?, Direccion=?, Telefono=? WHERE Cedula=?";
 
@@ -104,7 +106,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public boolean cambiarEstado(Gerente ger) throws Exception {
+    public boolean cambiarEstado(Gerente ger) throws SQLException {
 
         String consulta = "UPDATE persona set estado=? WHERE Cedula=?";
 
@@ -124,7 +126,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public List<Gerente> listar() throws Exception {
+    public List<Gerente> listar() throws SQLException {
 
         String consulta = "SELECT persona.*,zona.Codigo_z,zona.Nombre AS nombrezona,zona.estado AS estadozona FROM persona INNER JOIN gerente ON "
                 + "persona.Cedula=gerente.Cedula INNER JOIN zona ON gerente.Codigo_z=zona.Codigo_z";
@@ -160,7 +162,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public List<Vendedor> getVendedoresDeGerente(Gerente ger) throws Exception {
+    public List<Vendedor> getVendedoresDeGerente(Gerente ger) throws SQLException {
 
         List<Vendedor> vendedores = new ArrayList();
 
@@ -184,14 +186,13 @@ public class GerenteDAO implements Serializable, IDAOGerente {
             vendedor.setEstado(rs.getInt("estado"));
             vendedores.add(vendedor);
         }
-
-        state.close();
+        state.closeOnCompletion();
 
         return vendedores;
     }
 
     @Override
-    public Gerente getGerente(Gerente ger) throws Exception {
+    public Gerente getGerente(String cedula) throws SQLException {
 
         String consulta = "SELECT persona.*,zona.Codigo_z,zona.Nombre AS nombrezona,zona.estado AS estadozona FROM persona INNER JOIN gerente ON "
                 + "persona.Cedula=gerente.Cedula INNER JOIN zona ON gerente.Codigo_z=zona.Codigo_z WHERE gerente.Cedula=?";
@@ -200,7 +201,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
             con = new Conexion();
         }
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setString(1, ger.getCedula());
+        state.setString(1, cedula);
 
         ResultSet resultado = state.executeQuery();
 
@@ -228,7 +229,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public boolean cambiarContraseña(Gerente ger) throws Exception {
+    public boolean cambiarContraseña(Gerente ger) throws SQLException {
 
         String consulta = "UPDATE persona SET contrasena=? WHERE cedula=?";
 
@@ -249,7 +250,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public List<Gerente> listarPorEstado(int estado) throws Exception {
+    public List<Gerente> listarPorEstado(int estado) throws SQLException {
 
         List<Gerente> gerentes = new ArrayList();
 
@@ -288,10 +289,8 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public void closeConn() throws Exception {
-
+    public void closeConn(){
         con.close();
         con = null;
-
     }
 }

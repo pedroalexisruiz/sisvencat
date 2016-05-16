@@ -93,7 +93,14 @@ public class Campaña implements Serializable{
     public void setTema(String tema) {
         this.tema = tema;
     }
-
+    
+    public String getFechaFinString(){
+        return formater.format(fechaFin.getTime());
+    }
+    
+    public String getFechaInicioString(){
+        return formater.format(fechaIni.getTime());
+    }
     @Override
     public String toString() {
         String msg= "Campa\u00f1a{" + "codigo_cam=" + codigo_cam + ", fechaIni=" + 

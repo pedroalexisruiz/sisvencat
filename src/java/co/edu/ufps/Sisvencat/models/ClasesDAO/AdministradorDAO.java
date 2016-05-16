@@ -10,6 +10,7 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -28,7 +29,37 @@ public class AdministradorDAO implements Serializable, IDAOAdministrador{
     public Administrador login(Administrador a) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public Administrador getAdmin(String cedula) throws SQLException{
+        String consulta = "SELECT persona.*,zona.Codigo_z,zona.Nombre AS nombrezona,zona.estado AS estadozona FROM persona INNER JOIN gerente ON "
+                + "persona.Cedula=gerente.Cedula INNER JOIN zona ON gerente.Codigo_z=zona.Codigo_z WHERE gerente.Cedula=?";
 
+        if (con == null) {
+            con = new Conexion();
+        }
+        PreparedStatement state = con.getConexion().prepareStatement(consulta);
+        state.setString(1, cedula);
+
+        ResultSet resultado = state.executeQuery();
+
+        Administrador a = null;
+
+        while (resultado.next()) {
+
+            a = new Administrador(resultado.getString("Cedula"), resultado.getString("Nombre"),
+                    resultado.getString("Apellido"), resultado.getString("Correo"),
+                    resultado.getString("Direccion"), resultado.getString("Telefono"),
+                    resultado.getString("contrasena"), resultado.getInt("TipoUsuario"));
+            a.setEstado(resultado.getInt("estado"));
+        }
+
+        state.close();
+        resultado.close();
+
+        con.close();
+
+        return a;
+    }
     @Override
     public boolean modificarDatos(Administrador a) throws SQLException {
         

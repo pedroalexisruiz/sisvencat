@@ -6,7 +6,10 @@
 package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  *
@@ -19,5 +22,13 @@ public class NegocioFactory implements Serializable{
 
     public IAdminNegocio getAdminNegocio(Administrador admin){
         return new AdminNegocio(admin);
+    }
+    
+    public IGerenteNegocio getGerenteNegocio(String cedula) throws SQLException{
+        return new GerenteNegocio(cedula);
+    }
+    
+    public IGeneralNegocio getGeneralNegocio() throws SQLException, ParseException{
+        return new GeneralNegocio();
     }
 }

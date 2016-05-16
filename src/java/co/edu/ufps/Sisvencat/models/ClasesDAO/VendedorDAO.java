@@ -86,7 +86,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
    }
 
     @Override
-    public boolean modificar(Vendedor ven) throws Exception {
+    public boolean modificar(Vendedor ven) throws SQLException {
         
         String consulta = "UPDATE persona SET Nombre=?, Apellido=?, Correo=?, Direccion=?, Telefono=? WHERE cedula=?";
         
@@ -110,7 +110,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
     
     @Override
-    public boolean cambiarContraseña(Vendedor ven) throws Exception {
+    public boolean cambiarContraseña(Vendedor ven) throws SQLException {
         
         String consulta = "UPDATE persona SET contrasena=?";
         
@@ -131,7 +131,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
 
     @Override
-    public boolean cambiarEstado(Vendedor ven) throws Exception {
+    public boolean cambiarEstado(Vendedor ven) throws SQLException {
         
         String consulta = "UPDATE persona SET estado=? WHERE Cedula=?";
         
@@ -141,7 +141,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         }
         
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, 2);
+        state.setInt(1, ven.getEstado());
         state.setString(2, ven.getCedula());
         state.execute();
         
@@ -153,7 +153,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
 
     @Override
-    public List<Vendedor> listar() throws Exception {
+    public List<Vendedor> listar() throws SQLException {
         
         List<Vendedor> vendedores = new ArrayList();
         
@@ -187,9 +187,9 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     
     
     @Override
-    public List<Vendedor> listarPorEstado(int estado) throws Exception {
+    public List<Vendedor> listarPorEstado(int estado) throws SQLException{
         
-        List<Vendedor> vendedores = null;
+        List<Vendedor> vendedores = new ArrayList();
         
         String consulta ="SELECT persona.*,vendedor.Puntaje_Acumulado from persona INNER JOIN vendedor ON persona.Cedula=vendedor.Persona_Cedula WHERE persona.estado=?";
         
@@ -203,7 +203,6 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         Vendedor vendedor = null;
         
         while(rs.next()){
-            vendedores = new ArrayList();
             vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"),rs.getString("Cedula"),
                     rs.getString("Nombre"),rs.getString("Apellido"),rs.getString("Correo"),
                     rs.getString("Direccion"),rs.getString("Telefono"),rs.getString("contrasena"),
@@ -221,7 +220,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
 
     @Override
-    public Vendedor getVendedor(Vendedor ven) throws Exception {
+    public Vendedor getVendedor(Vendedor ven) throws SQLException {
         
         Vendedor vendedor = new Vendedor();
         
@@ -252,7 +251,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
 
     @Override
-    public void closeConn() throws Exception {
+    public void closeConn(){
         
         con.close();
         con = null;

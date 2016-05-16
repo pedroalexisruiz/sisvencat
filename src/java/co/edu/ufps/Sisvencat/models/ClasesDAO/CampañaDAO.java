@@ -2,14 +2,13 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOCampana;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -78,7 +77,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public List<Campaña> listarCampañas() throws Exception {
+    public List<Campaña> listarCampañas()throws SQLException,ParseException {
 
         List<Campaña> campañas = new ArrayList();
 
@@ -118,7 +117,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public List<Campaña> listarCampañasPorEstado(int estado) throws Exception {
+    public List<Campaña> listarCampañasPorEstado(int estado)throws SQLException,ParseException {
         
         List<Campaña> campañas = new ArrayList();
 
@@ -159,7 +158,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public Campaña getCampaña(Campaña cam) throws Exception {
+    public Campaña getCampaña(Campaña cam) throws SQLException, ParseException {
 
         String consulta = "SELECT * FROM campana WHERE Codigo_cam=?";
         Campaña campaña = null;
@@ -194,7 +193,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public void closeConn() throws SQLException {
+    public void closeConn(){
 
         con.close();
         con = null;

@@ -2,19 +2,27 @@
 package co.edu.ufps.Sisvencat.facade;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
 import co.edu.ufps.Sisvencat.negocio.IAdminNegocio;
+import co.edu.ufps.Sisvencat.negocio.IGeneralNegocio;
+import co.edu.ufps.Sisvencat.negocio.IGerenteNegocio;
+import co.edu.ufps.Sisvencat.negocio.IVendedorNegocio;
 import co.edu.ufps.Sisvencat.negocio.NegocioFactory;
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.text.ParseException;
 
 
 public class SisvencatFacade implements Serializable{
 
     
     NegocioFactory invocador;
-    IAdminNegocio adminN = null;
-            
+    IAdminNegocio adminN;
+    IGeneralNegocio generalN;
+    IGerenteNegocio gerenteN;
+    IVendedorNegocio vendedorN;
+    
     public SisvencatFacade() {
         this.invocador = new NegocioFactory();
     }
@@ -24,22 +32,28 @@ public class SisvencatFacade implements Serializable{
     }
 
     public void iniciarNegocioAdmin(Persona p){
-        Administrador a = new Administrador();
-        a.setCedula(p.getCedula());
-        a.setNombre(p.getNombre());
-        a.setApellido(p.getApellido());
-        a.setCorreo(p.getCorreo());
-        a.setDireccion(p.getDireccion());
-        a.setEstado(p.getEstado());
-        a.setContraseña(p.getContraseña());
-        a.setTelefono(p.getTelefono());
-        a.setTipoUsr(p.getTipoUsr());
-        a.setValido(p.isValido());
-        this.adminN = invocador.getAdminNegocio(a);
+
+        this.adminN = invocador.getAdminNegocio((Administrador)p);
+        this.generalN = null;
+        this.gerenteN = null;
+        this.vendedorN = null;
+        
     }
     
-    public void iniciarNegocioGerente(Persona p){
-        this.adminN = invocador.getAdminNegocio((Administrador)p);
+    public void iniciarNegocioGeneral() throws SQLException, ParseException{
+        this.generalN= invocador.getGeneralNegocio();
+        this.adminN = null;
+        this.gerenteN = null;
+        this.vendedorN = null;
+    }
+    
+    public void iniciarNegocioGerente(String cedula) throws SQLException{
+
+        this.gerenteN = invocador.getGerenteNegocio(cedula);
+        this.generalN= null;
+        this.adminN = null;
+        this.gerenteN = null;
+        this.vendedorN = null;
     }
     
     public void iniciarNegocioVendedor(Persona p){

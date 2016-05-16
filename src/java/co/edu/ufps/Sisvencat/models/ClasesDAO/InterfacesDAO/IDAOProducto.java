@@ -3,6 +3,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface IDAOProducto {
 
     public List<Producto> listar() throws Exception;
     
-    public List<Producto> listarPorCampaña(Campaña cam) throws Exception;
+    public List<Producto> listarPorCampaña(Campaña cam) throws SQLException;
 
     public List<Producto> listarDisponibleoNo(Campaña cam, boolean disp) throws Exception;
 

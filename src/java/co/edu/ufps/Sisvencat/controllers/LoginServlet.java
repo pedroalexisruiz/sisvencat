@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
                             ruta = "Admin/Profile.jsp";
                             break;
                         case 2:
-                            fachada.iniciarNegocioGerente(p);
+                            fachada.iniciarNegocioGerente(p.getCedula());
                             ruta = "Gerente/Profile.jsp";
                             break;
                         case 3:

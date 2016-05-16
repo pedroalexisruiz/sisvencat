@@ -7,6 +7,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -19,11 +20,11 @@ public interface IDAOCampana {
     
     public boolean finalizarCampaña(Campaña cam) throws SQLException;
     
-    public List<Campaña> listarCampañas() throws Exception;
+    public List<Campaña> listarCampañas()throws SQLException,ParseException ;
     
-    public List<Campaña> listarCampañasPorEstado(int estado) throws Exception;
+    public List<Campaña> listarCampañasPorEstado(int estado)throws SQLException,ParseException ;
     
-    public Campaña getCampaña(Campaña cam) throws Exception;
+    public Campaña getCampaña(Campaña cam) throws SQLException,ParseException ;
     
-    public void closeConn() throws SQLException;
+    public void closeConn();
 }

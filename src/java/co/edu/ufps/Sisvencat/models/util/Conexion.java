@@ -44,17 +44,21 @@ public class Conexion implements Serializable{
     public void close() {
 
         if (consulta != null) {
+           
             try {
                 consulta.close();
-            } catch (Exception e) {
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
+
             consulta = null;
         }
 
         if (conexion != null) {
             try {
                 conexion.close();
-            } catch (Exception e) {
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
 
             conexion = null;
