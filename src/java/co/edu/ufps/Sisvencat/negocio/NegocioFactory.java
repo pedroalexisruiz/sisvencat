@@ -20,8 +20,8 @@ public class NegocioFactory implements Serializable{
     public NegocioFactory() {
     }
 
-    public IAdminNegocio getAdminNegocio(Administrador admin){
-        return new AdminNegocio(admin);
+    public IAdminNegocio getAdminNegocio(Persona p){
+        return new AdminNegocio(p);
     }
     
     public IGerenteNegocio getGerenteNegocio(String cedula) throws SQLException{
@@ -30,5 +30,9 @@ public class NegocioFactory implements Serializable{
     
     public IGeneralNegocio getGeneralNegocio() throws SQLException, ParseException{
         return new GeneralNegocio();
+    }
+    
+    public IVendedorNegocio getVendedorNegocio(String cedula) throws SQLException{
+        return new VendedorNegocio(cedula);
     }
 }

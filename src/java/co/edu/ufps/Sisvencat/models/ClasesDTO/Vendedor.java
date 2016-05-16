@@ -14,7 +14,8 @@ import java.io.Serializable;
 public class Vendedor extends Persona implements Serializable{
     
     private int PuntajeAcumulado;//puntaje acumulado por el vendedor
-
+    private Pedido pedido;
+    
     public Vendedor() {
     }
 
@@ -22,8 +23,14 @@ public class Vendedor extends Persona implements Serializable{
         super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, tipoUsr);
         this.PuntajeAcumulado = PuntajeAcumulado;
     }
-    
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
     
     public int getPuntajeAcumulado() {
         return PuntajeAcumulado;

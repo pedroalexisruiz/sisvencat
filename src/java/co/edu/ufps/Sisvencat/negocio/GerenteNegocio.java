@@ -6,8 +6,11 @@
 package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDAO.GerenteDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOGerente;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOVendedor;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.VendedorDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import java.io.Serializable;
 import java.sql.SQLException;
 
@@ -15,9 +18,9 @@ import java.sql.SQLException;
  *
  * @author Administrator
  */
-public class GerenteNegocio implements Serializable, IGerenteNegocio{
-    
-    Gerente gerente;
+public class GerenteNegocio implements Serializable, IGerenteNegocio {
+
+    private Gerente gerente;
 
     public GerenteNegocio() {
     }
@@ -25,16 +28,49 @@ public class GerenteNegocio implements Serializable, IGerenteNegocio{
     public GerenteNegocio(String cedula) throws SQLException {
 
         this.gerente = new GerenteDAO().getGerente(cedula);
-        
+
     }
-    
+
+    @Override
     public Gerente getGerente() {
         return gerente;
     }
 
+    @Override
     public void setGerente(Gerente gerente) {
         this.gerente = gerente;
     }
-    
-    
+
+    @Override
+    public boolean actualizarDatos(Gerente ger) throws SQLException {
+
+        IDAOGerente gDAO = new GerenteDAO();
+
+        return gDAO.modificar(ger);
+    }
+
+    @Override
+    public boolean cambiarPassword(String contrasena, String contrasenanueva) throws SQLException {
+
+        if (this.gerente.getContraseña().equals(contrasena)) {
+
+            IDAOGerente gDAO = new GerenteDAO();
+            this.gerente.setContraseña(contrasenanueva);
+
+            return gDAO.cambiarContraseña(gerente);
+
+        } else {
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean registrarVendedor(Vendedor vendedor) throws SQLException {
+
+        IDAOVendedor vDAO = new VendedorDAO();
+        return vDAO.registrar(vendedor, gerente);
+        
+    }
+
 }

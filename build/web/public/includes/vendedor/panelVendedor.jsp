@@ -20,7 +20,7 @@
                                         <a href="verProductos.jsp" id="gestiongerentes"><i class="fa fa-suitcase"></i>Productos</a>
                                     </li>
                                     <li>
-                                        <a id="btncerrarSession" href="#"><i class="fa fa-sign-out"></i> Salir</a>
+                                        <a id="btncerrarSession" href="../cerrarSesion.jsp"><i class="fa fa-sign-out"></i> Salir</a>
                                     </li>
                                 </ul>
                             </div>

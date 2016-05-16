@@ -29,12 +29,10 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
     
     @Override
-    public int insertar(Vendedor ven, Gerente ger){
-        
-        int respuesta = 0;
-        
+    public boolean registrar(Vendedor ven, Gerente ger) throws SQLException{
+                
         String consulta1 = "INSERT INTO persona VALUES(?,?,?,?,?,?,?,3,1)";
-        String consulta2= "INSERT INTO vendedor VALUES(?,?,0)";
+        String consulta2= "INSERT INTO vendedor VALUES(?,?,?)";
         
         PreparedStatement state = null;
         PreparedStatement state2 = null;
@@ -59,6 +57,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             state2 = con.getConexion().prepareStatement(consulta2);
             state2.setString(1, ven.getCedula());
             state2.setString(2, ger.getCedula());
+            state2.setInt(3, ven.getPuntajeAcumulado());
             state2.execute();
             
             con.getConexion().commit();
@@ -69,19 +68,24 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             try {
                 con.getConexion().rollback();
             } catch (SQLException ex1) {
-                ex.printStackTrace();
+                System.out.println("Error Durante el Rollback");
+                ex1.printStackTrace();
+                throw ex1;
             }
+            ex.printStackTrace();
+            throw ex;
         }
 
         try {
             state.close();
             state2.close();
             this.closeConn();
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
+            throw ex;
         }
         
-        return respuesta;
+        return true;
         
    }
 
@@ -112,7 +116,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     @Override
     public boolean cambiarContraseña(Vendedor ven) throws SQLException {
         
-        String consulta = "UPDATE persona SET contrasena=?";
+        String consulta = "UPDATE persona SET contrasena=? WHERE Cedula=?";
         
         if (con == null) {
             con = new Conexion();
@@ -120,6 +124,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         state.setString(1, ven.getContraseña());
+        state.setString(2, ven.getCedula());
 
         state.execute();
         
@@ -220,7 +225,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
 
     @Override
-    public Vendedor getVendedor(Vendedor ven) throws SQLException {
+    public Vendedor getVendedor(String cedula) throws SQLException {
         
         Vendedor vendedor = new Vendedor();
         
@@ -231,7 +236,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         }
         
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setString(1, ven.getCedula());
+        state.setString(1, cedula);
         ResultSet rs = state.executeQuery();
         
         while(rs.next()){

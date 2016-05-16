@@ -1,9 +1,34 @@
 
-
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor"%>
+<%@page import="co.edu.ufps.Sisvencat.facade.SisvencatFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+            SisvencatFacade Fachada = (SisvencatFacade) request.getSession().getAttribute("Fachada");
+
+            if (Fachada == null) {
+        %>
+        <script>
+            alert("Debe Iniciar Sesión");
+            location = "../General/login.jsp";
+        </script>
+        <%
+        } else if (!Fachada.existeNegocioVendedor()) {
+        %>
+        <script>
+            alert("Acceso solo para Vendedores");
+            location = "../cerrarSesion.jsp";
+        </script>
+        <%
+            }
+        %>
+        <%
+            try {
+
+                Vendedor vendedor = Fachada.getVendedorLogeado();
+        %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
         <title>Modificar Datos</title>
     </head>
@@ -40,8 +65,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="password_old">Contraseña Actual</label>
-                                                <input type="password" class="form-control" name="contrasena" required>
-                                                <input type="hidden" class="form-control" name="Cedula" value="Cedula">
+                                                <input type="password" class="form-control" id="contrasena" name="contrasena" required>
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +86,7 @@
                                     <!-- /.row -->
 
                                     <div class="col-sm-12 text-center">
-                                        <button name="btncambiarContrasena" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar Nueva Contraseña</button>
+                                        <button name="btnCambiarContrasena" id="btnCambiarContrasena" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar Nueva Contraseña</button>
                                     </div>
                                 </form>
 
@@ -74,30 +98,29 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="firstname">Nombres</label>
-                                                <input type="text" class="form-control" name="Nombre" value="Nombre">
+                                                <input type="text" class="form-control" id="Nombre" name="Nombre" value="<%=vendedor.getNombre() %>">
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="lastname">Apellidos</label>
-                                                <input type="text" class="form-control" name="Apellido" value="Apellido">
+                                                <input type="text" class="form-control" id="Apellido" name="Apellido" value="<%=vendedor.getApellido()%>">
                                             </div>
                                         </div>
                                     </div>
                                     <!-- /.row -->
 
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label for="state">Cedula</label>
-                                                <input type="text" class="form-control" name="Cedulamod" value="Cedula">
-                                                <input type="hidden" class="form-control" name="Cedula" value=Cedula">
-                                            </div>
-                                        </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="street">Dirección</label>
-                                                <input type="text" class="form-control" name="Direccion" value="Direccion">
+                                                <input type="text" class="form-control" name="Direccion" id="Direccion" value="<%=vendedor.getDireccion()%>" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label for="phone">Teléfono</label>
+                                                <input type="number" class="form-control" name="Telefono" id="Telefono" value="<%=vendedor.getTelefono()%>" required />
                                             </div>
                                         </div>
                                     </div>
@@ -107,19 +130,12 @@
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for="phone">Teléfono</label>
-                                                <input type="text" class="form-control" name="Telefono" value="Telefono">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
                                                 <label for="email">Correo</label>
-                                                <input type="email" class="form-control" name="Correo" value="Correo">
+                                                <input type="email" name="Correo" id="Correo" value="<%=vendedor.getCorreo()%>" class="form-control" required title="Correo No Válido" />
                                             </div>
                                         </div>
                                         <div class="col-sm-12 text-center">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar Cambios</button>
-
+                                            <button id="btnModificarDatos" type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar Cambios</button>
                                         </div>
                                     </div>
                                 </form>
@@ -136,13 +152,16 @@
                                             </div>
 
                                             <script src="../public/js/jquery-1.11.0.min.js"></script>
-                                            <script src="../public/js/fileinput/fileinput.js"></script>
                                             <script src="../public/js/bootstrap/bootstrap.min.js"></script>
-                                            <script src="../public/js/jquery.cookie.js"></script>
-                                            <script src="../public/js/waypoints.min.js"></script>
-                                            <script src="../public/js/modernizr.js"></script>
-                                            <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
-                                            <script src="../public/js/owl.carousel.min.js"></script>
-                                            <script src="../public/js/front.js"></script>
+                                            <script src="../public/js/Vendedor.js" type="text/javascript"></script>
     </body>
+    <%                                            } catch (Exception e) {
+        e.printStackTrace();
+    %>
+    <script>
+            location = "../General/index.jsp";
+    </script>
+    <%
+        }
+    %>
 </html>

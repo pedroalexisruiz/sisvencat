@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IDAOVendedor {
 
-    public int insertar(Vendedor ven, Gerente ger);
+    public boolean registrar(Vendedor ven, Gerente ger) throws SQLException;
 
     public boolean modificar(Vendedor ven) throws SQLException;
     
@@ -28,7 +28,7 @@ public interface IDAOVendedor {
     
     public List<Vendedor> listarPorEstado(int estado) throws SQLException;
 
-    public Vendedor getVendedor(Vendedor ven) throws SQLException;
+    public Vendedor getVendedor(String cedula) throws SQLException;
 
     public void closeConn();
 

@@ -7,6 +7,8 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -16,15 +18,15 @@ import java.util.List;
 public interface IDAOPedido {
     
     
-    public boolean insertar(Pedido pe) throws Exception;
+    public boolean insertar(Pedido pe) throws SQLException;
 
-    public int modificar(Pedido pe) throws Exception;
+    public int modificar(Pedido pe) throws SQLException;
 
-    public boolean eliminar(Pedido pe) throws Exception;
+    public boolean eliminar(Pedido pe) throws SQLException;
 
-    public List<Pedido> listarPorCampaña(Campaña cam) throws Exception;
+    public List<Pedido> listarPorCampaña(Campaña cam) throws SQLException, ParseException ;
 
-    public Pedido getPedido(Pedido pe) throws Exception;
+    public Pedido getPedido(Pedido pe) throws SQLException;
 
-    public void closeConn() throws Exception;
+    public void closeConn();
 }

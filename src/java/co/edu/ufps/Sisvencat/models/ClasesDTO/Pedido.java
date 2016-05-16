@@ -15,26 +15,34 @@ import java.util.Calendar;
 public class Pedido implements Serializable {
     private int codigo_pedido;//codigo del pedido.
     private Premio premio;//premio asociado al pedido.
-    private Vendedor vendedor;//vendedor que realiza el pedido.
     private int valorTotal;//valor total del producto.
     private Calendar fecha;//fecha en que se realiza el pedido.
-
+    private String cedulaVendedor;
+    
     public Pedido() {
     }
 
-    public Pedido(Premio premio, Vendedor vendedor,int valorTotal, Calendar fecha) {
+    public Pedido(Premio premio,String cedulaVendedor,int valorTotal, Calendar fecha) {
         this.premio = premio;
-        this.vendedor = vendedor;
         this.valorTotal = valorTotal;
         this.fecha = fecha;
+        this.cedulaVendedor = cedulaVendedor;
     }
 
-    public Pedido(int codigo_pedido, Premio premio, Vendedor vendedor,int valorTotal, Calendar fecha) {
+    public Pedido(int codigo_pedido, Premio premio,String cedulaVendedor, int valorTotal, Calendar fecha) {
         this.codigo_pedido = codigo_pedido;
         this.premio = premio;
-        this.vendedor = vendedor;
         this.valorTotal = valorTotal;
         this.fecha = fecha;
+        this.cedulaVendedor = cedulaVendedor;
+    }
+
+    public String getCedulaVendedor() {
+        return cedulaVendedor;
+    }
+
+    public void setCedulaVendedor(String cedulaVendedor) {
+        this.cedulaVendedor = cedulaVendedor;
     }
     
     public int getCodigo_pedido() {
@@ -51,14 +59,6 @@ public class Pedido implements Serializable {
 
     public void setPremio(Premio premio) {
         this.premio = premio;
-    }
-
-    public Vendedor getVendedor() {
-        return vendedor;
-    }
-
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
     }
 
     public int getValorTotal() {
@@ -79,7 +79,7 @@ public class Pedido implements Serializable {
 
     @Override
     public String toString() {
-        return "Pedido{" + "codigo_pedido=" + codigo_pedido + ", premio=" + premio.getNombre() + ", vendedor=" + vendedor.getCedula() + ", valorTotal=" + valorTotal + ", fecha=" + fecha.get(Calendar.YEAR) + '}';
+        return "Pedido{" + "codigo_pedido=" + codigo_pedido + ", premio=" + premio.getNombre() + ", valorTotal=" + valorTotal + ", fecha=" + fecha.get(Calendar.YEAR) + '}';
     }
     
 }

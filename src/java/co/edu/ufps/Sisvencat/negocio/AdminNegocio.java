@@ -30,8 +30,19 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
     public AdminNegocio() {
     }
 
-    public AdminNegocio(Administrador admin) {
-        this.admin = admin;
+    public AdminNegocio(Persona p) {
+        
+        this.admin = new Administrador();
+        this.admin.setCedula(p.getCedula());
+        this.admin.setNombre(p.getNombre());
+        this.admin.setApellido(p.getApellido());
+        this.admin.setCorreo(p.getCorreo());
+        this.admin.setTipoUsr(1);
+        this.admin.setDireccion(p.getDireccion());
+        this.admin.setValido(true);
+        this.admin.setTelefono(p.getTelefono());
+        this.admin.setContraseña(p.getContraseña());
+        
         try {
             this.campañaActiva = new CampañaDAO().listarCampañasPorEstado(1).get(0);
         } catch (Exception ex) {
@@ -268,11 +279,7 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
     @Override
     public Vendedor getVendedor(String numDocVendedor) throws SQLException{
         
-        Vendedor ven = new Vendedor();
-        
-        ven.setCedula(numDocVendedor);
-        
-        return new VendedorDAO().getVendedor(ven);
+        return new VendedorDAO().getVendedor(numDocVendedor);
     }
 
     @Override

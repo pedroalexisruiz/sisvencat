@@ -20,7 +20,7 @@
         %>
         <script>
             alert("Acceso solo para el Administrador");
-            location = "../../cerrarSesion.jsp";
+            location = "../cerrarSesion.jsp";
         </script>
         <%
             }
