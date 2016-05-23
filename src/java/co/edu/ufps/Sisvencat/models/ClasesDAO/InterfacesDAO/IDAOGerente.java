@@ -31,5 +31,5 @@ public interface IDAOGerente {
     
     public List<Vendedor> getVendedoresDeGerente(Gerente ger)throws SQLException;
     
-    public void closeConn();
+    public void closeConn() throws SQLException;
 }

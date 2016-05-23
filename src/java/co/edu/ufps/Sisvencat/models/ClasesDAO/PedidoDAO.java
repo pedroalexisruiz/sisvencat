@@ -30,7 +30,7 @@ public class PedidoDAO implements Serializable, IDAOPedido{
     private Conexion con;
     public static final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
-    public PedidoDAO() {
+    public PedidoDAO() throws SQLException {
         con = new Conexion();
     }
     
@@ -85,9 +85,32 @@ public class PedidoDAO implements Serializable, IDAOPedido{
     public Pedido getPedido(Pedido pe) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
-    public void closeConn(){
+    public Pedido getPedidoDelVendedor(String cedula, int codigo_cam) throws SQLException, ParseException{
+        
+        String consulta = "SELECT * FROM pedido WHERE Vendedor_Persona_Cedula=? AND Campana_Codigo_cam=?";
+        if(con==null){
+            con = new Conexion();
+        }
+        
+        PreparedStatement state = con.getConexion().prepareStatement(consulta);
+        state.setString(1, cedula);
+        state.setInt(2, codigo_cam);
+        ResultSet rs = state.executeQuery();
+        
+        Pedido pedido = null;
+        
+        while(rs.next()){
+            Calendar fechapedido = Calendar.getInstance();
+            fechapedido.setTime(formater.parse(rs.getString("Fecha_pedido")));
+            pedido = new Pedido(rs.getInt("Codigo_pedido"),null,cedula,rs.getInt("Valor_Total"),fechapedido);
+        }
+        
+        return pedido;
+    }
+    @Override
+    public void closeConn() throws SQLException{
         con.close();
         con = null;
     }

@@ -16,7 +16,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
 
     private Conexion con;
 
-    public GerenteDAO() {
+    public GerenteDAO() throws SQLException {
         this.con = new Conexion();
     }
 
@@ -289,7 +289,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
     }
 
     @Override
-    public void closeConn(){
+    public void closeConn() throws SQLException{
         con.close();
         con = null;
     }

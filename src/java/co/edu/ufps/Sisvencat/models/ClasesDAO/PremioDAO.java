@@ -23,7 +23,7 @@ public class PremioDAO implements Serializable, IDAOPremio{
     
     private Conexion con;
 
-    public PremioDAO(){
+    public PremioDAO() throws SQLException{
         this.con = new Conexion();
     }
     
@@ -75,7 +75,7 @@ public class PremioDAO implements Serializable, IDAOPremio{
     }
 
     @Override
-    public void closeConn() {
+    public void closeConn() throws SQLException{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

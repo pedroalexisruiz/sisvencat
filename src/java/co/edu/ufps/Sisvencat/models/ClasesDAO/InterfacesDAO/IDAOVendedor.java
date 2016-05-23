@@ -30,6 +30,6 @@ public interface IDAOVendedor {
 
     public Vendedor getVendedor(String cedula) throws SQLException;
 
-    public void closeConn();
+    public void closeConn() throws SQLException ;
 
 }

@@ -22,33 +22,35 @@ public class Conexion implements Serializable{
     private final String db_password = "ufps_uy";
     /**
      * además de crear el objeto se genera la conexion y se crea la consulta
+     * @throws java.sql.SQLException
      */
-    public Conexion() {
+    public Conexion() throws SQLException{
         try {
             Class.forName(db_driver).newInstance();
             conexion = DriverManager.getConnection(db_url, db_username, db_password);
             consulta = conexion.createStatement();
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e1) {
+            throw e;
+        } catch (ClassNotFoundException  e1) {
             e1.printStackTrace();
         } catch (InstantiationException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
     /**
      * cierra la conexion a la base de datos.
+     * @throws java.sql.SQLException
      */
-    public void close() {
+    public void close() throws SQLException{
 
         if (consulta != null) {
            
             try {
                 consulta.close();
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                throw ex;
             }
 
             consulta = null;
@@ -58,7 +60,7 @@ public class Conexion implements Serializable{
             try {
                 conexion.close();
             } catch (SQLException ex) {
-                ex.printStackTrace();
+                throw ex;
             }
 
             conexion = null;

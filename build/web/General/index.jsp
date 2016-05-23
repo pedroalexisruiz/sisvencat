@@ -1,10 +1,21 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="co.edu.ufps.Sisvencat.facade.SisvencatFacade"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
 
+        <%
+            SisvencatFacade fachada = (SisvencatFacade) request.getSession().getAttribute("Fachada");
+
+            if (!fachada.existeNegocioGeneral()) {
+                response.sendRedirect("../cerrarSesion.jsp");
+        %>
+
+        <%
+        } else {
+        %>
         <title>Sisvencat</title>
 
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
@@ -25,7 +36,7 @@
             <div class="container">
                 <!--/.navbar-header -->
 
-            <jsp:include page="../public/includes/menupublico.jsp" />
+                <jsp:include page="../public/includes/menupublico.jsp" />
                 <!--/.nav-collapse -->
 
                 <!--/.nav-collapse -->
@@ -503,5 +514,7 @@
         <script src="../public/js/owl.carousel.min.js"></script>
         <script src="../public/js/front.js"></script>
     </body>
-
+    <%
+        }
+    %>
 </html>

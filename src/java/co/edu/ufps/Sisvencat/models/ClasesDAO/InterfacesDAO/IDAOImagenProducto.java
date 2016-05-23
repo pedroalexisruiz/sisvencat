@@ -7,6 +7,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.ImagenProductoDTO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,5 +29,5 @@ public interface IDAOImagenProducto {
 
     public ImagenProductoDTO getImagenProducto(Producto pro) throws Exception;
 
-    public boolean closeConn() throws Exception;
+    public boolean closeConn() throws SQLException;
 }

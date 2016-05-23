@@ -7,6 +7,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOVendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
 import java.io.Serializable;
@@ -24,7 +25,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
 
     private Conexion con;
 
-    public VendedorDAO() {
+    public VendedorDAO() throws SQLException {
         this.con = new Conexion();
     }
     
@@ -254,9 +255,9 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         
         return vendedor;
     }
-
+    
     @Override
-    public void closeConn(){
+    public void closeConn() throws SQLException{
         
         con.close();
         con = null;

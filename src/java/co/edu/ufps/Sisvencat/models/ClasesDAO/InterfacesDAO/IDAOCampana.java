@@ -26,5 +26,5 @@ public interface IDAOCampana {
     
     public Campaña getCampaña(Campaña cam) throws SQLException,ParseException ;
     
-    public void closeConn();
+    public void closeConn() throws SQLException;
 }

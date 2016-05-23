@@ -27,5 +27,5 @@ public interface IDAOZona {
     
     public boolean poseeGerente(int Zona_Codigo_Z)throws  SQLException;
     
-    public void closeConn();
+    public void closeConn() throws SQLException ;
 }

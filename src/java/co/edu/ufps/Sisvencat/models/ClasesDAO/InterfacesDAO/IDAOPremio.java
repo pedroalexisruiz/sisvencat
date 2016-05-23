@@ -27,5 +27,5 @@ public interface IDAOPremio {
 
     public Premio getPremio(Premio pre) throws SQLException;
 
-    public void closeConn();
+    public void closeConn() throws SQLException;
 }

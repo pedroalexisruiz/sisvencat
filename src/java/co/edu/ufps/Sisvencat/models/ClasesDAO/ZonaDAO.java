@@ -24,7 +24,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
 
     private Conexion con;
 
-    public ZonaDAO() {
+    public ZonaDAO() throws SQLException{
         this.con = new Conexion();
     }
 
@@ -257,7 +257,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
     }
 
     @Override
-    public void closeConn(){
+    public void closeConn() throws SQLException{
 
         con.close();
         con = null;

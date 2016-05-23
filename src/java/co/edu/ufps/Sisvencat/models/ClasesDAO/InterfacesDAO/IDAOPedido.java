@@ -26,7 +26,9 @@ public interface IDAOPedido {
 
     public List<Pedido> listarPorCampaña(Campaña cam) throws SQLException, ParseException ;
 
+    public Pedido getPedidoDelVendedor(String cedula, int codigo_cam) throws SQLException, ParseException;
+            
     public Pedido getPedido(Pedido pe) throws SQLException;
 
-    public void closeConn();
+    public void closeConn() throws SQLException;
 }

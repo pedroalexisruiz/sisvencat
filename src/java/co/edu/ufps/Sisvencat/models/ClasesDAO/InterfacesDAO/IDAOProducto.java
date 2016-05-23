@@ -28,5 +28,5 @@ public interface IDAOProducto {
     
     public boolean existe(Producto p) throws Exception;
     
-    public void closeConn() throws Exception;
+    public void closeConn() throws SQLException ;
 }

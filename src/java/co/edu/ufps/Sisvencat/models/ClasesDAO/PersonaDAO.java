@@ -13,7 +13,7 @@ public class PersonaDAO implements Serializable, IDAOPersona {
 
     private Conexion con;
 
-    public PersonaDAO() {
+    public PersonaDAO() throws SQLException {
         this.con = new Conexion();
     }
 
@@ -103,7 +103,7 @@ public class PersonaDAO implements Serializable, IDAOPersona {
     }
     
     @Override
-    public void closeConn(){
+    public void closeConn() throws SQLException{
 
         con.close();
         con = null;

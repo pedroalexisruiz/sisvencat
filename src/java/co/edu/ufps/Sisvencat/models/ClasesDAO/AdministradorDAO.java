@@ -21,7 +21,7 @@ public class AdministradorDAO implements Serializable, IDAOAdministrador{
 
     private Conexion con;
 
-    public AdministradorDAO() {
+    public AdministradorDAO() throws SQLException {
         this.con = new Conexion();
     }
     
@@ -105,7 +105,7 @@ public class AdministradorDAO implements Serializable, IDAOAdministrador{
     }
 
     @Override
-    public void closeConn() {
+    public void closeConn() throws SQLException {
         con.close();
         con = null;
     }

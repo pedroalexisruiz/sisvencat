@@ -48,6 +48,10 @@ public class SisvencatFacade implements Serializable{
         this.vendedorN = null;
     }
     
+    public boolean existeNegocioGeneral(){
+        return this.generalN!=null;
+    }
+    
     public void iniciarNegocioGerente(String cedula) throws SQLException{
 
         this.gerenteN = invocador.getGerenteNegocio(cedula);

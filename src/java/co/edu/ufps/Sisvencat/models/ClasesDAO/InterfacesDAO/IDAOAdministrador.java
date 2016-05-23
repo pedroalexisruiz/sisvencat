@@ -20,5 +20,5 @@ public interface IDAOAdministrador {
     
     public boolean cambiarContrasena(Administrador a) throws SQLException;
     
-    public void closeConn();
+    public void closeConn() throws SQLException;
 }

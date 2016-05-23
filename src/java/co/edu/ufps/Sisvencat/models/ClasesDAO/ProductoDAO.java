@@ -26,7 +26,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
 
     private Conexion con;
 
-    public ProductoDAO() {
+    public ProductoDAO() throws SQLException {
         con = new Conexion();
     }
 
@@ -207,7 +207,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
     }
 
     @Override
-    public void closeConn(){
+    public void closeConn() throws SQLException{
         con.close();
         con = null;
     }

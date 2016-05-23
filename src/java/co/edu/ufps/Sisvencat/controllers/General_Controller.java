@@ -1,12 +1,12 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package co.edu.ufps.Sisvencat.controllers;
 
-import co.edu.ufps.Sisvencat.facade.SisvencatFacade;
-import co.edu.ufps.Sisvencat.models.ClasesDAO.PersonaDAO;
-import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Administrador
+ * @author salaas402
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "General_Controller", urlPatterns = {"/General"})
+public class General_Controller extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,52 +33,8 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
-            String cedula = request.getParameter("cedula");
-            String contrasena = request.getParameter("password");
-
-            Persona p = new Persona();
-            p.setCedula(cedula);
-            p.setContraseña(contrasena);
-
-            try {
-                
-                PersonaDAO pDAO = new PersonaDAO();
-                p = pDAO.login(p);
-
-                if (p.isValido()) {
-
-                    SisvencatFacade fachada = new SisvencatFacade();
-                    int n = p.getTipoUsr();
-                    String ruta = "";
-                    
-                    switch (n) {
-                        case 1:
-                            fachada.iniciarNegocioAdmin(p);
-                            ruta = "Admin/Profile.jsp";
-                            break;
-                        case 2:
-                            fachada.iniciarNegocioGerente(p.getCedula());
-                            ruta = "Gerente/Profile.jsp";
-                            break;
-                        case 3:
-                            fachada.iniciarNegocioVendedor(p.getCedula());
-                            ruta = "Vendedor/Profile.jsp";
-                            break;
-                        default:
-                            break;
-                    }
-                    
-                    request.getSession().setAttribute("Fachada", fachada);
-                    out.print(ruta);
-                } else {
-                    out.print("Datos Erróneos");
-                }
-            } catch (SQLException ex) {
-                out.print("Error En la Consulta" + p.getCedula()+"-"+p.getContraseña());
-                ex.printStackTrace();
-            }
-
+            
+            
         }
     }
 

@@ -6,6 +6,7 @@
 package co.edu.ufps.Sisvencat.models.ClasesDTO;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -18,6 +19,7 @@ public class Pedido implements Serializable {
     private int valorTotal;//valor total del producto.
     private Calendar fecha;//fecha en que se realiza el pedido.
     private String cedulaVendedor;
+    private ArrayList<Item> items;
     
     public Pedido() {
     }
@@ -35,6 +37,14 @@ public class Pedido implements Serializable {
         this.valorTotal = valorTotal;
         this.fecha = fecha;
         this.cedulaVendedor = cedulaVendedor;
+    }
+
+    public ArrayList<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<Item> items) {
+        this.items = items;
     }
 
     public String getCedulaVendedor() {

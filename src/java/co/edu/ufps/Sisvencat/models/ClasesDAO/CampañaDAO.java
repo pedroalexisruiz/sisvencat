@@ -25,7 +25,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     private Conexion con;
     public static final DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 
-    public CampañaDAO() {
+    public CampañaDAO() throws SQLException {
         con = new Conexion();
     }
 
@@ -193,7 +193,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public void closeConn(){
+    public void closeConn() throws SQLException{
 
         con.close();
         con = null;
