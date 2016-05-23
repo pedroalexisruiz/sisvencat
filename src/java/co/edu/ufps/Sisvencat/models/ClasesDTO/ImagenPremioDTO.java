@@ -13,4 +13,14 @@ import java.io.Serializable;
  */
 public class ImagenPremioDTO extends Imagen implements Serializable{
 
+    public ImagenPremioDTO() {
+    }
+    
+    public ImagenPremioDTO(String urlImagen) {
+        super(urlImagen);
+    }
+
+    public ImagenPremioDTO(long id, String urlImagen) {
+        super(id, urlImagen);
+    }
 }

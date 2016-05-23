@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author estudiante
  */
 public class Item  implements Serializable{
-    private int codigo_item;//codigo que identifica al item.
+    private long codigo_item;//codigo que identifica al item.
     private Producto producto;//producto al cual esta asociado el item.
     private int cantidad;//cantidad del iten.
     private int valorTotal;//valor total del item;
@@ -26,18 +26,18 @@ public class Item  implements Serializable{
         this.valorTotal = valorTotal;
     }
 
-    public Item(int codigo_item, Producto producto, int cantidad, int valorTotal) {
+    public Item(long codigo_item, Producto producto, int cantidad, int valorTotal) {
         this.codigo_item = codigo_item;
         this.producto = producto;
         this.cantidad = cantidad;
         this.valorTotal = valorTotal;
     }
     
-    public int getCodigo_item() {
+    public long getCodigo_item() {
         return codigo_item;
     }
 
-    public void setCodigo_item(int codigo_item) {
+    public void setCodigo_item(long codigo_item) {
         this.codigo_item = codigo_item;
     }
 

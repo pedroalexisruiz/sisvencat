@@ -12,7 +12,7 @@ import java.util.List;
  * @author estudiante
  */
 public class Campaña implements Serializable{
-    private int codigo_cam;//codigo de la campaña
+    private long codigo_cam;//codigo de la campaña
     //tener cuidado con este tipo de datos en los DAOs
     private Calendar fechaIni;//fecha de inicio de la campaña
     private Calendar fechaFin;//fecha de finalizacion de la campaña
@@ -31,7 +31,7 @@ public class Campaña implements Serializable{
         this.tema = tema;
     }
 
-    public Campaña(int codigo_cam, Calendar fechaIni, Calendar fechaFin, String tema) {
+    public Campaña(long codigo_cam, Calendar fechaIni, Calendar fechaFin, String tema) {
         this.codigo_cam = codigo_cam;
         this.fechaIni = fechaIni;
         this.fechaFin = fechaFin;
@@ -62,11 +62,11 @@ public class Campaña implements Serializable{
         this.estado = estado;
     }
  
-    public int getCodigo_cam() {
+    public long getCodigo_cam() {
         return codigo_cam;
     }
 
-    public void setCodigo_cam(int codigo_cam) {
+    public void setCodigo_cam(long codigo_cam) {
         this.codigo_cam = codigo_cam;
     }
 

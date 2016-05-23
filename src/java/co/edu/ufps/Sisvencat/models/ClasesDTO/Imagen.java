@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Imagen implements Serializable{
        
-    private int id;//identificador de imagen
+    private long id;//identificador de imagen
     private String urlImagen;//direccion de la imagen
 
     public Imagen() {
@@ -23,13 +23,13 @@ public class Imagen implements Serializable{
         this.urlImagen = urlImagen;
     }
 
-    public Imagen(int id, String urlImagen) {
+    public Imagen(long id, String urlImagen) {
         this.id = id;
         this.urlImagen = urlImagen;
     }
     
     
-    public int getId() {
+    public long getId() {
         return id;
     }
 

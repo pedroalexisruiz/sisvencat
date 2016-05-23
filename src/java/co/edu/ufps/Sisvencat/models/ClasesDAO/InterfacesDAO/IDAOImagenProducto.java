@@ -9,7 +9,6 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.ImagenProductoDTO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -17,17 +16,13 @@ import java.util.List;
  */
 public interface IDAOImagenProducto {
     
-    public boolean subirImagenes(Producto pro, ArrayList<ImagenProductoDTO> imagenes) throws Exception;
+    public boolean subirImagenes(Producto pro, ArrayList<ImagenProductoDTO> imagenes) throws SQLException;
 
-    public int modificarImagen(Producto pro, ImagenProductoDTO imagen) throws Exception;
+    public boolean eliminarImagenesDeProducto(Producto pro) throws SQLException;
+    
+    public boolean eliminarImagen(ImagenProductoDTO imagen) throws SQLException;
 
-    public boolean eliminarImagen(Producto pro, ImagenProductoDTO imagen) throws Exception;
+    public ArrayList<ImagenProductoDTO> getImagenesProducto(Producto pro) throws SQLException;
 
-    public List<ImagenProductoDTO> listar() throws Exception;
-
-    public List<ImagenProductoDTO> listar(String where) throws Exception;
-
-    public ImagenProductoDTO getImagenProducto(Producto pro) throws Exception;
-
-    public boolean closeConn() throws SQLException;
+    public void closeConn() throws SQLException;
 }

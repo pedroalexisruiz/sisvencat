@@ -13,7 +13,7 @@ import java.util.List;
  * @author estudiante
  */
 public class Producto implements Serializable {
-    private int codigo_p;//codigo del producto
+    private long codigo_p;//codigo del producto
     private String nombre;//nombre distintivo del producto
     private String descripcion;// palabras que describen el producto
     private int valor;//costo del producto
@@ -23,6 +23,7 @@ public class Producto implements Serializable {
     private List<ImagenProductoDTO> imagenes;//imagenes asociadas al producto
     private List<String> talla;
     private List<String> color;
+    private int estado;
     
     public Producto() {
     }
@@ -37,7 +38,7 @@ public class Producto implements Serializable {
         this.imagenes = imagenes;
     }
 
-    public Producto(int codigo_p, String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto, List<ImagenProductoDTO> imagenes) {
+    public Producto(long codigo_p, String nombre, String descripcion, int valor, int cantidad, Categoria categoria, Tipo tipoProducto, List<ImagenProductoDTO> imagenes) {
         this.codigo_p = codigo_p;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -46,6 +47,14 @@ public class Producto implements Serializable {
         this.categoria = categoria;
         this.tipoProducto = tipoProducto;
         this.imagenes = imagenes;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public List<String> getTalla() {
@@ -64,11 +73,11 @@ public class Producto implements Serializable {
         this.color = color;
     }
     
-    public int getCodigo_p() {
+    public long getCodigo_p() {
         return codigo_p;
     }
 
-    public void setCodigo_p(int codigo_p) {
+    public void setCodigo_p(long codigo_p) {
         this.codigo_p = codigo_p;
     }
 
@@ -135,8 +144,8 @@ public class Producto implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + this.codigo_p;
+        int hash = 7;
+        hash = 13 * hash + (int) (this.codigo_p ^ (this.codigo_p >>> 32));
         return hash;
     }
 

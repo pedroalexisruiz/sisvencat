@@ -9,7 +9,6 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.ImagenPremioDTO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -17,17 +16,13 @@ import java.util.List;
  */
 public interface IDAOImagenPremio {
     
-    public boolean insertar(Premio pre, ArrayList<ImagenPremioDTO> imagenes) throws Exception;
+    public boolean insertar(Premio pre, ArrayList<ImagenPremioDTO> imagenes) throws SQLException;
 
-    public int modificar(Premio pre, ImagenPremioDTO imagen) throws Exception;
+    public boolean eliminarImagenesDePremio(Premio pre) throws SQLException;
+    
+    public boolean eliminarImagen(ImagenPremioDTO imagen) throws SQLException;
 
-    public boolean eliminar(Premio pre, ImagenPremioDTO imagen) throws Exception;
+    public ArrayList<ImagenPremioDTO> getImagenesPremio(Premio pre) throws SQLException;
 
-    public List<ImagenPremioDTO> listar() throws Exception;
-
-    public List<ImagenPremioDTO> listar(String where) throws Exception;
-
-    public ImagenPremioDTO getImagenPremio(ImagenPremioDTO imagen) throws Exception;
-
-    public boolean closeConn() throws SQLException;
+    public void closeConn() throws SQLException;
 }

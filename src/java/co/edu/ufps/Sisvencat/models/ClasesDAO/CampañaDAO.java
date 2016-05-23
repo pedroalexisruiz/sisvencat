@@ -65,7 +65,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
 
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         state.setInt(1, 2);
-        state.setInt(2, cam.getCodigo_cam());
+        state.setLong(2, cam.getCodigo_cam());
 
         state.execute();
 
@@ -168,7 +168,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
         }
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
 
-        state.setInt(1, cam.getCodigo_cam());
+        state.setLong(1, cam.getCodigo_cam());
         ResultSet rs = state.executeQuery();
 
         while (rs.next()) {
