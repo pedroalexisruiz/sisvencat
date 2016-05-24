@@ -85,7 +85,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             
         }
 
-        
+        System.out.println("esto es una prueba");
         
         return true;
         
