@@ -14,9 +14,19 @@ import java.util.List;
 public interface IDAOProducto {
     
     public boolean insertar(Producto pro, Campaña cam) throws SQLException;
+    
+    public boolean insertarVarios(ArrayList<Producto> productos, Campaña cam) throws SQLException;
+    
+    public boolean insertarTallas(Producto pro) throws SQLException;
+    
+    public boolean desasignarTallas(long codigo_p) throws SQLException;
+    
+    public boolean insertarColores(Producto pro) throws SQLException;
+    
+    public boolean desasignarColores(long codigo_p) throws SQLException;
 
     public boolean modificar(Producto pro) throws SQLException;
-
+            
     public boolean eliminar(Producto pro, Campaña cam) throws SQLException;
 
     public ArrayList<Producto> listar() throws SQLException;

@@ -22,8 +22,7 @@ public class Producto implements Serializable {
     private Tipo tipoProducto;//es el tipo de porducto 
     private List<ImagenProductoDTO> imagenes;//imagenes asociadas al producto
     private List<String> talla;
-    private List<String> color;
-    private int estado;
+    private List<Color> color;
     
     public Producto() {
     }
@@ -49,14 +48,6 @@ public class Producto implements Serializable {
         this.imagenes = imagenes;
     }
 
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
     public List<String> getTalla() {
         return talla;
     }
@@ -65,11 +56,11 @@ public class Producto implements Serializable {
         this.talla = talla;
     }
 
-    public List<String> getColor() {
+    public List<Color> getColor() {
         return color;
     }
 
-    public void setColor(List<String> color) {
+    public void setColor(List<Color> color) {
         this.color = color;
     }
     

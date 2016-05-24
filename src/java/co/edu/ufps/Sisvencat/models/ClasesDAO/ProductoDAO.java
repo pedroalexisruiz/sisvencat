@@ -8,6 +8,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOProducto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Categoria;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Color;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
@@ -33,44 +34,50 @@ public class ProductoDAO implements Serializable, IDAOProducto {
     @Override
     public boolean insertar(Producto pro, Campaña cam) throws SQLException {
 
-        return true;
-    }
-
-    @Override
-    public boolean modificar(Producto pro) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean eliminar(Producto pro, Campaña cam) throws SQLException {
-        
-        String consulta = "DELETE * FROM productosporcampana WHERE idProducto=? AND idCampana=?";
-        String consulta2 = "UPDATE producto set estado=2 WHERE Codigo_p=?";
+        String consulta = "SELECT `auto_increment` FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'producto'";
+        String consulta2 = "INSERT INTO producto VALUES(?,?,?,?,?,?,?)";
+        String consulta3 = "INSERT INTO productosporcampana VALUES(?,?)";
         PreparedStatement state = null;
         PreparedStatement state2 = null;
-        
-        try{
-            if(con ==null){
+        PreparedStatement state3 = null;
+        ResultSet rs = null;
+        try {
+            if (con == null) {
                 con = new Conexion();
             }
-            
+
             con.getConexion().setAutoCommit(false);
             state = con.getConexion().prepareStatement(consulta);
-            state.setLong(1, pro.getCodigo_p());
-            state.setLong(2, cam.getCodigo_cam());
-            state2 = con.getConexion().prepareStatement(consulta2);
-            state2.setLong(1, pro.getCodigo_p());
+            rs = state.executeQuery();
+            long id = 0;
             state.execute();
+
+            while (rs.next()) {
+                id = rs.getLong(1);
+            }
+
+            state2 = con.getConexion().prepareStatement(consulta2);
+            state2.setLong(1, id);
+            state2.setString(2, pro.getNombre());
+            state2.setString(3, pro.getDescripcion());
+            state2.setInt(4, pro.getValor());
+            state2.setInt(5, pro.getCantidad());
+            state2.setInt(6, pro.getCategoria().getId());
+            state2.setInt(7, pro.getTipoProducto().getId());
+            state3 = con.getConexion().prepareStatement(consulta3);
+            state3.setLong(1, id);
+            state3.setLong(2, cam.getCodigo_cam());
+
             state2.execute();
-            
-            con.getConexion().commit();    
+            state3.execute();
+            con.getConexion().commit();
         } catch (SQLException e) {
-            
-            if(con!=null){   
-                try{
+
+            if (con != null) {
+                try {
                     System.out.println("Error en la Transacción. Revirtiendo Cambios");
                     con.getConexion().rollback();
-                }catch(SQLException ex){
+                } catch (SQLException ex) {
                     throw ex;
                 }
             }
@@ -81,6 +88,283 @@ public class ProductoDAO implements Serializable, IDAOProducto {
             }
             if (state2 != null) {
                 state2.close();
+            }
+            if (state3 != null) {
+                state3.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean insertarVarios(ArrayList<Producto> productos, Campaña cam) throws SQLException {
+
+        String consulta = "SELECT `auto_increment` FROM INFORMATION_SCHEMA.TABLES WHERE table_name = 'producto' LIMIT 1";
+        String consulta2 = "INSERT INTO producto VALUES(?,?,?,?,?,?,?)";
+        String consulta3 = "INSERT INTO productosporcampana VALUES(?,?)";
+        PreparedStatement state = null;
+        PreparedStatement state2 = null;
+        PreparedStatement state3 = null;
+        ResultSet rs = null;
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            con.getConexion().setAutoCommit(false);
+            state = con.getConexion().prepareStatement(consulta);
+            rs = state.executeQuery();
+            long id = 0;
+            state.execute();
+
+            while (rs.next()) {
+                id = rs.getLong(1);
+            }
+            state2 = con.getConexion().prepareStatement(consulta2);
+            state3 = con.getConexion().prepareStatement(consulta3);
+
+            for (Producto pro : productos) {
+                state2.setLong(1, id);
+                state2.setString(2, pro.getNombre());
+                state2.setString(3, pro.getDescripcion());
+                state2.setInt(4, pro.getValor());
+                state2.setInt(5, pro.getCantidad());
+                state2.setInt(6, pro.getCategoria().getId());
+                state2.setInt(7, pro.getTipoProducto().getId());
+                state2.addBatch();
+                state3.setLong(1, id);
+                state3.setLong(2, cam.getCodigo_cam());
+                state3.addBatch();
+                id++;
+            }
+
+            state2.executeBatch();
+            state3.executeBatch();
+            con.getConexion().commit();
+        } catch (SQLException e) {
+
+            if (con != null) {
+                try {
+                    System.out.println("Error en la Transacción. Revirtiendo Cambios");
+                    con.getConexion().rollback();
+                } catch (SQLException ex) {
+                    throw ex;
+                }
+            }
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (state2 != null) {
+                state2.close();
+            }
+            if (state3 != null) {
+                state3.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean insertarTallas(Producto pro) throws SQLException {
+
+        String consulta = "INSERT INTO tallaporproducto VALUES(?,?)";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            con.getConexion().setAutoCommit(false);
+            state = con.getConexion().prepareStatement(consulta);
+            state.setLong(1, pro.getCodigo_p());
+
+            for (String talla : pro.getTalla()) {
+                state.setString(2, talla);
+                state.addBatch();
+            }
+            state.executeBatch();
+            con.getConexion().commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                System.out.println("Error en la Transacción. Revirtiendo Cambios");
+                try {
+                    con.getConexion().rollback();
+                } catch (SQLException ex) {
+                    throw ex;
+                }
+            }
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean desasignarTallas(long codigo_p) throws SQLException {
+        String consulta = "DELETE * FROM tallaporproducto WHERE Codigo_p=?";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+            state = con.getConexion().prepareStatement(consulta);
+            state.setLong(1, codigo_p);
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean insertarColores(Producto pro) throws SQLException {
+        String consulta = "INSERT INTO colorporproducto VALUES(?,?)";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            con.getConexion().setAutoCommit(false);
+            state = con.getConexion().prepareStatement(consulta);
+            state.setLong(1, pro.getCodigo_p());
+
+            for (Color color : pro.getColor()) {
+                state.setLong(2, color.getId());
+                state.addBatch();
+            }
+            state.executeBatch();
+            con.getConexion().commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                System.out.println("Error en la Transacción. Revirtiendo Cambios");
+                try {
+                    con.getConexion().rollback();
+                } catch (SQLException ex) {
+                    throw ex;
+                }
+            }
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean desasignarColores(long codigo_p) throws SQLException {
+
+        String consulta = "DELETE * FROM colorporproducto WHERE Codigo_p=?";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+            state = con.getConexion().prepareStatement(consulta);
+            state.setLong(1, codigo_p);
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean modificar(Producto pro) throws SQLException {
+        String consulta = "UPDATE producto SET Nombre=?,Descripcion=?,Valor=?,cantidad=?,idCategoria=?,idTipoPrenda=? WHERE Codigo_p=?";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setString(1, pro.getNombre());
+            state.setString(2, pro.getDescripcion());
+            state.setInt(3, pro.getValor());
+            state.setInt(4, pro.getCantidad());
+            state.setInt(5, pro.getCategoria().getId());
+            state.setInt(6, pro.getTipoProducto().getId());
+            state.setLong(7, pro.getCodigo_p());
+            state.execute();
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean eliminar(Producto pro, Campaña cam) throws SQLException {
+
+        String consulta = "DELETE * FROM productosporcampana WHERE idProducto=? AND idCampana=?";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setLong(1, pro.getCodigo_p());
+            state.setLong(2, cam.getCodigo_cam());
+            state.execute();
+
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
             }
             if (con != null) {
                 this.closeConn();
@@ -118,10 +402,10 @@ public class ProductoDAO implements Serializable, IDAOProducto {
                 cat = new Categoria(rs.getInt("idCategoria"), rs.getString("nombrecategoria"));
 
                 p = new Producto(rs.getInt("Codigo_p"), rs.getString("Nombre"), rs.getString("Descripcion"), rs.getInt("Valor"),
-                        rs.getInt("cantidad"), cat, tipo, new ImagenProductoDAO().getImagenesProducto(p));
+                        rs.getInt("cantidad"), cat, tipo, null);
+                p.setImagenes(new ImagenProductoDAO().getImagenesProducto(p));
                 p.setTalla(this.getTallas(p.getCodigo_p()));
                 p.setColor(this.getColores(p.getCodigo_p()));
-                p.setEstado(rs.getInt("estado"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -172,10 +456,10 @@ public class ProductoDAO implements Serializable, IDAOProducto {
                 cat = new Categoria(rs.getInt("idCategoria"), rs.getString("nombrecategoria"));
 
                 p = new Producto(rs.getInt("Codigo_p"), rs.getString("Nombre"), rs.getString("Descripcion"), rs.getInt("Valor"),
-                        rs.getInt("cantidad"), cat, tipo, new ImagenProductoDAO().getImagenesProducto(p));
+                        rs.getInt("cantidad"), cat, tipo, null);
+                p.setImagenes(new ImagenProductoDAO().getImagenesProducto(p));
                 p.setTalla(this.getTallas(p.getCodigo_p()));
                 p.setColor(this.getColores(p.getCodigo_p()));
-                p.setEstado(rs.getInt("estado"));
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -212,17 +496,19 @@ public class ProductoDAO implements Serializable, IDAOProducto {
 
     }
 
-    private List<String> getColores(long codP) throws SQLException {
+    private List<Color> getColores(long codP) throws SQLException {
 
-        List<String> colores = new ArrayList();
-        String consulta = "SELECT descripcion FROM colores INNER JOIN colorporproducto ON colores.idColor=colorporproducto.idColor "
+        List<Color> colores = new ArrayList();
+        String consulta = "SELECT colores.* FROM colores INNER JOIN colorporproducto ON colores.idColor=colorporproducto.idColor "
                 + "WHERE colorporproducto.Codigo_p=?";
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         state.setLong(1, codP);
         ResultSet rs = state.executeQuery();
+        Color color = null;
 
         while (rs.next()) {
-            colores.add(rs.getString("idColor"));
+            color = new Color(rs.getLong("idColor"), rs.getString("descripcion"));
+            colores.add(color);
         }
 
         return colores;
@@ -281,8 +567,8 @@ public class ProductoDAO implements Serializable, IDAOProducto {
                     cat = new Categoria(rs.getInt("idCategoria"), rs.getString("nombrecategoria"));
 
                     p = new Producto(rs.getInt("Codigo_p"), rs.getString("Nombre"), rs.getString("Descripcion"), rs.getInt("Valor"),
-                            rs.getInt("cantidad"), cat, tipo, new ImagenProductoDAO().getImagenesProducto(p));
-                    p.setEstado(rs.getInt("estado"));
+                            rs.getInt("cantidad"), cat, tipo, null);
+                    p.setImagenes(new ImagenProductoDAO().getImagenesProducto(p));
                     productos.add(p);
                 }
             }
@@ -306,7 +592,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
     @Override
     public boolean existe(Producto p) throws SQLException {
 
-        String consulta = "SELECT Codigo_p FROM producto WHERE Codigo_p=?";
+        String consulta = "SELECT Codigo_p FROM producto WHERE Codigo_p=? LIMIT 1";
         PreparedStatement state = null;
         ResultSet rs = null;
 
@@ -366,10 +652,10 @@ public class ProductoDAO implements Serializable, IDAOProducto {
                 cat = new Categoria(rs.getInt("idCategoria"), rs.getString("nombrecategoria"));
 
                 pr = new Producto(rs.getLong("Codigo_p"), rs.getString("Nombre"), rs.getString("Descripcion"), rs.getInt("Valor"),
-                        rs.getInt("cantidad"), cat, tipo, new ImagenProductoDAO().getImagenesProducto(pro));
+                        rs.getInt("cantidad"), cat, tipo, null);
+                pr.setImagenes(new ImagenProductoDAO().getImagenesProducto(pr));
                 pr.setTalla(this.getTallas(pr.getCodigo_p()));
                 pr.setColor(this.getColores(pr.getCodigo_p()));
-                pr.setEstado(rs.getInt("estado"));
             }
 
         } catch (SQLException e) {
