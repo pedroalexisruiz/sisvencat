@@ -8,6 +8,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -29,6 +30,8 @@ public interface IDAOVendedor {
     public List<Vendedor> listarPorEstado(int estado) throws SQLException;
 
     public Vendedor getVendedor(String cedula) throws SQLException;
+    
+    public Vendedor getVendedorCompleto(String cedula, long codigo_cam) throws SQLException, ParseException;
 
     public void closeConn() throws SQLException ;
 

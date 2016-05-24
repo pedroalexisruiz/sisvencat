@@ -17,7 +17,7 @@ public interface IDAOPremio {
     
     public boolean insertar(Premio pre) throws SQLException;
 
-    public int modificar(Premio pre) throws SQLException;
+    public boolean modificar(Premio pre) throws SQLException;
 
     public boolean eliminar(Premio pre) throws SQLException;
 
@@ -26,6 +26,10 @@ public interface IDAOPremio {
     public List<Premio> listarDisponiblesoNo(boolean dispon) throws SQLException;
 
     public Premio getPremio(Premio pre) throws SQLException;
+    
+    public boolean insertarPorVendedor(Premio pre, String cedula, long codigo_cam) throws SQLException;
+            
+    public Premio getPremioPorVendedor(String cedula, long Codigo_cam) throws SQLException;
 
     public void closeConn() throws SQLException;
 }

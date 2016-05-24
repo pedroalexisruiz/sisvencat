@@ -3,6 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/facade/SisvencatFacade.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/models/ClasesDAO/ItemDAO.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/negocio/AdminNegocio.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/models/ClasesDAO/PedidoDAO.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/negocio/VendedorNegocio.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/carritoDeCompras.jsp</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/models/ClasesDAO/ProductoDAO.java</file>
         </group>
     </open-files>

@@ -5,13 +5,17 @@
 package co.edu.ufps.Sisvencat.models.util;
 
 
+import co.edu.ufps.Sisvencat.models.ClasesDAO.PedidoDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.ProductoDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Categoria;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Color;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Item;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,27 +28,15 @@ import java.util.logging.Logger;
 public class prueba {
     
     public static void main(String[] args) {
+
         
-        ArrayList<Producto> productos = new ArrayList();
-        
-        Producto p = null;
-        Categoria cat = null;
-        Tipo tipo = null;
-        
-        for (int i = 0; i < 10; i++) {
-            cat = new Categoria();
-            cat.setId(1);
-            tipo = new Tipo();
-            tipo.setId(1);
-            p = new Producto("NombrePrueba"+i,"Descripcion"+i,i,i,cat,tipo,null);
-            productos.add(p);
-        }
-        Campaña cam = new Campaña();
-        cam.setCodigo_cam(1);
         try {
-            ProductoDAO pDAO = new ProductoDAO();
-            pDAO.insertarVarios(productos, cam);
+            PedidoDAO pDAO = new PedidoDAO();
+            Pedido p = pDAO.getPedidoDelVendedor("12345", 1);
+            System.out.println(p.toString());
         } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ParseException ex) {
             ex.printStackTrace();
         }
     }

@@ -4,10 +4,20 @@
     Author     : Administrador
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Producto"%>
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Item"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean class="co.edu.ufps.Sisvencat.facade.SisvencatFacade" id="Fachada" scope="session"></jsp:useBean>
+        
+        <%
+            Pedido pedido = Fachada.getVendedorLogeado().getPedido();
+            ArrayList<Item> items = pedido.getItems();
+        %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
         <title>Vendedor - Pedido</title>
     </head>
@@ -36,7 +46,7 @@
                             <form method="post" action="checkout1.html">
 
                                 <h1>Carrito de Compras</h1>
-                                <p class="text-muted">Actualmente tienes 2 item(s) en tu carrito.</p>
+                                <p class="text-muted">Actualmente tienes <%=items.size() %> item(s) en tu carrito.</p>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -48,38 +58,31 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <%
+                                                Producto p = null;
+                                                for(Item item:items){
+                                                    p = item.getProducto();
+                                                    String rutaimagen ="public/imgpremiosyproductos/imgnormal/nodisponible.jpg";
+                                            %>
                                             <tr>
                                                 <td>
                                                     <a href="#">
-                                                        <img src="../public/img/detailsquare.jpg" alt="White Blouse Armani">
+                                                        <img src="<%=rutaimagen %>" alt="White Blouse Armani">
                                                     </a>
                                                 </td>
-                                                <td><a href="#">Blusa Blanca Armani</a>
+                                                <td><a href="#"><%=p.getNombre() %></a>
                                                 </td>
                                                 <td>
-                                                    <input type="number" value="2" class="form-control">
+                                                    <input type="number" value="<%=item.getCantidad() %>" class="form-control">
                                                 </td>
-                                                <td>$70.000</td>
-                                                <td>$140.000</td>
+                                                <td>$<%=p.getValor() %></td>
+                                                <td>$<%=item.getValorTotal() %></td>
                                                 <td><a href="#"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <a href="#">
-                                                        <img src="../public/img/basketsquare.jpg" alt="Black Blouse Armani">
-                                                    </a>
-                                                </td>
-                                                <td><a href="#">Blusa Negra Versace</a>
-                                                </td>
-                                                <td>
-                                                    <input type="number" value="1" class="form-control">
-                                                </td>
-                                                <td>$80.000</td>
-                                                <td>$80.000</td>
-                                                <td><a href="#"><i class="fa fa-trash-o"></i></a>
-                                                </td>
-                                            </tr>
+                                            <%
+                                                }
+                                            %>
                                         </tbody>
                                         <tfoot>
                                             <tr>

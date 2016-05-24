@@ -4,7 +4,7 @@
     Author     : Administrador
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,7 +16,7 @@
         <!-- Optionally add helpers - button, thumbnail and/or media -->
         <link rel="stylesheet" href="../public/js/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
         <link rel="stylesheet" href="../public/js/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
-        <title>Profile - Admin</title>
+        <title>Ver Premios</title>
     </head>
     <body>
         <jsp:include page="../public/includes/admin/header.jsp" />
@@ -29,9 +29,9 @@
                     <div class="col-md-12">
 
                         <ul class="breadcrumb">
-                            <li><a href="#">Inicio</a>
+                            <li><a href="Profile.jsp">Inicio</a>
                             </li>
-                            <li>Mi Cuenta</li>
+                            <li>Premios</li>
                         </ul>
 
                     </div>
@@ -46,7 +46,7 @@
                                     <p class="lead text-center">¡Te premiamos por tus ventas!</p>
 
                                     <div class="row">
-                                        <div class="col-xs-12 col-md-4">
+                                        <div class="col-xs-12 col-sm-4">
                                             <div class="item">
                                                 <div class="product">
                                                     <div class="flip-container">
@@ -76,18 +76,18 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-xs-12 col-md-4">
+                                        <div class="col-xs-12 col-sm-4">
                                             <div class="item">
                                                 <div class="product">
                                                     <div class="flip-container">
                                                         <div class="flipper">
                                                             <div class="front">
-                                                                <a href="detail.html">
+                                                                <a href="detail.html" class="fancybox-thumb" caption="Premio">
                                                                     <img src="../public/imgpremiosyproductos/imgnormal/televisor.jpg" alt="" class="img-responsive">
                                                                 </a>
                                                             </div>
                                                             <div class="back">
-                                                                <a href="detail.html">
+                                                                <a href="detail.html" class="fancybox-thumb" caption="Premio">
                                                                     <img src="../public/imgpremiosyproductos/imgnormal/LG-LED-TV.jpg" alt="" class="img-responsive">
                                                                 </a>
                                                             </div>
@@ -106,7 +106,7 @@
                                             </div>
                                         </div>
                                         
-                                        <div class="col-xs-12 col-md-4">
+                                        <div class="col-xs-12 col-sm-4">
                                             <div class="item">
                                                 <div class="product">
                                                     <div class="flip-container">

@@ -15,7 +15,6 @@ import java.util.Calendar;
  */
 public class Pedido implements Serializable {
     private long codigo_pedido;//codigo del pedido.
-    private Premio premio;//premio asociado al pedido.
     private int valorTotal;//valor total del producto.
     private Calendar fecha;//fecha en que se realiza el pedido.
     private String cedulaVendedor;
@@ -24,16 +23,14 @@ public class Pedido implements Serializable {
     public Pedido() {
     }
 
-    public Pedido(Premio premio,String cedulaVendedor,int valorTotal, Calendar fecha) {
-        this.premio = premio;
+    public Pedido(String cedulaVendedor,int valorTotal, Calendar fecha) {
         this.valorTotal = valorTotal;
         this.fecha = fecha;
         this.cedulaVendedor = cedulaVendedor;
     }
 
-    public Pedido(long codigo_pedido, Premio premio,String cedulaVendedor, int valorTotal, Calendar fecha) {
+    public Pedido(long codigo_pedido,String cedulaVendedor, int valorTotal, Calendar fecha) {
         this.codigo_pedido = codigo_pedido;
-        this.premio = premio;
         this.valorTotal = valorTotal;
         this.fecha = fecha;
         this.cedulaVendedor = cedulaVendedor;
@@ -63,14 +60,6 @@ public class Pedido implements Serializable {
         this.codigo_pedido = codigo_pedido;
     }
 
-    public Premio getPremio() {
-        return premio;
-    }
-
-    public void setPremio(Premio premio) {
-        this.premio = premio;
-    }
-
     public int getValorTotal() {
         return valorTotal;
     }
@@ -89,7 +78,7 @@ public class Pedido implements Serializable {
 
     @Override
     public String toString() {
-        return "Pedido{" + "codigo_pedido=" + codigo_pedido + ", premio=" + premio.getNombre() + ", valorTotal=" + valorTotal + ", fecha=" + fecha.get(Calendar.YEAR) + '}';
+        return "Pedido{" + "codigo_pedido=" + codigo_pedido + ", valorTotal=" + valorTotal + ", fecha=" + fecha.get(Calendar.YEAR) + '}';
     }
     
 }

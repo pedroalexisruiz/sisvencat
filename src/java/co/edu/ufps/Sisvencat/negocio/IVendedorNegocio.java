@@ -5,8 +5,13 @@
  */
 package co.edu.ufps.Sisvencat.negocio;
 
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Item;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -21,4 +26,14 @@ public interface IVendedorNegocio {
     public boolean actualizarDatos(Vendedor vendedor)throws SQLException;
     
     public boolean cambiarPassword(String contrasena, String contrasenanueva) throws SQLException;
+    
+    public List<Premio> listarPremios() throws SQLException;
+    
+    public boolean solicitarPremio(Premio premio) throws SQLException;
+
+    public List<Producto> listarProductos() throws SQLException;
+    
+    public boolean agregarAlPedido(Item item) throws SQLException;
+    
+    public boolean enviarPedido(Pedido pedido) throws SQLException;
 }

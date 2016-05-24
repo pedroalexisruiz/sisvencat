@@ -15,6 +15,7 @@ public class Vendedor extends Persona implements Serializable{
     
     private int PuntajeAcumulado;//puntaje acumulado por el vendedor
     private Pedido pedido;
+    private Premio premio;
     
     public Vendedor() {
     }
@@ -22,6 +23,14 @@ public class Vendedor extends Persona implements Serializable{
     public Vendedor(int PuntajeAcumulado, String cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña, int tipoUsr) {
         super(cedula, nombre, Apellido, correo, Direccion, telefono, contraseña, tipoUsr);
         this.PuntajeAcumulado = PuntajeAcumulado;
+    }
+
+    public Premio getPremio() {
+        return premio;
+    }
+
+    public void setPremio(Premio premio) {
+        this.premio = premio;
     }
 
     public Pedido getPedido() {
@@ -43,7 +52,5 @@ public class Vendedor extends Persona implements Serializable{
     @Override
     public String toString() {
         return "Vendedor{"+this.getNombre()+" "+this.getApellido() + "PuntajeAcumulado=" + PuntajeAcumulado + '}';
-    }
-    
-    
+    }   
 }

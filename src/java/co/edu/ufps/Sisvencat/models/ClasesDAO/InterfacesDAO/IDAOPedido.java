@@ -18,17 +18,17 @@ import java.util.List;
 public interface IDAOPedido {
     
     
-    public boolean insertar(Pedido pe) throws SQLException;
+    public boolean insertar(Pedido pe, long codigo_cam) throws SQLException;
 
-    public int modificar(Pedido pe) throws SQLException;
+    public boolean modificar(Pedido pe) throws SQLException;
 
     public boolean eliminar(Pedido pe) throws SQLException;
 
     public List<Pedido> listarPorCampaña(Campaña cam) throws SQLException, ParseException ;
 
-    public Pedido getPedidoDelVendedor(String cedula, int codigo_cam) throws SQLException, ParseException;
+    public Pedido getPedidoDelVendedor(String cedula, long codigo_cam) throws SQLException, ParseException;
             
-    public Pedido getPedido(Pedido pe) throws SQLException;
+    public Pedido getPedido(Pedido pe) throws SQLException, ParseException;
 
     public void closeConn() throws SQLException;
 }

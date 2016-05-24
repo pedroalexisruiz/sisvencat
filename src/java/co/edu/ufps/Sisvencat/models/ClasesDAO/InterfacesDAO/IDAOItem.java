@@ -6,6 +6,7 @@
 package co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Item;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -20,9 +21,11 @@ public interface IDAOItem {
     
     public ArrayList<Item> getItemsPorPedido(long codigoPedido) throws SQLException;
     
-    public boolean agregarItem(Item item) throws SQLException;
-    
+    public boolean agregarItem(Item item, Pedido pedido) throws SQLException;
+        
     public boolean modificarItem(Item item) throws SQLException;
     
     public boolean eliminarItem(Item item) throws SQLException;
+    
+    public void closeConn() throws SQLException;
 }
