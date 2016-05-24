@@ -87,7 +87,7 @@ public interface IAdminNegocio {
      * @param zona zona con todos los datos necesarios
      * @return codigo de respuesta
      */
-    public int registrarZona(Zona zona) throws SQLException;
+    public boolean registrarZona(Zona zona) throws SQLException;
     
     /**
      * Seleccionar Campaña con todos sus datos

@@ -35,12 +35,14 @@ public class ImagenProductoDAO implements Serializable, IDAOImagenProducto {
             }
             con.getConexion().setAutoCommit(false);
             state = con.getConexion().prepareStatement(consulta);
-
+            state.setLong(1, pro.getCodigo_p());
+            
             for (ImagenProductoDTO imagen : imagenes) {
-                state.setLong(1, pro.getCodigo_p());
+                
                 state.setString(2, imagen.getUrlImagen());
-                state.execute();
+                state.addBatch();
             }
+            state.executeBatch();
             con.getConexion().commit();
         } catch (SQLException e) {
             if (con != null) {

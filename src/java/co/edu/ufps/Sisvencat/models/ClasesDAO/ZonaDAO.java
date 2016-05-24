@@ -20,11 +20,11 @@ import java.util.List;
  *
  * @author estudiante
  */
-public class ZonaDAO implements Serializable,IDAOZona {
+public class ZonaDAO implements Serializable, IDAOZona {
 
     private Conexion con;
 
-    public ZonaDAO() throws SQLException{
+    public ZonaDAO() throws SQLException {
         this.con = new Conexion();
     }
 
@@ -36,9 +36,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * error devolvera un -1
      */
     @Override
-    public int insertar(Zona zona) {
-
-        int respuesta = 0;
+    public boolean insertar(Zona zona)throws SQLException {
 
         PreparedStatement state = null;
 
@@ -54,24 +52,25 @@ public class ZonaDAO implements Serializable,IDAOZona {
             state.setString(2, zona.getNombre());
             state.setInt(3, zona.getEstado());
             state.execute();
+
         } catch (SQLException ex) {
-            ex.getErrorCode();
+            throw ex;
         } finally {
             try {
-
-                state.close();
-
-                this.closeConn();
+                if (state != null) {
+                    state.close();
+                }
+                if (con != null) {
+                    this.closeConn();
+                }
 
             } catch (SQLException ex) {
-                respuesta = ex.getErrorCode();
-                ex.printStackTrace();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+
+                throw ex;
             }
         }
 
-        return respuesta;
+        return true;
     }
 
     /**
@@ -122,7 +121,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * error devolvera un -1
      */
     @Override
-    public boolean cambiarEstado(Zona zona) throws SQLException  {
+    public boolean cambiarEstado(Zona zona) throws SQLException {
 
         PreparedStatement state = null;
 
@@ -160,8 +159,8 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * @return
      */
     @Override
-    public List<Zona> listar()throws SQLException{
-        
+    public List<Zona> listar() throws SQLException {
+
         List<Zona> lista = new ArrayList();
 
         PreparedStatement state = null;
@@ -202,7 +201,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
      * @return una lista condicionada
      */
     @Override
-    public List<Zona> listarPorEstado(int estado) throws SQLException{
+    public List<Zona> listarPorEstado(int estado) throws SQLException {
         List<Zona> lista = new ArrayList();
 
         PreparedStatement state = null;
@@ -229,7 +228,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
                 this.closeConn();
             } catch (SQLException ex) {
                 throw ex;
-            } 
+            }
         }
 
         return lista;
@@ -257,7 +256,7 @@ public class ZonaDAO implements Serializable,IDAOZona {
     }
 
     @Override
-    public void closeConn() throws SQLException{
+    public void closeConn() throws SQLException {
 
         con.close();
         con = null;
@@ -265,10 +264,10 @@ public class ZonaDAO implements Serializable,IDAOZona {
 
     @Override
     public boolean poseeGerente(int Zona_Codigo_Z) throws SQLException {
-        
+
         String consulta = "SELECT * FROM gerente WHERE Codigo_z=?";
         boolean respuesta = false;
-        
+
         if (con == null) {
             con = new Conexion();
         }
@@ -277,13 +276,13 @@ public class ZonaDAO implements Serializable,IDAOZona {
         ResultSet rs = state.executeQuery();
 
         Zona z = null;
-        
-        if(rs.next()){
+
+        if (rs.next()) {
             respuesta = true;
         }
         rs.close();
         this.closeConn();
-        
+
         return respuesta;
     }
 }

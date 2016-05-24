@@ -156,8 +156,8 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
     }
 
     @Override
-    public int registrarZona(Zona zona)throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean registrarZona(Zona zona)throws SQLException {
+        return new ZonaDAO().insertar(zona);
     }
 
     @Override

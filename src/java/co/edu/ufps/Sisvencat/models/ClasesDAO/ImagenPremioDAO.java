@@ -35,12 +35,13 @@ public class ImagenPremioDAO implements Serializable, IDAOImagenPremio {
             }
             con.getConexion().setAutoCommit(false);
             state = con.getConexion().prepareStatement(consulta);
-
+            state.setLong(1, pre.getCodigo_premio());
+            
             for (ImagenPremioDTO imagen : imagenes) {
-                state.setLong(1, pre.getCodigo_premio());
                 state.setString(2, imagen.getUrlImagen());
-                state.execute();
+                state.addBatch();
             }
+            state.executeBatch();
             con.getConexion().commit();
         } catch (SQLException e) {
             if (con != null) {

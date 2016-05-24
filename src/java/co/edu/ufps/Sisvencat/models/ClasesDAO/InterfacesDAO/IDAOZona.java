@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IDAOZona {
     
-    public int insertar(Zona zona)throws SQLException;
+    public boolean insertar(Zona zona)throws SQLException;
     
     public boolean modificar(Zona zona)throws SQLException;
     
