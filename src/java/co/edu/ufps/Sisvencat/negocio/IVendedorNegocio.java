@@ -26,6 +26,14 @@ public interface IVendedorNegocio {
     
     public Campaña getCampañaActiva();
     
+    public Producto getProducto(long codigo_p);
+    
+    public boolean existeItem(long codigo_p);
+    
+    public boolean agregarItemAlPedido(Item item);
+    
+    public boolean registrarPedido() throws SQLException;
+    
     public boolean actualizarDatos(Vendedor vendedor)throws SQLException;
     
     public boolean cambiarPassword(String contrasena, String contrasenanueva) throws SQLException;
@@ -36,7 +44,7 @@ public interface IVendedorNegocio {
 
     public List<Producto> listarProductos() throws SQLException;
     
-    public boolean agregarAlPedido(Item item) throws SQLException;
+    public boolean agregarAlPedido(Item item);
     
     public boolean enviarPedido(Pedido pedido) throws SQLException;
 }

@@ -1,5 +1,7 @@
 $('#btnAcceder').on('click', function (e) {
     e.preventDefault();
+    $('#divCargando').html('<div><img src="../public/img/AjaxLoader.gif"/></div>');
+    $('#btnAcceder').attr("disabled",true);
     iniciarSesion();
 });
 
@@ -18,11 +20,11 @@ function iniciarSesion() {
             
             if(respuesta=="Datos Erróneos"){
                 alert(respuesta);
+                $('#btnAcceder').removeAttr("disabled")
             }else{
                 location = "../"+respuesta;
             }         
         }
 
     });
-
 }

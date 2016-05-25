@@ -4,6 +4,7 @@
     Author     : Administrador
 --%>
 
+<%@page import="java.text.NumberFormat"%>
 <%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Producto"%>
 <%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Item"%>
 <%@page import="java.util.ArrayList"%>
@@ -61,6 +62,7 @@
                                 } else {
 
                                     ArrayList<Item> items = pedido.getItems();
+                                    NumberFormat formateador = NumberFormat.getCurrencyInstance();
                                 %>
                                 <p class="text-muted">Actualmente tienes <%=items.size()%> item(s) en tu carrito.</p>
                                 <div class="table-responsive">
@@ -86,13 +88,13 @@
                                                         <img src="<%=rutaimagen%>" alt="White Blouse Armani">
                                                     </a>
                                                 </td>
-                                                <td><a href="#"><%=p.getNombre()%></a>
+                                                <td><a href="#" id="item" valor="<%=item.getCodigo_item() %>"><%=p.getNombre()%></a>
                                                 </td>
                                                 <td>
                                                     <input type="number" value="<%=item.getCantidad()%>" class="form-control">
                                                 </td>
-                                                <td>$<%=p.getValor()%></td>
-                                                <td>$<%=item.getValorTotal()%></td>
+                                                <td><%=formateador.format(p.getValor()) %></td>
+                                                <td><%=formateador.format(item.getValorTotal()) %></td>
                                                 <td><a href="#"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
@@ -103,7 +105,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th colspan="5">Total</th>
-                                                <th colspan="2">$<%=pedido.getValorTotal() %></th>
+                                                <th colspan="2"><%=formateador.format(pedido.getValorTotal()) %></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -116,7 +118,7 @@
                                         <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continuar Comprando</a>
                                     </div>
                                     <div class="pull-right">
-                                        <button type="submit" class="btn btn-primary">Confirmar Pedido <i class="fa fa-chevron-right"></i>
+                                        <button id="btnEnviarPedido" class="btn btn-primary">Confirmar Pedido <i class="fa fa-chevron-right"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -144,7 +146,7 @@
         <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
         <script src="../public/js/owl.carousel.min.js"></script>
         <script src="../public/js/front.js"></script>
-
+        <script src="../public/js/Pedido.js" type="text/javascript"></script>
         <%
             }
         %>

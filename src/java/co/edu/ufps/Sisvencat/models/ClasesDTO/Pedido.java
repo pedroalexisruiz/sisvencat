@@ -75,7 +75,10 @@ public class Pedido implements Serializable {
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
-
+    
+    public void agregarItem(Item item){
+        this.items.add(item);
+    }
     @Override
     public String toString() {
         return "Pedido{" + "codigo_pedido=" + codigo_pedido + ", valorTotal=" + valorTotal + ", fecha=" + fecha.get(Calendar.YEAR) + '}';

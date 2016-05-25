@@ -1,10 +1,29 @@
 
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Color"%>
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.ImagenProductoDTO"%>
 <%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <jsp:useBean class="co.edu.ufps.Sisvencat.facade.SisvencatFacade" id="Fachada" scope="session"></jsp:useBean>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
+        <link href="../public/css/popUp.css" rel="stylesheet" type="text/css"/>
+
+        <%
+            if (!Fachada.existeNegocioVendedor()) {
+        %>
+        <script>
+            alert("Acceso solo para el Administrador");
+            location = "../../cerrarSesion.jsp";
+        </script>
+        <%
+        } else if (request.getParameter("id") == null) {
+            request.getRequestDispatcher("Profile.jsp").forward(request, response);
+        } else {
+            long id = Long.parseLong(request.getParameter("id"));
+            Producto producto = Fachada.getProducto(id);
+        %>
         <title>Producto - Detalles</title>
     </head>
     <body>
@@ -30,43 +49,66 @@
                         <div>
                             <div class="col-md-9">
 
-                                <div class="row" id="productMain">
+                                <div class="row" id="producto" codigo="<%=producto.getCodigo_p()%>">
                                     <div class="col-sm-6">
                                         <div id="mainImage">
-                                            <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
+                                            <img src="<%=producto.getImagenes().get(0).getUrlImagen()%>" alt="" class="img-responsive">
                                         </div>
 
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="box">
-                                            <h1 class="text-center">Blusa Vestido Leonisa</h1>
+                                            <h1 class="text-center"><%=producto.getNombre()%></h1>
                                             <p class="goToDescription"><a href="#details" class="scroll-to">Desplázate hacia abajo para conocer más detalles del premio.</a>
                                             </p>
-                                            <p class="price">$80.000</p>
+                                            <p class="price">$<%=producto.getValor()%></p>
+
 
                                             <p class="text-center buttons">
-                                                <a href="basket.html" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</a> 
+                                                <%
+                                                    if (Fachada.existeItem(id)) {
+                                                %>
+                                                <button data-popup-open="popup-1" class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                                <%
+                                                } else {
+                                                %>
+                                                <button data-popup-open="popup-1" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                                <%}
+                                                %>
                                             </p>
+                                            <div class="popup" id="popup" data-popup="popup-1">
+                                                <div class="popup-inner">
+                                                    <h2>Indique la Cantidad</h2>
+                                                    <div class="col-xs-6 col-xs-offset-3 text-center">
+                                                        <input type="number" class="form-control" id="cantidad" name="cantidad"/>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                    <div class="col-xs-6 col-xs-offset-3 text-center">
+                                                        <button id="btnAgregarItem" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir</button>
+                                                    </div>
+
+                                                    <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+                                                </div>
+                                            </div>
+
+
 
 
                                         </div>
 
+                                        <%
+                                            String msg = "";
+                                            for (ImagenProductoDTO imagen : producto.getImagenes()) {
+                                                msg += "<div class='col-xs-4'>"
+                                                        + "<a href='" + imagen.getUrlImagen() + "' class='thumb'>"
+                                                        + "<img src='" + imagen.getUrlImagen() + "' alt='' class='img-responsive'>"
+                                                        + "</a>"
+                                                        + "</div>";
+                                            }
+                                        %>
                                         <div class="row" id="thumbs">
-                                            <div class="col-xs-4">
-                                                <a href="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" class="thumb">
-                                                    <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <a href="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" class="thumb">
-                                                    <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-4">
-                                                <a href="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" class="thumb">
-                                                    <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
-                                                </a>
-                                            </div>
+                                            <%=msg%>
                                         </div>
                                     </div>
 
@@ -76,17 +118,27 @@
                                 <div class="box" id="details">
                                     <p>
                                     <h4>Detalles del Producto</h4>
-                                    
-                                    <p>Hermosa Blusa-Vestido color negro.</p>
-                                    <h4>Material y Cuidado</h4>
+
+                                    <p><%=producto.getDescripcion()%>.</p>
+                                    <h4>Colores</h4>
                                     <ul>
-                                        <li>Poliéster</li>
-                                        <li>Lavar a Máquina</li>
+                                        <%
+                                            for (Color color : producto.getColor()) {
+                                        %>
+                                        <li><%=color.getNombre()%></li>
+                                            <%
+                                                }
+                                            %>
                                     </ul>
                                     <h4>Tallas y medidas</h4>
                                     <ul>
-                                        <li>Corte clásico</li>
-                                        <li>El modelo (altura de 5'8 "y el pecho 33") lleva una talla S</li>
+                                        <%
+                                            for (String talla : producto.getTalla()) {
+                                        %>
+                                        <li><%=talla%></li>
+                                            <%
+                                                }
+                                            %>
                                     </ul>
 
                                     <blockquote>
@@ -120,5 +172,9 @@
         <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
         <script src="../public/js/owl.carousel.min.js"></script>
         <script src="../public/js/front.js"></script>
+        <script src="../public/js/Item.js" type="text/javascript"></script>
     </body>
+    <%
+        }
+    %>
 </html>

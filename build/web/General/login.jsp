@@ -70,9 +70,12 @@
                                 <input type="password" class="form-control" name="password" id="password">
                             </div>
                             <div class="text-center">
+                                <div id="divCargando"></div>
                                 <button id="btnAcceder" type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Acceder</button>
                             </div>
                         </form>
+                            
+                            
                     </div>
                 </div>
             </div>

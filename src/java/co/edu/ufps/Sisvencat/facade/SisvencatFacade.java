@@ -3,7 +3,9 @@ package co.edu.ufps.Sisvencat.facade;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Item;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import co.edu.ufps.Sisvencat.negocio.IAdminNegocio;
@@ -112,6 +114,19 @@ public class SisvencatFacade implements Serializable{
             return this.generalN.getCampañaActiva();
         }
     }
+    
+    public Producto getProducto(long codigo_p){
+        
+        if(this.adminN!=null){
+            return this.vendedorN.getProducto(codigo_p);
+        }
+        if(this.vendedorN!=null){
+            return this.vendedorN.getProducto(codigo_p);
+        }else{
+            return this.vendedorN.getProducto(codigo_p);
+        }
+    }
+    
     public boolean registrarVendedor(int PuntajeAcumulado, String cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña) throws SQLException{
         
         Vendedor vendedor = new Vendedor(PuntajeAcumulado,cedula,nombre,Apellido,correo,Direccion,telefono,Encriptador.encriptar(contraseña),3);
@@ -120,6 +135,18 @@ public class SisvencatFacade implements Serializable{
     
     public Vendedor getVendedorLogeado(){
         return this.vendedorN.getVendedor();
+    }
+    
+    public boolean existeItem(long codigo_p){
+        return this.vendedorN.existeItem(codigo_p);
+    }
+    
+    public boolean agregarItemAlPedido(Item item){
+        return this.vendedorN.agregarItemAlPedido(item);
+    }
+    
+    public boolean registrarPedido() throws SQLException{
+        return this.vendedorN.registrarPedido();
     }
     
     public boolean modificarDatosVendedor(String nombre,String apellido,String correo,String direccion,String telefono) throws SQLException{
