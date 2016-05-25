@@ -86,5 +86,4 @@ public class GeneralNegocio implements Serializable, IGeneralNegocio {
         return productosPorCategoriaYTipo;
 
     }
-
 }
