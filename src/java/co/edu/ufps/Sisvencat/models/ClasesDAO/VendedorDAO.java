@@ -75,16 +75,17 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             }
             ex.printStackTrace();
             throw ex;
+        }finally{
+            if(state!=null)
+                state.close();
+            if(state2!=null)
+                state2.close();
+            if(con!=null)
+                this.closeConn();
+            
         }
 
-        try {
-            state.close();
-            state2.close();
-            this.closeConn();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-            throw ex;
-        }
+        
         
         return true;
         
@@ -118,16 +119,29 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     public boolean cambiarContraseña(Vendedor ven) throws SQLException {
         
         String consulta = "UPDATE persona SET contrasena=? WHERE Cedula=?";
+        PreparedStatement state = null;
         
-        if (con == null) {
-            con = new Conexion();
-        }
-        
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setString(1, ven.getContraseña());
-        state.setString(2, ven.getCedula());
+        try{
+            
+            if (con == null) {
+                con = new Conexion();
+            }
 
-        state.execute();
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setString(1, ven.getContraseña());
+            state.setString(2, ven.getCedula());
+
+            state.execute();
+        }
+        catch(SQLException ex){
+            throw ex;
+        }finally{
+            if(state!=null)
+                state.close();
+            if(con!=null)
+                this.closeConn();
+        }
         
         state.close();
         
