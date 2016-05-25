@@ -62,6 +62,11 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio{
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
+    
+    @Override
+    public Campaña getCampañaActiva() {
+        return campañaActiva;
+    }
 
     @Override
     public boolean actualizarDatos(Vendedor vendedor) throws SQLException {

@@ -13,10 +13,17 @@
 <html>
     <head>
         <jsp:useBean class="co.edu.ufps.Sisvencat.facade.SisvencatFacade" id="Fachada" scope="session"></jsp:useBean>
-        
+
         <%
-            Pedido pedido = Fachada.getVendedorLogeado().getPedido();
-            ArrayList<Item> items = pedido.getItems();
+            if (!Fachada.existeNegocioVendedor()) {
+        %>
+        <script>
+            alert("Acceso solo para el Administrador");
+            location = "../../cerrarSesion.jsp";
+        </script>
+        <%
+        } else {
+
         %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
         <title>Vendedor - Pedido</title>
@@ -46,7 +53,16 @@
                             <form method="post" action="checkout1.html">
 
                                 <h1>Carrito de Compras</h1>
-                                <p class="text-muted">Actualmente tienes <%=items.size() %> item(s) en tu carrito.</p>
+                                <%                                    Pedido pedido = Fachada.getVendedorLogeado().getPedido();
+                                    if (pedido == null) {
+                                %>
+                                <p class="text-muted">Actualmente no haz realizado ningún pedido.</p>
+                                <%
+                                } else {
+
+                                    ArrayList<Item> items = pedido.getItems();
+                                %>
+                                <p class="text-muted">Actualmente tienes <%=items.size()%> item(s) en tu carrito.</p>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -60,23 +76,23 @@
                                         <tbody>
                                             <%
                                                 Producto p = null;
-                                                for(Item item:items){
+                                                for (Item item : items) {
                                                     p = item.getProducto();
-                                                    String rutaimagen ="public/imgpremiosyproductos/imgnormal/nodisponible.jpg";
+                                                    String rutaimagen = (p.getImagenes().isEmpty()) ? "public/imgpremiosyproductos/imgnormal/lacoste-tenis-casuales-misano-22.jpg" : p.getImagenes().get(0).getUrlImagen();
                                             %>
                                             <tr>
                                                 <td>
                                                     <a href="#">
-                                                        <img src="<%=rutaimagen %>" alt="White Blouse Armani">
+                                                        <img src="<%=rutaimagen%>" alt="White Blouse Armani">
                                                     </a>
                                                 </td>
-                                                <td><a href="#"><%=p.getNombre() %></a>
+                                                <td><a href="#"><%=p.getNombre()%></a>
                                                 </td>
                                                 <td>
-                                                    <input type="number" value="<%=item.getCantidad() %>" class="form-control">
+                                                    <input type="number" value="<%=item.getCantidad()%>" class="form-control">
                                                 </td>
-                                                <td>$<%=p.getValor() %></td>
-                                                <td>$<%=item.getValorTotal() %></td>
+                                                <td>$<%=p.getValor()%></td>
+                                                <td>$<%=item.getValorTotal()%></td>
                                                 <td><a href="#"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
@@ -87,7 +103,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th colspan="5">Total</th>
-                                                <th colspan="2">$220.000</th>
+                                                <th colspan="2">$<%=pedido.getValorTotal() %></th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -106,7 +122,9 @@
                                 </div>
 
                             </form>
-
+                            <%
+                                }
+                            %>
                         </div>
                         <!-- /.box -->
                     </div>
@@ -126,5 +144,9 @@
         <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
         <script src="../public/js/owl.carousel.min.js"></script>
         <script src="../public/js/front.js"></script>
+
+        <%
+            }
+        %>
     </body>
 </html>

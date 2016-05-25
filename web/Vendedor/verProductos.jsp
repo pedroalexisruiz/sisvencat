@@ -9,8 +9,8 @@
 <html>
     <head>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
-
-
+        <jsp:useBean class="co.edu.ufps.Sisvencat.facade.SisvencatFacade" id="Fachada" scope="session"></jsp:useBean>
+        
         <!-- Add fancyBox -->
         <link rel="stylesheet" href="../public/js/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
         <!-- Optionally add helpers - button, thumbnail and/or media -->
@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../public/js/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
         <title>Vendedor - Productos</title>
     </head>
-    <body onload="imprimir()">
+    <body onload="cargarProductos()">
         <jsp:include page="../public/includes/admin/header.jsp" />
 
         <div id="all">
@@ -47,144 +47,6 @@
                                     <br>
                                     <br>
                                     <h3 class="text-primary text-center">Mujeres</h3>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="item">
-                                                <div class="product">
-                                                    <div class="flip-container">
-                                                        <div class="flipper">
-                                                            <div class="front">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                            <div class="back">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="detail.html" class="invisible">
-                                                        <img src="../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg" alt="" class="img-responsive">
-                                                    </a>
-                                                    <div class="text">
-                                                        <h3><a href="detail.html">Xbox 360 Slim</a></h3>
-                                                        <p class="price">$800.000</p>
-                                                    </div>
-                                                    <!-- /.text -->
-                                                </div>
-                                                <!-- /.product -->
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="item">
-                                                <div class="product">
-                                                    <div class="flip-container">
-                                                        <div class="flipper">
-                                                            <div class="front">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/Vestido_bata.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                            <div class="back">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/Vestido_bata.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="detail.html" class="invisible">
-                                                        <img src="../public/imgpremiosyproductos/imgnormal/Vestido_bata.jpg" alt="" class="img-responsive">
-                                                    </a>
-                                                    <div class="text">
-                                                        <h3><a href="detail.html">Xbox 360 Slim</a></h3>
-                                                        <p class="price">$800.000</p>
-                                                    </div>
-                                                    <!-- /.text -->
-                                                </div>
-                                                <!-- /.product -->
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="item">
-                                                <div class="product">
-                                                    <div class="flip-container">
-                                                        <div class="flipper">
-                                                            <div class="front">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/chaquetanaranja.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                            <div class="back">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/chaquetanaranja.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="detail.html" class="invisible">
-                                                        <img src="../public/imgpremiosyproductos/imgnormal/chaquetanaranja.jpg" alt="" class="img-responsive">
-                                                    </a>
-                                                    <div class="text">
-                                                        <h3><a href="detail.html">Xbox 360 Slim</a></h3>
-                                                        <p class="price">$800.000</p>
-                                                    </div>
-                                                    <!-- /.text -->
-                                                </div>
-                                                <!-- /.product -->
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-12 col-md-6">
-                                            <div class="item">
-                                                <div class="product">
-                                                    <div class="flip-container">
-                                                        <div class="flipper">
-                                                            <div class="front">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/abrigodecortocircuito.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                            <div class="back">
-                                                                <a href="detail.html">
-                                                                    <img src="../public/imgpremiosyproductos/imgnormal/abrigodecortocircuito.jpg" alt="" class="img-responsive">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <a href="detail.html" class="invisible">
-                                                        <img src="../public/imgpremiosyproductos/imgnormal/abrigodecortocircuito.jpg" alt="" class="img-responsive">
-                                                    </a>
-                                                    <div class="text">
-                                                        <h3><a href="detail.html">Xbox 360 Slim</a></h3>
-                                                        <p class="price">$800.000</p>
-                                                    </div>
-                                                    <!-- /.text -->
-                                                </div>
-                                                <!-- /.product -->
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="text-center">
-                                        <ul class="pagination">
-                                            <li class="active"><a href="#">&laquo;</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                            <li><a href="#">5</a></li>
-                                            <li><a href="#">&raquo;</a></li>
-                                        </ul>
-                                    </div>
-
 
                                 </div>
                             </div>
@@ -213,6 +75,19 @@
         <script type="text/javascript" src="../public/js/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
         <script type="text/javascript" src="../public/js/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
         <script type="text/javascript" src="../public/js/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-
+        
+        <script>
+            function cargarProductos(){
+                $.ajax({
+                    url:"listadoProductos.jsp",
+                    type:"POST",
+                    data:{
+                        pagina:1
+                    }
+                }).done(function(respuesta){
+                    $('#results').append(respuesta);
+                });
+            }
+        </script>
     </body>
 </html>

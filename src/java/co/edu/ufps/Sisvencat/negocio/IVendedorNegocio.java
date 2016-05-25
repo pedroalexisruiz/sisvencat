@@ -5,6 +5,7 @@
  */
 package co.edu.ufps.Sisvencat.negocio;
 
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Item;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
@@ -22,6 +23,8 @@ public interface IVendedorNegocio {
     public Vendedor getVendedor();
 
     public void setVendedor(Vendedor vendedor);
+    
+    public Campaña getCampañaActiva();
     
     public boolean actualizarDatos(Vendedor vendedor)throws SQLException;
     

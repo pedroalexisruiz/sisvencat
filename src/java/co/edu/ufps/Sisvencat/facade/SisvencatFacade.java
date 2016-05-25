@@ -1,6 +1,7 @@
 
 package co.edu.ufps.Sisvencat.facade;
 
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
@@ -89,7 +90,7 @@ public class SisvencatFacade implements Serializable{
         return this.gerenteN.cambiarPassword(contrasena, contrasenanueva);
     }
     
-    public void iniciarNegocioVendedor(String cedula) throws SQLException{
+    public void iniciarNegocioVendedor(String cedula) throws SQLException, ParseException{
         this.vendedorN = invocador.getVendedorNegocio(cedula);
         this.generalN= null;
         this.adminN = null;
@@ -100,6 +101,17 @@ public class SisvencatFacade implements Serializable{
         return this.vendedorN!=null;
     }
     
+    public Campaña getCampañaActiva(){
+        
+        if(this.adminN!=null){
+            return this.vendedorN.getCampañaActiva();
+        }
+        if(this.vendedorN!=null){
+            return this.vendedorN.getCampañaActiva();
+        }else{
+            return this.generalN.getCampañaActiva();
+        }
+    }
     public boolean registrarVendedor(int PuntajeAcumulado, String cedula, String nombre, String Apellido, String correo, String Direccion, String telefono, String contraseña) throws SQLException{
         
         Vendedor vendedor = new Vendedor(PuntajeAcumulado,cedula,nombre,Apellido,correo,Direccion,telefono,Encriptador.encriptar(contraseña),3);

@@ -32,7 +32,7 @@ public class NegocioFactory implements Serializable{
         return new GeneralNegocio();
     }
     
-    public IVendedorNegocio getVendedorNegocio(String cedula) throws SQLException{
+    public IVendedorNegocio getVendedorNegocio(String cedula) throws SQLException, ParseException{
         return new VendedorNegocio(cedula);
     }
 }

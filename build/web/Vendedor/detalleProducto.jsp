@@ -1,5 +1,5 @@
 
-
+<%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Producto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
