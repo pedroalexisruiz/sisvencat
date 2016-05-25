@@ -27,7 +27,7 @@
                 + "<div class='flipper'>"
                 + "<div class='front'>"
                 + "<a href='detail.html'>"
-                + "<img src='../public/imgpremiosyproductos/imgnormal/Blusa_vestido.jpg' alt='' class='img-responsive'>"
+                + "<img src='"+producto.getImagenes().get(0).getUrlImagen()+"' alt='' class='img-responsive'>"
                 + "</a>"
                 + "</div>"
                 + "<div class='back'>"
