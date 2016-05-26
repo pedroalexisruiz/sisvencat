@@ -31,7 +31,8 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
 
     private Vendedor vendedor;
     private Campaña campañaActiva;
-
+    private List<Premio> premios;
+    
     public VendedorNegocio() {
     }
 
@@ -41,6 +42,7 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
         try {
             CampañaDAO cDAO = new CampañaDAO();
             campañas = cDAO.listarCampañasPorEstado(1);
+            premios = new PremioDAO().listar();
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
@@ -164,7 +166,7 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
 
     @Override
     public List<Premio> listarPremios() throws SQLException {
-        return new PremioDAO().listar();
+        return this.premios;
     }
 
     @Override

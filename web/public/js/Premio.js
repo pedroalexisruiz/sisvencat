@@ -1,11 +1,11 @@
-function cargarPremios() {
+function cargarPremios(pag) {
     $.ajax({
         url: "listadoPremios.jsp",
         type: "POST",
         data: {
-            pagina: 1
+            pag: pag
         }
     }).done(function (respuesta) {
-        $('#results').append(respuesta);
+        $('#results').html(respuesta);
     });
 }

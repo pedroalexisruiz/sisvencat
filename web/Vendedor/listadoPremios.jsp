@@ -9,7 +9,7 @@
 <%
     Campaña campañactiva = Fachada.getCampañaActiva();
     List<Premio> premios = Fachada.listarPremios();
-    int pagina = (request.getParameter("pagina") != null) ? Integer.parseInt(request.getParameter("pagina")) : 1;
+    int pagina = (request.getParameter("pag") != null) ? Integer.parseInt(request.getParameter("pag")) : 1;
     int cant = 3;
     int contpremio = cant * (pagina - 1);
     String msg = "";
@@ -33,22 +33,22 @@
                                                     +"<div class='flip-container'>"
                                                         +"<div class='flipper'>"
                                                             +"<div class='front'>"
-                                                                +"<a href='detail.html'>"
+                                                                +"<a href='detallePremio.jsp?id="+premio.getCodigo_premio()+"'>"
                                                                     +"<img src='"+imgprincipal+"' alt='' class='img-responsive'>"
                                                                 +"</a>"
                                                             +"</div>"
                                                             +"<div class='back'>"
-                                                                +"<a href='detail.html'>"
+                                                                +"<a href='detallePremio.jsp?id="+premio.getCodigo_premio()+"'>"
                                                                     +"<img src='"+imgprincipal+"' alt='' class='img-responsive'>"
                                                                 +"</a>"
                                                             +"</div>"
                                                         +"</div>"
                                                     +"</div>"
-                                                    +"<a href='detail.html' class='invisible'>"
+                                                    +"<a href='detallePremio.jsp?id="+premio.getCodigo_premio()+"' class='invisible'>"
                                                         +"<img src='"+imgsegundaria+"' alt='' class='img-responsive'>"
                                                     +"</a>"
                                                     +"<div class='text'>"
-                                                        +"<h3><a href='detail.html'>"+premio.getNombre()+"</a></h3>"
+                                                        +"<h3><a href='detallePremio.jsp?id="+premio.getCodigo_premio()+"'>"+premio.getNombre()+"</a></h3>"
                                                         +"<p class='price'>"+formateador.format(premio.getPuntosRequeridos())+"</p>"
                                                     +"</div>"
                                                     +"<!-- /.text -->"
@@ -66,11 +66,11 @@
     msg += "<div class='text-center'>"
             + "<ul class='pagination'>"
             + "<li class='active'><a href='#'>&laquo;</a></li>"
-            + "<li><a href='#'>1</a></li>"
-            + "<li><a href='#'>2</a></li>"
-            + "<li><a href='#'>3</a></li>"
-            + "<li><a href='#'>4</a></li>"
-            + "<li><a href='#'>5</a></li>"
+            + "<li><a onclick='cargarPremios(1)'>1</a></li>"
+            + "<li><a onclick='cargarPremios(2)'>2</a></li>"
+            + "<li><a onclick='cargarPremios(3)'>3</a></li>"
+            + "<li><a onclick='cargarPremios(4)'>4</a></li>"
+            + "<li><a onclick='cargarPremios(5)'>5</a></li>"
             + "<li><a href='#'>&raquo;</a></li>"
             + "</ul>"
             + "</div>";

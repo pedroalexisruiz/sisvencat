@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="../public/js/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
         <title>Ver Premios</title>
     </head>
-    <body onload="cargarPremios()">
+    <body onload="cargarPremios(1)">
         <jsp:include page="../public/includes/admin/header.jsp" />
 
         <div id="all">
