@@ -1,4 +1,5 @@
 
+<%@page import="java.text.NumberFormat"%>
 <%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña"%>
 <%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Producto"%>
 <%@page import="java.util.List"%>
@@ -12,14 +13,18 @@
     int cant = 2;
     int contproducto = cant * (pagina - 1);
     String msg = "";
-
+    Producto producto = null;
+    String imgprincipal = "";
+    NumberFormat formateador = NumberFormat.getCurrencyInstance();
+    
     for (int i = contproducto; i < cant && i < productos.size(); i++) {
-        Producto producto = productos.get(i);
+        producto = productos.get(i);
 
         if ((i + 1) % 2 == 1) {
             msg += "<div class='row'>";
         }
-
+        
+        imgprincipal= (producto.getImagenes().isEmpty()) ? "../public/imgpremiosyproductos/imgnormal/lacoste-tenis-casuales-misano-22.jpg" : producto.getImagenes().get(0).getUrlImagen();
         msg += "<div class='col-xs-12 col-md-6'>"
                 + "<div class='item'>"
                 + "<div class='product'>"
@@ -27,7 +32,7 @@
                 + "<div class='flipper'>"
                 + "<div class='front'>"
                 + "<a href='detalleProducto.jsp?id="+producto.getCodigo_p()+"'>"
-                + "<img src='"+producto.getImagenes().get(0).getUrlImagen()+"' alt='' class='img-responsive'>"
+                + "<img src='"+imgprincipal+"' alt='' class='img-responsive'>"
                 + "</a>"
                 + "</div>"
                 + "<div class='back'>"
@@ -42,7 +47,7 @@
                 + "</a>"
                 + "<div class='text'>"
                 + "<h3><a href='detalleProducto.jsp?id="+producto.getCodigo_p()+"'>" + producto.getNombre() + "</a></h3>"
-                + "<p class='price'>" + producto.getValor() + "</p>"
+                + "<p class='price'>" + formateador.format(producto.getValor()) + "</p>"
                 + "</div>"
                 + "<!-- /.text -->"
                 + "</div>"

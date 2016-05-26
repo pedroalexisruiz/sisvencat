@@ -162,6 +162,7 @@ public class PedidoDAO implements Serializable, IDAOPedido {
 
             p = new Pedido(rs.getInt("Codigo_pedido"), rs.getString("Vendedor_Persona_Cedula"), rs.getInt("Valor_total"), fechapedido);
             p.setItems(new ItemDAO().getItemsPorPedido(p.getCodigo_pedido()));
+            p.setEstado(rs.getByte("estado"));
             pedidos.add(p);
         }
         this.closeConn();
@@ -188,6 +189,7 @@ public class PedidoDAO implements Serializable, IDAOPedido {
                 fechapedido.setTime(formater.parse(rs.getString("Fecha_pedido")));
                 pedido = new Pedido(pe.getCodigo_pedido(), rs.getString("Vendedor_Persona_Cedula"), rs.getInt("Valor_total"), fechapedido);
                 pedido.setItems(new ItemDAO().getItemsPorPedido(pedido.getCodigo_pedido()));
+                pedido.setEstado(rs.getByte("estado"));
             }
         } catch (SQLException | ParseException e) {
             throw e;
@@ -218,6 +220,7 @@ public class PedidoDAO implements Serializable, IDAOPedido {
                 fechapedido.setTime(formater.parse(rs.getString("Fecha_pedido")));
                 pedido = new Pedido(rs.getInt("Codigo_pedido"), cedula, rs.getInt("Valor_Total"), fechapedido);
                 pedido.setItems(new ItemDAO().getItemsPorPedido(pedido.getCodigo_pedido()));
+                pedido.setEstado(rs.getByte("estado"));
             }
         } catch (SQLException e) {
             throw e;

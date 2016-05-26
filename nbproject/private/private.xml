@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/public/js/Item.js</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/enviarPedidoAjax.jsp</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/facade/SisvencatFacade.java</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/agregarItemAjax.jsp</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/detalleProducto.jsp</file>
-            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/negocio/VendedorNegocio.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/verProductos.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/listadoProductos.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/verPremios.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/listadoPremios.jsp</file>
             <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Vendedor/carritoDeCompras.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/models/ClasesDAO/ImagenPremioDAO.java</file>
         </group>
     </open-files>
 </project-private>

@@ -23,6 +23,7 @@
         } else {
             long id = Long.parseLong(request.getParameter("id"));
             Producto producto = Fachada.getProducto(id);
+            String imagenprincipal = (producto.getImagenes().isEmpty())?"../public/imgpremiosyproductos/imgnormal/nodisponible.jpg":producto.getImagenes().get(0).getUrlImagen();
         %>
         <title>Producto - Detalles</title>
     </head>
@@ -52,7 +53,7 @@
                                 <div class="row" id="producto" codigo="<%=producto.getCodigo_p()%>">
                                     <div class="col-sm-6">
                                         <div id="mainImage">
-                                            <img src="<%=producto.getImagenes().get(0).getUrlImagen()%>" alt="" class="img-responsive">
+                                            <img src="<%=imagenprincipal%>" alt="" class="img-responsive">
                                         </div>
 
                                     </div>

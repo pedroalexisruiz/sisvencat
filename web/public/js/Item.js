@@ -21,6 +21,11 @@ $('#btnAgregarItem').click(function(e){
     agregarItem();
 });
 
+$('#btnEliminarItem').click(function(e){
+    e.preventDefault();
+    eliminarItem();
+});
+
 function agregarItem(){
     
     var codigo_p = $('#producto').attr("codigo");
@@ -39,15 +44,13 @@ function agregarItem(){
     });
 }
 
-function eliminarItem(){
-    
-    var codigo_item = $('#item').attr("valor");
-    
+function eliminarItem(id){
+        
     $.ajax({
         url:"agregarItemAjax.jsp",
         type:"POST",
         data:{
-            Codigo_item:codigo_item
+            accion:"eliminar",Codigo_item:id
         }
     }).done(function(respuesta){
        alert(respuesta); 

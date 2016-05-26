@@ -19,6 +19,7 @@ public class Pedido implements Serializable {
     private Calendar fecha;//fecha en que se realiza el pedido.
     private String cedulaVendedor;
     private ArrayList<Item> items;
+    private byte estado;
     
     public Pedido() {
     }
@@ -34,6 +35,14 @@ public class Pedido implements Serializable {
         this.valorTotal = valorTotal;
         this.fecha = fecha;
         this.cedulaVendedor = cedulaVendedor;
+    }
+
+    public byte getEstado() {
+        return estado;
+    }
+
+    public void setEstado(byte estado) {
+        this.estado = estado;
     }
 
     public ArrayList<Item> getItems() {

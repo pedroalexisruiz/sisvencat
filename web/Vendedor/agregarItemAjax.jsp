@@ -32,7 +32,17 @@
         }
     }
     if (accion.equals("eliminar")) {
-        long codigo_item = Long.parseLong(request.getParameter("Codigo_item"));
+        int codigo_item = Integer.parseInt(request.getParameter("Codigo_item"));
+
+        if (Fachada.eliminaItemDelPedido(codigo_item)) {
+%>
+<%="Item Eliminado"%>
+<%
+} else {
+%>
+<%="No se pudo eliminar el item"%>
+<%
+        }
     }
 
 

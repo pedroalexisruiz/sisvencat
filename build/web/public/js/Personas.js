@@ -20,7 +20,8 @@ function iniciarSesion() {
             
             if(respuesta=="Datos Erróneos"){
                 alert(respuesta);
-                $('#btnAcceder').removeAttr("disabled")
+                $('#btnAcceder').removeAttr("disabled");
+                $('#divCargando').hide();
             }else{
                 location = "../"+respuesta;
             }         

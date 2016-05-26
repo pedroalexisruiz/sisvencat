@@ -79,25 +79,25 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
         }
         return null;
     }
-    
+
     @Override
-    public boolean existeItem(long codigo_p){
+    public boolean existeItem(long codigo_p) {
         boolean estado = false;
-        
-        if(this.vendedor.getPedido() == null){
+
+        if (this.vendedor.getPedido() == null) {
             estado = false;
-        }else{
-            for(Item item:this.vendedor.getPedido().getItems()){
-                if(item.getProducto().getCodigo_p()==codigo_p){
+        } else {
+            for (Item item : this.vendedor.getPedido().getItems()) {
+                if (item.getProducto().getCodigo_p() == codigo_p) {
                     estado = true;
                     break;
                 }
             }
         }
-        
+
         return estado;
     }
-    
+
     @Override
     public boolean agregarItemAlPedido(Item item) {
 
@@ -106,7 +106,7 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
             if (this.vendedor.getPedido() == null) {
                 pedido = new Pedido(this.vendedor.getCedula(), 0, null);
                 pedido.setItems(new ArrayList<Item>());
-            }else{
+            } else {
                 pedido = this.vendedor.getPedido();
             }
 
@@ -120,9 +120,23 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
 
         return true;
     }
+
     @Override
-    public boolean registrarPedido() throws SQLException{
-        return new PedidoDAO().insertar(this.vendedor.getPedido(), this.campañaActiva.getCodigo_cam());
+    public boolean eliminarItemDelPedido(int posicion_item) {
+
+        Pedido pedido = this.vendedor.getPedido();
+        pedido.getItems().remove(posicion_item);
+        return true;
+    }
+
+    @Override
+    public boolean registrarPedido() throws SQLException {
+        boolean estado = new PedidoDAO().insertar(this.vendedor.getPedido(), this.campañaActiva.getCodigo_cam());
+
+        if (estado) {
+            this.vendedor.getPedido().setEstado((byte) 1);
+        }
+        return estado;
     }
 
     @Override
@@ -164,7 +178,7 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
     }
 
     @Override
-    public boolean agregarAlPedido(Item item){
+    public boolean agregarAlPedido(Item item) {
 
         if (this.vendedor.getPedido() == null) {
             this.vendedor.setPedido(new Pedido());

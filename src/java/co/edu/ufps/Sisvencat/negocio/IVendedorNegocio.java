@@ -32,6 +32,8 @@ public interface IVendedorNegocio {
     
     public boolean agregarItemAlPedido(Item item);
     
+    public boolean eliminarItemDelPedido(int codigo_item);
+    
     public boolean registrarPedido() throws SQLException;
     
     public boolean actualizarDatos(Vendedor vendedor)throws SQLException;

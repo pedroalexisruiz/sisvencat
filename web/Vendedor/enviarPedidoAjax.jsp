@@ -10,11 +10,11 @@
 <%
     if(Fachada.registrarPedido()){
         %>
-        <%="Pedido Realizado Correctamente"; %>
+        <%="Pedido Realizado Correctamente" %>
 <%
     }else{
 %>
-        <%="No se Pudo Realizar el Pedido"; %>
+        <%="No se Pudo Realizar el Pedido" %>
 <%
 }
 %>

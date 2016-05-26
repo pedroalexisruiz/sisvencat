@@ -78,7 +78,9 @@
                                         <tbody>
                                             <%
                                                 Producto p = null;
-                                                for (Item item : items) {
+                                                Item item = null;
+                                                for (int i = 0; i < items.size(); i++) {
+                                                    item = items.get(i);
                                                     p = item.getProducto();
                                                     String rutaimagen = (p.getImagenes().isEmpty()) ? "public/imgpremiosyproductos/imgnormal/lacoste-tenis-casuales-misano-22.jpg" : p.getImagenes().get(0).getUrlImagen();
                                             %>
@@ -88,31 +90,44 @@
                                                         <img src="<%=rutaimagen%>" alt="White Blouse Armani">
                                                     </a>
                                                 </td>
-                                                <td><a href="#" id="item" valor="<%=item.getCodigo_item() %>"><%=p.getNombre()%></a>
+                                                <td><a href="#" id="item" valor="<%=i%>"><%=p.getNombre()%></a>
                                                 </td>
                                                 <td>
                                                     <input type="number" value="<%=item.getCantidad()%>" class="form-control">
                                                 </td>
-                                                <td><%=formateador.format(p.getValor()) %></td>
-                                                <td><%=formateador.format(item.getValorTotal()) %></td>
-                                                <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                                <td><%=formateador.format(p.getValor())%></td>
+                                                <td><%=formateador.format(item.getValorTotal())%></td>
+                                                <%
+                                                    if (pedido.getEstado() != 1) {
+                                                %>
+                                                <td><a name="btnEliminarItem" onclick="eliminarItem(this.id)" id="<%=i%>"><i class="fa fa-trash-o"></i></a>
                                                 </td>
                                             </tr>
-                                            <%
+                                            <%}
                                                 }
                                             %>
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th colspan="5">Total</th>
-                                                <th colspan="2"><%=formateador.format(pedido.getValorTotal()) %></th>
+                                                <th colspan="2"><%=formateador.format(pedido.getValorTotal())%></th>
                                             </tr>
                                         </tfoot>
                                     </table>
 
                                 </div>
                                 <!-- /.table-responsive -->
-
+                                <%
+                                    if (pedido.getEstado() == 1) {
+                                %>
+                                <div class="box-footer">
+                                    <div class="text-center">
+                                        <h4 class="text-aqua">El Pedido ya fue Solicitado.</h4>
+                                    </div>
+                                </div>
+                                <%
+                                } else {
+                                %>
                                 <div class="box-footer">
                                     <div class="pull-left">
                                         <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continuar Comprando</a>
@@ -122,6 +137,10 @@
                                         </button>
                                     </div>
                                 </div>
+                                <%
+                                    }
+                                %>
+
 
                             </form>
                             <%

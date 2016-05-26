@@ -1,6 +1,6 @@
-function cargarProductos() {
+function cargarPremios() {
     $.ajax({
-        url: "listadoProductos.jsp",
+        url: "listadoPremios.jsp",
         type: "POST",
         data: {
             pagina: 1

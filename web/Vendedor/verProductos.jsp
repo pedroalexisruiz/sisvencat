@@ -75,19 +75,6 @@
         <script type="text/javascript" src="../public/js/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
         <script type="text/javascript" src="../public/js/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
         <script type="text/javascript" src="../public/js/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-        
-        <script>
-            function cargarProductos(){
-                $.ajax({
-                    url:"listadoProductos.jsp",
-                    type:"POST",
-                    data:{
-                        pagina:1
-                    }
-                }).done(function(respuesta){
-                    $('#results').append(respuesta);
-                });
-            }
-        </script>
+        <script src="../public/js/Producto.js" type="text/javascript"></script>
     </body>
 </html>
