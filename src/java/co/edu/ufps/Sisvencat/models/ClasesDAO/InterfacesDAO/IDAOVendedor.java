@@ -21,6 +21,8 @@ public interface IDAOVendedor {
 
     public boolean modificar(Vendedor ven) throws SQLException;
     
+    public boolean descontarPuntos(String cedula, int puntos) throws SQLException;
+    
     public boolean cambiarContraseña(Vendedor ven) throws SQLException;
 
     public boolean cambiarEstado(Vendedor ven) throws SQLException;

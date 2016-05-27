@@ -27,7 +27,7 @@ public interface IDAOPremio {
 
     public Premio getPremio(Premio pre) throws SQLException;
     
-    public boolean insertarPorVendedor(Premio pre, String cedula, long codigo_cam) throws SQLException;
+    public boolean insertarPorVendedor(long codigo_pre, String cedula, long codigo_cam) throws SQLException;
             
     public Premio getPremioPorVendedor(String cedula, long Codigo_cam) throws SQLException;
 

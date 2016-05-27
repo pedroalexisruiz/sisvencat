@@ -57,7 +57,7 @@
                                             <h5><%=vendedor.getNombre()%></h5>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>
                                             <h4 class="text-primary">Apellidos</h4>
@@ -66,16 +66,16 @@
                                             <h5><%=vendedor.getApellido()%></h5>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>
                                             <h4 class="text-primary">Cédula</h4>
                                         </td>
                                         <td>
-                                            <h5><%=formateador.format(Long.parseLong(vendedor.getCedula())) %></h5>
+                                            <h5><%=formateador.format(Long.parseLong(vendedor.getCedula()))%></h5>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>
                                             <h4 class="text-primary">Correo</h4>
@@ -84,7 +84,7 @@
                                             <h5><%=vendedor.getCorreo()%></h5>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>
                                             <h4 class="text-primary">Dirección</h4>
@@ -93,7 +93,7 @@
                                             <h5><%=vendedor.getDireccion()%></h5>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>
                                             <h4 class="text-primary">Teléfono</h4>
@@ -102,7 +102,7 @@
                                             <h5><%=vendedor.getTelefono()%></h5>
                                         </td>
                                     </tr>
-                                    
+
                                     <tr>
                                         <td>
                                             <h4 class="text-primary">Puntaje Acumulado</h4>
@@ -112,6 +112,25 @@
                                                 formateador = NumberFormat.getCurrencyInstance();
                                             %>
                                             <h5><%=formateador.format(vendedor.getPuntajeAcumulado())%></h5>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>
+                                            <h4 class="text-primary">Premio</h4>
+                                        </td>
+                                        <td>
+                                            <%
+                                                if (vendedor.getPremio() == null) {
+                                            %>
+                                            No posees solicitudes de premio en esta campaña.
+                                            <%
+                                            } else {
+                                            %>
+                                            <a href="detallePremio.jsp?id=<%=vendedor.getPremio().getCodigo_premio()%>"><%=vendedor.getPremio().getNombre()%></a>
+                                            <%
+                                                }
+                                            %>
                                         </td>
                                     </tr>
                                 </tbody>

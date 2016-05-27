@@ -120,6 +120,35 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     }
 
     @Override
+    public boolean descontarPuntos(String cedula, int puntos) throws SQLException {
+
+        String consulta = "UPDATE vendedor SET Puntaje_Acumulado=? WHERE Persona_Cedula=?";
+        PreparedStatement state = null;
+
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+            
+            state = con.getConexion().prepareStatement(consulta);
+            state.setInt(1, puntos);
+            state.setString(2, cedula);
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean cambiarContraseña(Vendedor ven) throws SQLException {
 
         String consulta = "UPDATE persona SET contrasena=? WHERE Cedula=?";
@@ -146,10 +175,6 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
                 this.closeConn();
             }
         }
-
-        state.close();
-
-        this.closeConn();
 
         return true;
     }

@@ -28,6 +28,8 @@ public interface IVendedorNegocio {
     
     public Producto getProducto(long codigo_p);
     
+    public Premio getPremio(long codig_pre);
+    
     public boolean existeItem(long codigo_p);
     
     public boolean agregarItemAlPedido(Item item);
@@ -42,11 +44,9 @@ public interface IVendedorNegocio {
     
     public List<Premio> listarPremios() throws SQLException;
     
-    public boolean solicitarPremio(Premio premio) throws SQLException;
+    public boolean solicitarPremio(long codigo_pre) throws SQLException;
 
     public List<Producto> listarProductos() throws SQLException;
     
     public boolean agregarAlPedido(Item item);
-    
-    public boolean enviarPedido(Pedido pedido) throws SQLException;
 }

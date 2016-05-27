@@ -12,7 +12,7 @@ function enviarPedido() {
 
     var confirmar = confirm("Está seguro de Realizar el Pedido. Tenga en cuenta que no podrá ser cancelado.");
 
-    if (confirmar==true) {
+    if (confirmar===true) {
         $.ajax({
             url: "enviarPedidoAjax.jsp",
             type: "GET"

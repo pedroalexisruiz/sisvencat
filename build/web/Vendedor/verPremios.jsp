@@ -38,9 +38,11 @@
 
                     <jsp:include page="../public/includes/vendedor/panelVendedor.jsp" />
                             <div class="col-md-9">
-                                <div id="results" class="box">
+                                <div class="box">
                                     <h1 class="text-primary text-center">Premios</h1>
                                     <p class="lead text-center">¡Te premiamos por tus ventas!</p>
+                                    
+                                    <div id="results"></div>
                                 </div>
                             </div>
                     <!-- /.container -->

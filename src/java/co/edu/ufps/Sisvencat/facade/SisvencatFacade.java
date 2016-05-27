@@ -125,6 +125,18 @@ public class SisvencatFacade implements Serializable {
             return this.vendedorN.getProducto(codigo_p);
         }
     }
+    
+    public Premio getPremio(long codigo_pre){
+        
+        if (this.adminN != null) {
+            return this.vendedorN.getPremio(codigo_pre);
+        }
+        if (this.vendedorN != null) {
+            return this.vendedorN.getPremio(codigo_pre);
+        } else {
+            return this.vendedorN.getPremio(codigo_pre);
+        }
+    }
 
     public List<Premio> listarPremios() throws SQLException {
         if (this.adminN != null) {
@@ -158,6 +170,10 @@ public class SisvencatFacade implements Serializable {
 
     public boolean registrarPedido() throws SQLException {
         return this.vendedorN.registrarPedido();
+    }
+    
+    public boolean solicitarPremio(long codigo_pre) throws SQLException{
+        return this.vendedorN.solicitarPremio(codigo_pre);
     }
 
     public boolean modificarDatosVendedor(String nombre, String apellido, String correo, String direccion, String telefono) throws SQLException {

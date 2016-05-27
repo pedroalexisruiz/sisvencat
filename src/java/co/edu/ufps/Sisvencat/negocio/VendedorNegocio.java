@@ -32,7 +32,7 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
     private Vendedor vendedor;
     private Campaña campañaActiva;
     private List<Premio> premios;
-    
+
     public VendedorNegocio() {
     }
 
@@ -80,6 +80,39 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
             }
         }
         return null;
+    }
+
+    @Override
+    public Premio getPremio(long codig_pre) {
+
+        for (Premio premio : this.premios) {
+            if (premio.getCodigo_premio() == codig_pre) {
+                return premio;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean solicitarPremio(long codigo_pre) throws SQLException {
+
+        PremioDAO pDAO = new PremioDAO();
+        Premio pre = new Premio();
+        pre.setCodigo_premio(codigo_pre);
+
+        if (pDAO.insertarPorVendedor(codigo_pre, vendedor.getCedula(), campañaActiva.getCodigo_cam())) {
+            vendedor.setPremio(pDAO.getPremio(pre));
+            int precio = vendedor.getPremio().getPuntosRequeridos();
+            this.descontarPrecio(precio);
+            vendedor.setPuntajeAcumulado(vendedor.getPuntajeAcumulado()-precio);
+            return true;
+        }
+        return false;
+
+    }
+    
+    private boolean descontarPrecio(int precio) throws SQLException{
+        return new VendedorDAO().descontarPuntos(vendedor.getCedula(), precio);
     }
 
     @Override
@@ -170,11 +203,6 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
     }
 
     @Override
-    public boolean solicitarPremio(Premio premio) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<Producto> listarProductos() throws SQLException {
         return new ProductoDAO().listar();
     }
@@ -190,10 +218,4 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
 
         return true;
     }
-
-    @Override
-    public boolean enviarPedido(Pedido pedido) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -203,7 +203,7 @@ public class PremioDAO implements Serializable, IDAOPremio {
 
     
     @Override
-    public boolean insertarPorVendedor(Premio pre, String cedula, long codigo_cam) throws SQLException {
+    public boolean insertarPorVendedor(long codigo_pre, String cedula, long codigo_cam) throws SQLException {
         
         String consulta = "INSERT INTO premioporvendedor VALUES(?,?,?)";
         PreparedStatement state = null;
@@ -214,7 +214,7 @@ public class PremioDAO implements Serializable, IDAOPremio {
             }
 
             state = con.getConexion().prepareStatement(consulta);
-            state.setString(1, pre.getNombre());
+            state.setLong(1,codigo_pre);
             state.setString(2, cedula);
             state.setLong(3, codigo_cam);
             state.execute();

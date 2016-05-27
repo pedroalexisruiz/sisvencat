@@ -14,7 +14,7 @@
             if (!Fachada.existeNegocioVendedor()) {
         %>
         <script>
-            alert("Acceso solo para el Administrador");
+            alert("Acceso solo para el Vendedor");
             location = "../../cerrarSesion.jsp";
         </script>
         <%
@@ -23,7 +23,7 @@
         } else {
             long id = Long.parseLong(request.getParameter("id"));
             Producto producto = Fachada.getProducto(id);
-            String imagenprincipal = (producto.getImagenes().isEmpty())?"../public/imgpremiosyproductos/imgnormal/nodisponible.jpg":producto.getImagenes().get(0).getUrlImagen();
+            String imagenprincipal = (producto.getImagenes().isEmpty()) ? "../public/imgpremiosyproductos/imgnormal/nodisponible.jpg" : producto.getImagenes().get(0).getUrlImagen();
         %>
         <title>Producto - Detalles</title>
     </head>
@@ -67,15 +67,25 @@
 
                                             <p class="text-center buttons">
                                                 <%
+                                                    if (Fachada.getVendedorLogeado().getPedido() != null) {
+                                                %>
+                                            <p>Ya confirmaste tu pedido.</p>
+                                            <button data-popup-open="popup-1" class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                            <%
+                                                }else{
                                                     if (Fachada.existeItem(id)) {
-                                                %>
-                                                <button data-popup-open="popup-1" class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
-                                                <%
-                                                } else {
-                                                %>
-                                                <button data-popup-open="popup-1" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
-                                                <%}
-                                                %>
+                                            %>
+                                            <p>El producto ya fue agregado a tu pedido.</p>
+                                            <button data-popup-open="popup-1" class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                            <%
+                                            } else {
+                                            %>
+                                            <button data-popup-open="popup-1" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                            <%}
+                                            %>
+                                            <%}
+                                            %>
+
                                             </p>
                                             <div class="popup" id="popup" data-popup="popup-1">
                                                 <div class="popup-inner">
@@ -168,11 +178,11 @@
 
         <script src="../public/js/jquery-1.11.0.min.js"></script>
         <script src="../public/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../public/js/jquery.cookie.js"></script>
-        <script src="../public/js/waypoints.min.js"></script>
-        <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
-        <script src="../public/js/owl.carousel.min.js"></script>
-        <script src="../public/js/front.js"></script>
+        <script src="../public/js/jquery.cookie.js" type="text/javascript"></script>
+        <script src="../public/js/waypoints.min.js" type="text/javascript"></script>
+        <script src="../public/js/modernizr.js" type="text/javascript"></script>
+        <script src="../public/js/owl.carousel.min.js" type="text/javascript"></script>
+        <script src="../public/js/front.js" type="text/javascript"></script>
         <script src="../public/js/Item.js" type="text/javascript"></script>
     </body>
     <%
