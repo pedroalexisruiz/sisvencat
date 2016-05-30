@@ -233,4 +233,6 @@ public interface IAdminNegocio {
     public List<Pedido> getPedidos() throws SQLException, ParseException;
     
     public boolean subirProductos(ArrayList<Producto> productos) throws SQLException;
+    
+    public boolean subirPremio(Premio pre) throws SQLException;
 }

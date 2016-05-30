@@ -11,6 +11,7 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import co.edu.ufps.Sisvencat.negocio.IAdminNegocio;
 import co.edu.ufps.Sisvencat.negocio.IGeneralNegocio;
@@ -126,6 +127,14 @@ public class SisvencatFacade implements Serializable {
         return this.adminN.getPedidos();
     }
 
+    public boolean registrarPremio(Premio pre) throws SQLException{
+        return this.adminN.subirPremio(pre);
+    }
+    
+    public boolean registrarZona(Zona zona) throws SQLException{
+        return this.adminN.registrarZona(zona);
+    }
+    
     public void iniciarNegocioGeneral() throws SQLException, ParseException {
         this.generalN = invocador.getGeneralNegocio();
         this.adminN = null;

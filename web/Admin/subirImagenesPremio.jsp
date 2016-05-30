@@ -66,7 +66,7 @@
                                         <div class="col-xs-12">
                                             <h2 class="text-primary text-center">Subir Imagenes</h2>
                                             <h4 class="text-muted">Puedes Subir Varias Imagenes a  la vez si lo deseas.</h4>
-                                            <form action="controladordeImagenes.jsp" method="POST" enctype="multipart/form-data">
+                                            <form action="controladordeImagenesPremio.jsp" method="POST" enctype="multipart/form-data">
                                                 <div align="center" class="form-group">
 
                                                     <input type="file" name="imagen" id="imagen"  multiple="multiple"/>

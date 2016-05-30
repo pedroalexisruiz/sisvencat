@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/General/listarPorCategoria.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Admin/registrarZona.jsp</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/src/java/co/edu/ufps/Sisvencat/negocio/AdminNegocio.java</file>
+            <file>file:/C:/Users/Administrator/Documents/NetBeansProjects/Sisvencat/web/Admin/controladorZona.jsp</file>
+        </group>
     </open-files>
 </project-private>

@@ -40,20 +40,18 @@
 
 
 
-                                    <form action="registrarZona" method="post">
+                                    <form>
                                         <div class="row">
                                             <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                                                <input class="form-control" type="text" name="Nombrezona" placeholder="Nombre de la Zona" required/>
+                                                <input class="form-control" type="text" name="Nombrezona" id="nombre" placeholder="Nombre de la Zona" required/>
                                             </div>
                                         </div>
                                         <br>
                                         <div class="row">
                                             <div class="form-group text-center">
-                                                <input name="enviar" class="btn btn-primary" type="submit" value="Registrar Zona" />
-                                                <button class="btnCancelar btn btn-default">Cancelar</button>
+                                                <input id="btnRegistrarZona" class="btn btn-primary" type="submit" value="Registrar Zona" />
                                             </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>
@@ -72,10 +70,7 @@
 
         <script src="../public/js/jquery-1.11.0.min.js"></script>
         <script src="../public/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../public/js/jquery.cookie.js"></script>
-        <script src="../public/js/waypoints.min.js"></script>
         <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
-        <script src="../public/js/owl.carousel.min.js"></script>
-        <script src="../public/js/front.js"></script>
+        <script src="../public/js/Zona.js" type="text/javascript"></script>
     </body>
 </html>

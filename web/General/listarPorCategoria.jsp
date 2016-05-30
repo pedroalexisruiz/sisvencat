@@ -64,7 +64,7 @@
                 + "<h3><a href='detalleProducto.jsp?id=" + producto.getCodigo_p() + "'>" + producto.getNombre() + "</a></h3>"
                 + "<p class='price'>" + formateador.format(producto.getValor()) + "</p>"
                 + "<p class='buttons'>"
-                + "<a href='' class='btn btn-primary'> Ver Detalles</a>"
+                + "<a href='detalleProducto.jsp?id=" + producto.getCodigo_p() + "' class='btn btn-primary'> Ver Detalles</a>"
                 + "</p>"
                 + "</div>"
                 + "<!-- /.text -->"

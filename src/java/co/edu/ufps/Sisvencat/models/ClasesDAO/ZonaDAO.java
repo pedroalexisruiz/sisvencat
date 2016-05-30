@@ -46,11 +46,9 @@ public class ZonaDAO implements Serializable, IDAOZona {
                 con = new Conexion();
             }
 
-            String insertar = "INSERT INTO zona VALUES(?,?,?)";
+            String insertar = "INSERT INTO zona(Nombre,estado) VALUES(?,1)";
             state = con.getConexion().prepareStatement(insertar);
-            state.setInt(1, zona.getCodigo_z());
-            state.setString(2, zona.getNombre());
-            state.setInt(3, zona.getEstado());
+            state.setString(1, zona.getNombre());
             state.execute();
 
         } catch (SQLException ex) {

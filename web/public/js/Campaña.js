@@ -10,9 +10,9 @@ $('#btnModificarCampaña').click(function (e) {
 
 function finalizarCampaña() {
     var codigo_cam = $('#btnDesactivarCampaña').attr("valor");
-    var confirm = confirm("Está Seguro de Finalizar la Campaña?");
+    var conf = confirm("Está Seguro de Finalizar la Campaña?");
 
-    if (confirm === true) {
+    if (conf === true) {
         $.ajax({
             url: "finalizarCampaña.jsp",
             type: "POST",

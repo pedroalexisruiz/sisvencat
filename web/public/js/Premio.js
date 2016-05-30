@@ -3,6 +3,28 @@ $('#btnSolicitarPremio').click(function (e) {
     solicitarPremio();
 });
 
+$('#btnRegistrarPremio').click(function (e) {
+    e.preventDefault();
+    registrarPremio();
+});
+
+function registrarPremio(){
+    var nombre = $('#Nombre').val();
+    var descripcion = $('#Descripcion').val();
+    var punto_requerido = $('#Punto_requerido').val();
+    var cantDisponible = $('#CantDisponible').val();
+    
+    $.ajax({
+        url:"registrarPremio.jsp",
+        type:"POST",
+        data:{
+            nombre:nombre, descripcion:descripcion, punto_requerido:punto_requerido, cantDisponible:cantDisponible
+        }
+    }).done(function(respuesta){
+        alert(respuesta);
+        location.reload();
+    });
+}
 function cargarPremios(pag) {
     $.ajax({
         url: "listadoPremios.jsp",
@@ -39,6 +61,4 @@ function solicitarPremio() {
             });
         }
     }
-
-
 }

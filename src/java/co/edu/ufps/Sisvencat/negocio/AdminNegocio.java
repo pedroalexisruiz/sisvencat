@@ -457,4 +457,8 @@ public class AdminNegocio implements Serializable, IAdminNegocio {
         return estado;
     }
 
+    @Override
+    public boolean subirPremio(Premio pre) throws SQLException{
+        return new PremioDAO().insertar(pre);
+    }
 }
