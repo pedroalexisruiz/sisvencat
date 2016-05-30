@@ -1,11 +1,11 @@
-$('#btnEnviarPedido').click(function (e) {
-    e.preventDefault();
-    enviarPedido();
-});
-
 $('#btnEliminarItem').click(function(e){
     e.preventDefault();
     eliminarItem();
+});
+
+$('#btnEnviarPedido').click(function(e){
+    e.preventDefault();
+    enviarPedido();
 });
 
 function enviarPedido() {
@@ -18,6 +18,7 @@ function enviarPedido() {
             type: "GET"
         }).done(function (respuesta) {
             alert(respuesta);
+            location.reload();
         });
     }
 }

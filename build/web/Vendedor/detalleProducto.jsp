@@ -25,6 +25,7 @@
             Producto producto = Fachada.getProducto(id);
             String imagenprincipal = (producto.getImagenes().isEmpty()) ? "../public/imgpremiosyproductos/imgnormal/nodisponible.jpg" : producto.getImagenes().get(0).getUrlImagen();
         %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Producto - Detalles</title>
     </head>
     <body>
@@ -62,23 +63,37 @@
                                             <h1 class="text-center"><%=producto.getNombre()%></h1>
                                             <p class="goToDescription"><a href="#details" class="scroll-to">Desplázate hacia abajo para conocer más detalles del premio.</a>
                                             </p>
+                                            <h5>Disponibles: <%=producto.getCantidad()%></h5>
                                             <p class="price">$<%=producto.getValor()%></p>
 
 
                                             <p class="text-center buttons">
                                                 <%
-                                                    if (Fachada.getVendedorLogeado().getPedido() != null) {
+                                                    if (producto.getCantidad() == 0) {
                                                 %>
+                                            <p>Agotado.</p>
+                                            <button class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                            <%
+                                            } else {
+
+if(Fachada.getVendedorLogeado().getPedido()!=null){
+if (Fachada.getVendedorLogeado().getPedido().getEstado()==1) {
+                                            %>
                                             <p>Ya confirmaste tu pedido.</p>
                                             <button data-popup-open="popup-1" class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
                                             <%
-                                                }else{
-                                                    if (Fachada.existeItem(id)) {
+                                            } else if (Fachada.existeItem(id)) {
                                             %>
                                             <p>El producto ya fue agregado a tu pedido.</p>
                                             <button data-popup-open="popup-1" class="btn btn-primary" disabled><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
                                             <%
-                                            } else {
+                                            }else {
+                                            %>
+                                            <button data-popup-open="popup-1" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
+                                            <%}
+                                            %> 
+<%}
+else {
                                             %>
                                             <button data-popup-open="popup-1" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Añadir Al Carrito</button>
                                             <%}
@@ -91,7 +106,7 @@
                                                 <div class="popup-inner">
                                                     <h2>Indique la Cantidad</h2>
                                                     <div class="col-xs-6 col-xs-offset-3 text-center">
-                                                        <input type="number" class="form-control" id="cantidad" name="cantidad"/>
+                                                        <input type="number" class="form-control" id="cantidad" name="cantidad" max="<%=producto.getCantidad()%>"/>
                                                     </div>
                                                     <br>
                                                     <br>
@@ -130,7 +145,10 @@
                                     <p>
                                     <h4>Detalles del Producto</h4>
 
-                                    <p><%=producto.getDescripcion()%>.</p>
+                                    <blockquote>
+                                        <p><em><%=producto.getDescripcion()%></em></p>
+                                    </blockquote>
+                                    
                                     <h4>Colores</h4>
                                     <ul>
                                         <%
@@ -151,14 +169,6 @@
                                                 }
                                             %>
                                     </ul>
-
-                                    <blockquote>
-                                        <p><em>Define el estilo de esta temporada con una nueva gama 
-                                                de Armani con sus Blusas-Vestidos de moda, hechos a mano
-                                                con detalles intrincados. Crean una apariencia elegante
-                                                combinándolos con vaqueros ajustados.</em>
-                                        </p>
-                                    </blockquote>
 
                                     <hr>
                                 </div>

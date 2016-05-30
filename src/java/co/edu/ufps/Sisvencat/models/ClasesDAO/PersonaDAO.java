@@ -31,7 +31,7 @@ public class PersonaDAO implements Serializable, IDAOPersona {
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
         
         state.setString(1, p.getCedula());
-        state.setString(2, p.getContraseña());
+        state.setString(2, contrasenaencriptada);
         
         ResultSet resultado = state.executeQuery();
         
@@ -91,7 +91,7 @@ public class PersonaDAO implements Serializable, IDAOPersona {
         }
         PreparedStatement enunciado = con.getConexion().prepareStatement("update persona set "
                 + "contrasena=? WHERE numDocumento=?");
-        enunciado.setString(1, p.getContraseña());
+        enunciado.setString(1, new Encriptador().encriptar(p.getContraseña()));
         enunciado.setString(2, p.getCedula());
         enunciado.execute();
 

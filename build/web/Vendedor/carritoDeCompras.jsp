@@ -27,6 +27,7 @@
 
         %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Vendedor - Pedido</title>
     </head>
     <body>
@@ -53,7 +54,7 @@
 
                             <form method="post" action="checkout1.html">
 
-                                <h1>Carrito de Compras</h1>
+                                <h1 class="text-center text-primary">Carrito de Compras</h1>
                                 <%                                    Pedido pedido = Fachada.getVendedorLogeado().getPedido();
                                     if (pedido == null) {
                                 %>
@@ -133,7 +134,7 @@
                                         <a href="category.html" class="btn btn-default"><i class="fa fa-chevron-left"></i> Continuar Comprando</a>
                                     </div>
                                     <div class="pull-right">
-                                        <button id="btnEnviarPedido" class="btn btn-primary">Confirmar Pedido <i class="fa fa-chevron-right"></i>
+                                        <button id="btnEnviarPedido" type="button" class="btn btn-primary">Confirmar Pedido <i class="fa fa-chevron-right"></i>
                                         </button>
                                     </div>
                                 </div>

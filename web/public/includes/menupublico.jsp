@@ -20,7 +20,7 @@
                             <div class="col-sm-3">
                                 <h5>Prendas</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/2-1">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=2&tipo=1&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/ropahombre.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -28,7 +28,7 @@
                             <div class="col-sm-3">
                                 <h5>Zapatos</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/2-2">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=2&tipo=2&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/zapatoshombre.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="col-sm-3">
                                 <h5>Accessorios</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/2-3">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=2&tipo=3&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/accesorioshombre.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -69,7 +69,7 @@
                             <div class="col-sm-3">
                                 <h5>Prendas</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/1-1">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=1&tipo=1&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/ropamujer.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -77,7 +77,7 @@
                             <div class="col-sm-3">
                                 <h5>Zapatos</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/1-2">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=1&tipo=2&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/zapatosmujer.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -85,7 +85,7 @@
                             <div class="col-sm-3">
                                 <h5>Accessorios</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/1-3">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=1&tipo=3&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/accesoriosmujer.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -118,7 +118,7 @@
                             <div class="col-sm-3">
                                 <h5>Prendas</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/3-1">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=3&tipo=1&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/ropaninos.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -126,7 +126,7 @@
                             <div class="col-sm-3">
                                 <h5>Zapatos</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/3-2">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=3&tipo=2&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/zapatosninos.png" class="img img-responsive" alt="">
                                     </a>
                                 </div>
@@ -134,7 +134,7 @@
                             <div class="col-sm-3">
                                 <h5>Accessorios</h5>
                                 <div class="banner">
-                                    <a href="<%= request.getContextPath()%>/Producto/categoriayTipo/3-3">
+                                    <a href="<%= request.getContextPath()%>/General/Categoria.jsp?cat=3&tipo=3&pagina=1">
                                         <img src="<%= request.getContextPath()%>/public/imgpremiosyproductos/imgnormal/accesoriosninos.jpg" class="img img-responsive" alt="">
                                     </a>
                                 </div>

@@ -13,13 +13,10 @@
                                     <li id="li1">
                                         <a href="ModificarDatos.jsp" id="modificardatos"><i class="fa fa-credit-card"></i>Modificar Datos</a>
                                     </li>
-                                    <li id="li5">
+                                    <li id="li2">
                                         <a href="registrarVendedor.jsp" id="gestionvendedores"><i class="fa fa-user"></i>Control de Vendedores</a>
                                     </li>
-                                    <li id="li6">
-                                        <a href="reuniones.jsp" id="gestionpremios"><i class="fa fa-shopping-cart"></i>Gestionar Reuniones</a>
-                                    </li>
-                                    <li id="li8">
+                                    <li id="li3">
                                         <a id="btncerrarSession" href="../cerrarSesion.jsp"><i class="fa fa-sign-out"></i> Salir</a>
                                     </li>
                                 </ul>

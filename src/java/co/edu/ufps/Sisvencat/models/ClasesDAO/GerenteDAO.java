@@ -5,6 +5,7 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
+import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -238,7 +239,7 @@ public class GerenteDAO implements Serializable, IDAOGerente {
         }
 
         PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setString(1, ger.getContraseña());
+        state.setString(1, new Encriptador().encriptar(ger.getContraseña()));
         state.setString(2, ger.getCedula());
         state.execute();
 

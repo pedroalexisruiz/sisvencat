@@ -1,5 +1,5 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,14 +38,12 @@
 
                                     <div class="row">
                                         <div class="col-xs-12">
-                                        <form enctype="multipart/form-data" action="uploadTabla" method="post">
+                                        <form enctype="multipart/form-data" action="cargadorDeProductos.jsp" method="post">
                                             <div class="form-group text-center">
                                                 <input name="archivo" id="file-3" type="file" size="35" required>
                                             </div>
                                             <div class="form-group text-center">
-                                                <button class="btnCancelar btn btn-default">Cancelar</button>
                                                 <input name="enviar" class="btn btn-primary" type="submit" value="Subir Archivo" />
-                                                <input name="action" type="hidden" value="upload" />  
                                             </div>
                                         </form>
                                     </div>

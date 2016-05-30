@@ -70,7 +70,11 @@ public class PremioDAO implements Serializable, IDAOPremio {
             }
 
             state = con.getConexion().prepareStatement(consulta);
-            state.setLong(1, pre.getCodigo_premio());
+            state.setString(1, pre.getNombre());
+            state.setString(2, pre.getDescripcion());
+            state.setInt(3, pre.getPuntosRequeridos());
+            state.setInt(4, pre.getCantidadDisponible());
+            state.setLong(5, pre.getCodigo_premio());
             state.execute();
         } catch (SQLException e) {
             throw e;

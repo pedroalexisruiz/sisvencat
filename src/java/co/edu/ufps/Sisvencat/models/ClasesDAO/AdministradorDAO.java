@@ -8,6 +8,7 @@ package co.edu.ufps.Sisvencat.models.ClasesDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOAdministrador;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
+import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -93,7 +94,7 @@ public class AdministradorDAO implements Serializable, IDAOAdministrador{
         PreparedStatement enunciado = con.getConexion().prepareStatement("UPDATE persona SET "
                 + "contrasena=? WHERE Cedula=?");
 
-        enunciado.setString(1,a.getContraseña());
+        enunciado.setString(1,new Encriptador().encriptar(a.getContraseña()));
         enunciado.setString(2,a.getCedula());
         
         enunciado.execute();

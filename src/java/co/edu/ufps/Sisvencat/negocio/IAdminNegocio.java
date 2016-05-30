@@ -7,13 +7,19 @@ package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Administrador;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Categoria;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Color;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Zona;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IAdminNegocio {
@@ -50,7 +56,7 @@ public interface IAdminNegocio {
      * @param campaña campaña con todos los datos necesarios
      * @return codigo de respuesta
      */
-    public int iniciarCampaña(Campaña campaña) throws SQLException;
+    public boolean iniciarCampaña(Campaña campaña) throws SQLException, ParseException;
     
     /**
      * Seleccionar Campaña con todos sus datos
@@ -79,7 +85,7 @@ public interface IAdminNegocio {
      * @param campaña campaña con el estado ya modificado
      * @return codigo de respuesta
      */
-    public int desactivarCampaña(Campaña campaña) throws SQLException;
+    public boolean desactivarCampaña() throws SQLException;
     
     //Gestion de Zonas
     /**
@@ -203,4 +209,28 @@ public interface IAdminNegocio {
     public boolean cambiarEstadoVendedor(String cedula, int estado) throws SQLException;
     
     public List<Premio> getListadoPremios() throws SQLException;
+
+    public Producto getProducto(long codigo_p);
+
+    public List<Categoria> getCategorias()throws SQLException;
+    
+    public ArrayList<Tipo> getTiposDePrenda()throws SQLException;
+    
+    public ArrayList<Color> getColores()throws SQLException;
+    
+    public ArrayList<String> getTallas() throws SQLException;
+    
+    public boolean modificarProducto(Producto p)throws SQLException;
+    
+    public boolean insertarImagenDeProducto(ArrayList<String> urls, long codigo_p) throws SQLException;
+    
+    public boolean modificarPremio(Premio p)throws SQLException;
+    
+    public boolean insertarImagenDePremio(ArrayList<String> urls, long codigo_p) throws SQLException;
+    
+    public Premio getPremio(long codig_pre) throws SQLException;
+    
+    public List<Pedido> getPedidos() throws SQLException, ParseException;
+    
+    public boolean subirProductos(ArrayList<Producto> productos) throws SQLException;
 }

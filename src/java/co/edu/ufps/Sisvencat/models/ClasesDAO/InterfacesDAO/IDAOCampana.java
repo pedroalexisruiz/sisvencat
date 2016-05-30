@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IDAOCampana {
     
-    public boolean inicarCampaña(Campaña cam) throws SQLException;
+    public boolean iniciarCampaña(Campaña cam) throws SQLException;
     
     public boolean finalizarCampaña(Campaña cam) throws SQLException;
     

@@ -68,7 +68,7 @@ public class ImagenPremioDAO implements Serializable, IDAOImagenPremio {
     @Override
     public boolean eliminarImagenesDePremio(Premio pre) throws SQLException {
 
-        String consulta = "DELETE * from imagenesdepremios WHERE Codigo_prem=?";
+        String consulta = "DELETE from imagenesdepremios WHERE Codigo_prem=?";
         PreparedStatement state = null;
 
         try {
@@ -94,7 +94,7 @@ public class ImagenPremioDAO implements Serializable, IDAOImagenPremio {
     @Override
     public boolean eliminarImagen(ImagenPremioDTO imagen) throws SQLException {
 
-        String consulta = "DELETE * from imagenesdepremios WHERE Id=?";
+        String consulta = "DELETE from imagenesdepremios WHERE Id=?";
         PreparedStatement state = null;
 
         try {

@@ -30,26 +30,34 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public boolean inicarCampaña(Campaña cam) throws SQLException {
+    public boolean iniciarCampaña(Campaña cam) throws SQLException {
 
-        String consulta = "INSERT INTO campana VALUES(null,?,?,?)";
+        String consulta = "INSERT INTO campana (Fecha_inicio, Fecha_fin,Estado,Tema)VALUES(?,?,1,?)";
+        PreparedStatement state = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+            state = con.getConexion().prepareStatement(consulta);
+            String fechain = formater.format(cam.getFechaIni().getTime());
+            String fechafin = formater.format(cam.getFechaFin().getTime());
+
+            state.setString(1, fechain);
+            state.setString(2, fechafin);
+            state.setString(3, cam.getTema());
+
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        String fechain = formater.format(cam.getFechaIni().getTime());
-        String fechafin = formater.format(cam.getFechaFin().getTime());
-
-        state.setString(1, fechain);
-        state.setString(2, fechafin);
-        state.setInt(3, cam.getEstado());
-
-        state.execute();
-
-        state.close();
-
-        this.closeConn();
 
         return true;
     }
@@ -58,101 +66,130 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     public boolean finalizarCampaña(Campaña cam) throws SQLException {
 
         String consulta = "UPDATE campana set Estado=? WHERE Codigo_cam=?";
+        PreparedStatement state = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setInt(1, 2);
+            state.setLong(2, cam.getCodigo_cam());
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, 2);
-        state.setLong(2, cam.getCodigo_cam());
-
-        state.execute();
-
-        state.close();
-
-        this.closeConn();
 
         return true;
     }
 
     @Override
-    public List<Campaña> listarCampañas()throws SQLException,ParseException {
+    public List<Campaña> listarCampañas() throws SQLException, ParseException {
 
         List<Campaña> campañas = new ArrayList();
 
         String consulta = "SELECT * FROM campana";
+        PreparedStatement state = null;
+        ResultSet rs = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+
+            rs = state.executeQuery();
+            Campaña campaña = null;
+
+            while (rs.next()) {
+
+                Calendar fechain = Calendar.getInstance();
+                fechain.setTime(formater.parse(rs.getString("Fecha_inicio")));
+
+                Calendar fechafin = Calendar.getInstance();
+                fechafin.setTime(formater.parse(rs.getString("Fecha_fin")));
+
+                campaña = new Campaña(fechain, fechafin, rs.getString("Tema"));
+                campaña.setCodigo_cam(rs.getInt("Codigo_cam"));
+                campaña.setEstado(rs.getInt("Estado"));
+                campaña.setProductos(new ProductoDAO().listarPorCampaña(campaña));
+
+                campañas.add(campaña);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-
-        ResultSet rs = state.executeQuery();
-        Campaña campaña = null;
-
-        while (rs.next()) {
-
-            Calendar fechain = Calendar.getInstance();
-            fechain.setTime(formater.parse(rs.getString("Fecha_inicio")));
-
-            Calendar fechafin = Calendar.getInstance();
-            fechafin.setTime(formater.parse(rs.getString("Fecha_fin")));
-
-            campaña = new Campaña(fechain, fechafin, rs.getString("Tema"));
-            campaña.setCodigo_cam(rs.getInt("Codigo_cam"));
-            campaña.setEstado(rs.getInt("Estado"));
-            campaña.setProductos(new ProductoDAO().listarPorCampaña(campaña));
-
-            campañas.add(campaña);
-        }
-
-        state.close();
-        rs.close();
-
-        this.closeConn();
 
         return campañas;
     }
 
     @Override
-    public List<Campaña> listarCampañasPorEstado(int estado)throws SQLException,ParseException {
-        
+    public List<Campaña> listarCampañasPorEstado(int estado) throws SQLException, ParseException {
+
         List<Campaña> campañas = new ArrayList();
 
         String consulta = "SELECT * FROM campana WHERE Estado=?";
+        PreparedStatement state = null;
+        ResultSet rs = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setInt(1, estado);
+
+            rs = state.executeQuery();
+            Campaña campaña = null;
+
+            while (rs.next()) {
+
+                Calendar fechain = Calendar.getInstance();
+                fechain.setTime(formater.parse(rs.getString("Fecha_inicio")));
+
+                Calendar fechafin = Calendar.getInstance();
+                fechafin.setTime(formater.parse(rs.getString("Fecha_fin")));
+
+                campaña = new Campaña(fechain, fechafin, rs.getString("Tema"));
+                campaña.setCodigo_cam(rs.getInt("Codigo_cam"));
+                campaña.setEstado(rs.getInt("Estado"));
+                campaña.setProductos(new ProductoDAO().listarPorCampaña(campaña));
+
+                campañas.add(campaña);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, estado);
-        
-        ResultSet rs = state.executeQuery();
-        Campaña campaña = null;
-
-        while (rs.next()) {
-
-            Calendar fechain = Calendar.getInstance();
-            fechain.setTime(formater.parse(rs.getString("Fecha_inicio")));
-
-            Calendar fechafin = Calendar.getInstance();
-            fechafin.setTime(formater.parse(rs.getString("Fecha_fin")));
-
-            campaña = new Campaña(fechain, fechafin, rs.getString("Tema"));
-            campaña.setCodigo_cam(rs.getInt("Codigo_cam"));
-            campaña.setEstado(rs.getInt("Estado"));
-            campaña.setProductos(new ProductoDAO().listarPorCampaña(campaña));
-
-            campañas.add(campaña);
-        }
-
-        state.close();
-        rs.close();
-
-        this.closeConn();
 
         return campañas;
     }
@@ -193,7 +230,7 @@ public class CampañaDAO implements Serializable, IDAOCampana {
     }
 
     @Override
-    public void closeConn() throws SQLException{
+    public void closeConn() throws SQLException {
 
         con.close();
         con = null;

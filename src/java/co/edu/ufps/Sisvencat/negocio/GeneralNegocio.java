@@ -6,10 +6,18 @@
 package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDAO.CampañaDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.CategoriasDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.ColorDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOCampana;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.PremioDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.TallasDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Categoria;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Color;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -25,7 +33,8 @@ public class GeneralNegocio implements Serializable, IGeneralNegocio {
     private Campaña campañaActiva;
 
     public GeneralNegocio() throws SQLException, ParseException {
-        this.campañaActiva = new CampañaDAO().listarCampañasPorEstado(1).get(0);
+        List<Campaña> campañas = new CampañaDAO().listarCampañasPorEstado(1);
+        this.campañaActiva = (!campañas.isEmpty()) ? campañas.get(0) : null;
     }
 
     @Override
@@ -85,5 +94,52 @@ public class GeneralNegocio implements Serializable, IGeneralNegocio {
 
         return productosPorCategoriaYTipo;
 
+    }
+
+    @Override
+    public List<Categoria> getCategorias() throws SQLException {
+        return new CategoriasDAO().getCategorias();
+    }
+
+    @Override
+    public ArrayList<Tipo> getTiposDePrenda() throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Color> getColores() throws SQLException {
+        return new ColorDAO().getColores();
+    }
+
+    @Override
+    public ArrayList<String> getTallas() throws SQLException {
+        return new TallasDAO().getTallas();
+    }
+
+    @Override
+    public Premio getPremio(long codig_pre) throws SQLException {
+
+        for (Premio premio : new PremioDAO().listar()) {
+            if (premio.getCodigo_premio() == codig_pre) {
+                return premio;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Categoria getCategoria(int id) throws SQLException {
+        return new CategoriasDAO().getCategoria(id);
+    }
+    
+    @Override
+    public Producto getProducto(long codig_p) {
+
+        for (Producto producto : this.campañaActiva.getProductos()) {
+            if (producto.getCodigo_p() == codig_p) {
+                return producto;
+            }
+        }
+        return null;
     }
 }

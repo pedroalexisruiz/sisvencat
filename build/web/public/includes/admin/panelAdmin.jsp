@@ -21,11 +21,7 @@ _________________________________________________________ -->
                     </ul>
                 </li>
                 <li id="li3">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-map-marker"></i>Zonas de Venta</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="registrarZona.jsp">Registrar Zona</a></li>
-                        <li><a href="listarZonas.jsp">Listado de Zonas</a></li>
-                    </ul>
+                    <a href="listarPedidos.jsp"><i class="fa fa-map-marker"></i>Pedidos</a>
                 </li>
                 <li id="li4">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i>Gestionar Gerentes</a>
@@ -59,6 +55,13 @@ _________________________________________________________ -->
                     </ul>
                 </li>
                 <li id="li8">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-map-marker"></i>Zonas de Venta</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="registrarZona.jsp">Registrar Zona</a></li>
+                        <li><a href="listarZonas.jsp">Listado de Zonas</a></li>
+                    </ul>
+                </li>
+                <li id="li9">
                     <a id="btncerrarSession" href="../cerrarSesion.jsp"><i class="fa fa-sign-out"></i> Salir</a>
                 </li>
             </ul>

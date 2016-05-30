@@ -6,10 +6,15 @@
 package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Categoria;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Color;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Persona;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,5 +33,19 @@ public interface IGeneralNegocio {
     
     public List<Producto> getProductosCampañaPorCategoria(int cat) throws SQLException;
     
+    public Producto getProducto(long codig_p);
+    
     public List<Producto> getProductosCampañaPorCategoriaYTipoPrenda(int cat, int tipo) throws SQLException;
+
+    public List<Categoria> getCategorias()throws SQLException;
+    
+    public ArrayList<Tipo> getTiposDePrenda()throws SQLException;
+    
+    public ArrayList<Color> getColores()throws SQLException;
+    
+    public ArrayList<String> getTallas() throws SQLException;
+    
+    public Premio getPremio(long codig_pre) throws SQLException;
+    
+    public Categoria getCategoria(int id) throws SQLException;
 }

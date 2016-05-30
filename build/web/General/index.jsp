@@ -343,7 +343,7 @@
                                             </div>
                                             <div class="back">
                                                 <a href="detail.html">
-                                                    <img src="../public/img/product2_2.jpg" alt="" class="img-responsive">
+                                                    <img src="../public/imgpremiosyproductos/miniatura/12744133_10208947874082376_4092073630596462574_n.jpg" alt="" class="img-responsive">
                                                 </a>
                                             </div>
                                         </div>

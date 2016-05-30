@@ -6,17 +6,25 @@
 package co.edu.ufps.Sisvencat.negocio;
 
 import co.edu.ufps.Sisvencat.models.ClasesDAO.CampañaDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.CategoriasDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.ColorDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOVendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.PedidoDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.PremioDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.ProductoDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.TallasDAO;
+import co.edu.ufps.Sisvencat.models.ClasesDAO.TipoDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.VendedorDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Categoria;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Color;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Item;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Premio;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Producto;
+import co.edu.ufps.Sisvencat.models.ClasesDTO.Tipo;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
+import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -103,7 +111,7 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
         if (pDAO.insertarPorVendedor(codigo_pre, vendedor.getCedula(), campañaActiva.getCodigo_cam())) {
             vendedor.setPremio(pDAO.getPremio(pre));
             int precio = vendedor.getPremio().getPuntosRequeridos();
-            this.descontarPrecio(precio);
+            this.descontarPrecio(vendedor.getPuntajeAcumulado()-precio);
             vendedor.setPuntajeAcumulado(vendedor.getPuntajeAcumulado()-precio);
             return true;
         }
@@ -170,6 +178,13 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
 
         if (estado) {
             this.vendedor.getPedido().setEstado((byte) 1);
+            this.vendedor.setPuntajeAcumulado(this.vendedor.getPuntajeAcumulado()+this.vendedor.getPedido().getValorTotal());
+            Producto p = null;
+            for(Item item:this.vendedor.getPedido().getItems()){
+                p = item.getProducto();
+                new ProductoDAO().descontarUnidades(p.getCodigo_p(), item.getCantidad());
+            }
+            new VendedorDAO().descontarPuntos(vendedor.getCedula(), vendedor.getPuntajeAcumulado());
         }
         return estado;
     }
@@ -184,11 +199,13 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
 
     @Override
     public boolean cambiarPassword(String contrasena, String contrasenanueva) throws SQLException {
-
-        if (this.vendedor.getContraseña().equals(contrasena)) {
+        
+        Encriptador e = new Encriptador();
+        
+        if (this.vendedor.getContraseña().equals(e.encriptar(contrasena))) {
 
             IDAOVendedor vDAO = new VendedorDAO();
-            this.vendedor.setContraseña(contrasenanueva);
+            this.vendedor.setContraseña(e.encriptar(contrasenanueva));
 
             return vDAO.cambiarContraseña(vendedor);
 
@@ -217,5 +234,25 @@ public class VendedorNegocio implements Serializable, IVendedorNegocio {
         this.vendedor.getPedido().setValorTotal(this.vendedor.getPedido().getValorTotal() + item.getValorTotal());
 
         return true;
+    }
+    
+    @Override
+    public List<Categoria> getCategorias() throws SQLException{
+        return new CategoriasDAO().getCategorias();
+    }
+    
+    @Override
+    public ArrayList<Tipo> getTiposDePrenda()throws SQLException{
+        return new TipoDAO().getTipos();
+    }
+    
+    @Override
+    public ArrayList<Color> getColores()throws SQLException{
+        return new ColorDAO().getColores();
+    }
+    
+    @Override
+    public ArrayList<String> getTallas() throws SQLException{
+        return new TallasDAO().getTallas();
     }
 }

@@ -3,11 +3,11 @@
 <%@page import="java.util.List"%>
 <%@page import="co.edu.ufps.Sisvencat.facade.SisvencatFacade"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
+<jsp:useBean class="co.edu.ufps.Sisvencat.facade.SisvencatFacade" id="Fachada" scope="session"></jsp:useBean>
+    <!DOCTYPE html>
+    <html>
+        <head>
         <%
-            SisvencatFacade Fachada = (SisvencatFacade) request.getSession().getAttribute("Fachada");
 
             if (Fachada == null) {
         %>
@@ -25,8 +25,6 @@
         <%
             }
             try {
-
-                List<Premio> premios = Fachada.getAdminN().getListadoPremios();
         %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
         <title>Admin - Premios</title>
@@ -50,69 +48,58 @@
                     </div>
 
                     <jsp:include page="../public/includes/admin/panelAdmin.jsp" />
-                    <div>
+                    <div class="col-md-9">
+                        <div id="results" class="box">
+                            <%
+                                List<Premio> premios = Fachada.getAdminN().getListadoPremios();
+                            %>
+                            <h1 class="text-primary">Listado de Premios</h1>
+                            <p class="lead">Desde esta sección podrás modificar o eliminar premios.</p>
 
-                        <div>
-                            <div class="col-md-9">
-                                <div id="results" class="box">
-                                    <h1 class="text-primary">Listado de Premios</h1>
-                                    <p class="lead">Desde esta sección podrás modificar o eliminar premios.</p>
+                            </br>
+                            <div class="input-group"> <span class="input-group-addon">Buscar</span>
+                                <input id="premioabuscar" type="text" class="form-control" placeholder="Ingresa el Nombre o el Código del Premio que deseas Buscar...">
+                            </div>
 
-                                    </br>
-                                    <div class="input-group"> <span class="input-group-addon">Buscar</span>
-                                        <input id="premioabuscar" type="text" class="form-control" placeholder="Ingresa el Nombre o el Código del Premio que deseas Buscar...">
-                                    </div>
-                                    
-                                    </br>
-                                    </br>
-                                    <div class="table-responsive">
+                            </br>
+                            </br>
+                            <div class="table-responsive">
 
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center">Codigo</th>
-                                                    <th class="text-center">Nombre</th>
-                                                    <th class="text-center">Descripcion</th>
-                                                    <th class="text-center">Acumulado Requerido</th>  
-                                                    <th class="text-center">Disponibles</th>
-                                                    <th class="text-center" colspan="3">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="buscar">
-                                                <%
-                                                    for(Premio premio:premios){
-                                                %>
-                                                <tr>
-                                                    <td class="text-center"><%=premio.getCodigo_premio() %></td>
-                                                    <td class="text-justify"><%=premio.getNombre()%></td>
-                                                    <td class="text-justify"><%=premio.getDescripcion()%></td>
-                                                    <td class="text-center"><%=premio.getPuntosRequeridos()%></td>
-                                                    <td class="text-center"><%=premio.getCantidadDisponible()%></td>
-                                                    <td class="text-center">
-                                                        <button name="premioacambiar" type="submit" id="<%=premio.getCodigo_premio() %>" class="btn btn-xs btn-info" data-toggle="tooltip" title="Cambiar Datos"><i class="fa fa-cogs"></i></button>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button name="BtnpremioImg" type="submit" id="<%=premio.getCodigo_premio() %>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Subir Imagenes"><i class="fa fa-file-o"></i></button>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <button name="premioaborrar" type="submit" id="<%=premio.getCodigo_premio() %>" class="btn btn-xs btn-danger" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o"></i></button>
-                                                    </td>
-                                                </tr>
-                                                <%
-                                                    }
-                                                %>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 text-center">
-                                            <button class="btnCancelar btn btn-default">Cancelar</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">Codigo</th>
+                                            <th class="text-center">Nombre</th>
+                                            <th class="text-center">Descripcion</th>
+                                            <th class="text-center">Acumulado Requerido</th>  
+                                            <th class="text-center">Disponibles</th>
+                                            <th class="text-center" colspan="2">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="buscar">
+                                        <%
+                                            for (Premio premio : premios) {
+                                        %>
+                                        <tr>
+                                            <td class="text-center"><%=premio.getCodigo_premio()%></td>
+                                            <td class="text-justify"><%=premio.getNombre()%></td>
+                                            <td class="text-justify"><%=premio.getDescripcion()%></td>
+                                            <td class="text-center"><%=premio.getPuntosRequeridos()%></td>
+                                            <td class="text-center"><%=premio.getCantidadDisponible()%></td>
+                                            <td class="text-center">
+                                                <a href="modificarPremio.jsp?id=<%=premio.getCodigo_premio()%>" class="btn btn-xs btn-info" data-toggle="tooltip" title="Cambiar Datos"><i class="fa fa-cogs"></i></a>
+                                            </td>
+                                            <td class="text-center">
+                                                <a href="subirImagenesPremio.jsp?id=<%=premio.getCodigo_premio()%>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Subir Imagenes"><i class="fa fa-file-o"></i></a>
+                                            </td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-
 
                     </div>
                     <!-- /.container -->

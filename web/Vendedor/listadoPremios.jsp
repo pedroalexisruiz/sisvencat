@@ -27,6 +27,8 @@
         }
         imgprincipal = (premio.getImagenes().isEmpty()) ? "../public/imgpremiosyproductos/imgnormal/nodisponible.jpg" : premio.getImagenes().get(0).getUrlImagen();
         imgsegundaria = (premio.getImagenes().isEmpty()) ? "../public/imgpremiosyproductos/imgnormal/nodisponible.jpg" : premio.getImagenes().get(premio.getImagenes().size() - 1).getUrlImagen();
+        imgprincipal = imgprincipal.replace("imgnormal", "miniatura");
+        imgsegundaria = imgsegundaria.replace("imgnormal", "miniatura");
         msg += "<div class='col-xs-12 col-sm-4'>"
                 + "<div class='item'>"
                 + "<div class='product'>"

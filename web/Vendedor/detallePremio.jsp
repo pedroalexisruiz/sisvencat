@@ -47,7 +47,7 @@
                     <jsp:include page="../public/includes/vendedor/panelVendedor.jsp" />
                     <div class="col-md-9">
 
-                        <div class="row" id="premio" codigo="<%=premio.getCodigo_premio()%>" puntosvendedor="<%=Fachada.getVendedorLogeado().getPuntajeAcumulado() %>">
+                        <div class="row" id="premio" codigo="<%=premio.getCodigo_premio()%>" puntosvendedor="<%=Fachada.getVendedorLogeado().getPuntajeAcumulado()%>">
                             <div class="col-sm-6">
                                 <div id="mainImage">
                                     <img src="<%=imagenprincipal%>" alt="" class="img-responsive">
@@ -59,9 +59,17 @@
                                     <h1 class="text-center"><%=premio.getNombre()%></h1>
                                     <p class="goToDescription"><a href="#details" class="scroll-to">Desplázate hacia abajo para conocer más detalles del premio.</a>
                                     </p>
-                                    <p class="price" id="precio" precio="<%=premio.getPuntosRequeridos() %>">$<%=premio.getPuntosRequeridos()%></p>
+                                    <p class="price" id="precio" precio="<%=premio.getPuntosRequeridos()%>">$<%=premio.getPuntosRequeridos()%></p>
 
                                     <%
+                                        if (Fachada.getCampañaActiva() == null) {
+                                    %>
+                                    <p>No se pueden solicitar Premios mientras que no haya campañas Activas.</p>
+                                    <p class="text-center buttons">
+                                        <button disabled class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Solicitar</button> 
+                                    </p>
+                                    <%
+                                    }else{
                                         if (Fachada.getVendedorLogeado().getPremio() == null) {
                                     %>
                                     <p class="text-center buttons">
@@ -76,6 +84,7 @@
                                     </p>
                                     <%
                                         }
+}
                                     %>
 
                                 </div>
@@ -124,7 +133,7 @@
         <script src="../public/js/owl.carousel.min.js" type="text/javascript"></script>
         <script src="../public/js/front.js" type="text/javascript"></script>
         <script src="../public/js/Premio.js" type="text/javascript"></script>
-        
+
     </body>
     <%
         }

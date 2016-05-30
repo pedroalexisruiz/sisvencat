@@ -150,6 +150,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
                 try {
                     System.out.println("Error en la Transacción. Revirtiendo Cambios");
                     con.getConexion().rollback();
+                    e.printStackTrace();
                 } catch (SQLException ex) {
                     throw ex;
                 }
@@ -219,7 +220,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
 
     @Override
     public boolean desasignarTallas(long codigo_p) throws SQLException {
-        String consulta = "DELETE * FROM tallaporproducto WHERE Codigo_p=?";
+        String consulta = "DELETE FROM tallaporproducto WHERE Codigo_p=?";
         PreparedStatement state = null;
 
         try {
@@ -287,7 +288,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
     @Override
     public boolean desasignarColores(long codigo_p) throws SQLException {
 
-        String consulta = "DELETE * FROM colorporproducto WHERE Codigo_p=?";
+        String consulta = "DELETE FROM colorporproducto WHERE Codigo_p=?";
         PreparedStatement state = null;
 
         try {
@@ -433,7 +434,7 @@ public class ProductoDAO implements Serializable, IDAOProducto {
                 + "producto.Codigo_p=productosporcampana.idProducto INNER JOIN "
                 + "tipodeprenda ON producto.idTipoPrenda=tipodeprenda.id INNER JOIN categorias ON "
                 + "producto.idCategoria=categorias.id WHERE "
-                + "productosporcampana.idCampana=?";
+                + "productosporcampana.idCampana=? ORDER BY producto.idCategoria";
 
         List<Producto> productos = new ArrayList();
         PreparedStatement state = null;
@@ -674,6 +675,32 @@ public class ProductoDAO implements Serializable, IDAOProducto {
         return pr;
     }
 
+    @Override
+    public boolean descontarUnidades(long codigo_pro, int unidades) throws SQLException{
+        String consulta = "UPDATE producto SET cantidad= cantidad-? WHERE Codigo_p=?";
+        PreparedStatement state = null;
+        
+        try{
+            if(con==null){
+                con = new Conexion();
+            }
+            state = con.getConexion().prepareStatement(consulta);
+            state.setInt(1, unidades);
+            state.setLong(2, codigo_pro);
+            state.execute();
+        }catch(SQLException e){
+            throw e;
+        }finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
+        }
+        
+        return true;
+    }
     @Override
     public void closeConn() throws SQLException {
         con.close();

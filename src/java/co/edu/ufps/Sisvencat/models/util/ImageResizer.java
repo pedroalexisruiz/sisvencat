@@ -15,25 +15,17 @@ import javax.imageio.ImageIO;
 public class ImageResizer {
 
     //Ancho máximo
-    public static int MAX_WIDTH = 800;
+    public static int MAX_WIDTH = 450;
     //Alto máximo
-    public static int MAX_HEIGHT = 800;
+    public static int MAX_HEIGHT = 600;
 
     /*Este método recibe la ruta al archivo original y la ruta donde vamos a guardar la copia
     copyImage("C:\\Users\\IngenioDS\\Desktop\\test.png","C:\\Users\\IngenioDS\\Desktop\\Copia\\test2.png");*/
     public static void copyImage(String filePath, String copyPath) {
         BufferedImage bimage = loadImage(filePath);
-        if (bimage.getHeight() > bimage.getWidth()) {
-            int heigt = (bimage.getHeight() * MAX_WIDTH) / bimage.getWidth();
-            bimage = resize(bimage, MAX_WIDTH, heigt);
-            int width = (bimage.getWidth() * MAX_HEIGHT) / bimage.getHeight();
-            bimage = resize(bimage, width, MAX_HEIGHT);
-        } else {
-            int width = (bimage.getWidth() * MAX_HEIGHT) / bimage.getHeight();
-            bimage = resize(bimage, width, MAX_HEIGHT);
-            int heigt = (bimage.getHeight() * MAX_WIDTH) / bimage.getWidth();
-            bimage = resize(bimage, MAX_WIDTH, heigt);
-        }
+
+        bimage = resize(bimage, MAX_WIDTH, MAX_HEIGHT);
+
         saveImage(bimage, copyPath);
     }
 

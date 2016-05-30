@@ -11,6 +11,7 @@ import co.edu.ufps.Sisvencat.models.ClasesDAO.InterfacesDAO.IDAOVendedor;
 import co.edu.ufps.Sisvencat.models.ClasesDAO.VendedorDAO;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
+import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import java.io.Serializable;
 import java.sql.SQLException;
 
@@ -52,10 +53,11 @@ public class GerenteNegocio implements Serializable, IGerenteNegocio {
     @Override
     public boolean cambiarPassword(String contrasena, String contrasenanueva) throws SQLException {
 
-        if (this.gerente.getContraseña().equals(contrasena)) {
+        Encriptador e = new Encriptador();
+        if (this.gerente.getContraseña().equals(e.encriptar(contrasena))) {
 
             IDAOGerente gDAO = new GerenteDAO();
-            this.gerente.setContraseña(contrasenanueva);
+            this.gerente.setContraseña(e.encriptar(contrasenanueva));
 
             return gDAO.cambiarContraseña(gerente);
 

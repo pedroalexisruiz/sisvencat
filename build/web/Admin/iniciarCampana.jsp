@@ -1,9 +1,31 @@
 
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="co.edu.ufps.Sisvencat.facade.SisvencatFacade"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+            SisvencatFacade Fachada = (SisvencatFacade) request.getSession().getAttribute("Fachada");
+
+            if (Fachada == null) {
+        %>
+        <script>
+            alert("Debe Iniciar Sesión");
+            location = "../General/login.jsp";
+        </script>
+        <%
+        } else if (Fachada.getAdminN() == null) {
+        %>
+        <script>
+            alert("Acceso solo para el Administrador");
+            location = "../../cerrarSesion.jsp";
+        </script>
+        <%
+            }
+            try {
+        %>
         <jsp:include page="../public/includes/importarlibrerias.jsp" />
         <link href="../public/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css"/>
         <title>Admin - Campaña</title>
@@ -27,47 +49,50 @@
                     </div>
 
                     <jsp:include page="../public/includes/admin/panelAdmin.jsp" />
-                    <div>
 
-                        <div>
-                            <div class="col-md-9">
-                                <div id="results" class="box">
-                                    <h1 class="text-primary">Gestión de Campañas</h1>
+                    <div class="col-md-9">
+                        <div id="results" class="box">
+                            <%
+                                if (Fachada.getCampañaActiva() != null) {
+                            %>
+                            <h2 class="text-primary">Ya existe una Campaña Activa.</h2>
+                            <%
+                            } else {
+                            %>
 
-                                    <h3>Agregar Campaña</h3>
+                            <h1 class="text-primary text-center">Gestión de Campañas</h1>
 
-                                    <p class="lead text-muted">Desde esta sección podrás añadir las campañas nuevas.</p>
+                            <h3>Agregar Campaña</h3>
 
-                                    <form id="registroCampaña" action="crearCampaña" method="post">
+                            <p class="lead text-muted">Desde esta sección podrás añadir las campañas nuevas.</p>
 
-                                        <div class="row">
-                                            <div class="col-md-4 form-group">
-                                                <label for="text">Fecha de Inicio</label>
-                                                <input type="text" class="form-control" id="datepicker" name="Fecha_inicio" required>
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label for="text">Fecha de Finalización</label>
-                                                <input type="text" class="form-control" id="datepicker" name="Fecha_fin" required>
-                                            </div>
-                                            <div class="col-md-4 form-group">
-                                                <label for="text">Tema</label>
-                                                <input type="text" class="form-control" name="Tema" required>
-                                            </div>
-                                        </div>
-                                        <div class="row">
+                            <form id="registroCampaña" action="registrarCampaña.jsp" method="post">
 
-                                            <div class="col-sm-12 form-group" align="center">
-                                                <button class="btnCancelar btn btn-default">Cancelar</button>
-                                                <input name="enviar" class="btn btn-primary" type="submit" value="Registrar Campaña" />
-                                            </div>
-                                        </div>
-
-                                    </form>
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <label for="text">Fecha de Inicio</label>
+                                        <input type="text" class="form-control" id="datepicker" name="Fecha_inicio" required>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="text">Fecha de Finalización</label>
+                                        <input type="text" class="form-control" id="datepicker" name="Fecha_fin" required>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <label for="text">Tema</label>
+                                        <input type="text" class="form-control" name="Tema" required>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="row">
+
+                                    <div class="col-sm-12 form-group" align="center">
+                                        <input class="btn btn-primary" type="submit" value="Registrar Campaña" />
+                                    </div>
+                                </div>
+
+                            </form>
+                            <%}
+                            %>
                         </div>
-
-
                     </div>
                     <!-- /.container -->
                 </div>
@@ -93,4 +118,12 @@
             });
         </script>
     </body>
+    <%
+    } catch (Exception e) {
+    %>
+    <%="Error: " + e.getMessage()%>
+    <%
+            e.printStackTrace();
+        }
+    %>
 </html>

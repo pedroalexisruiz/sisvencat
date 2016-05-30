@@ -8,7 +8,7 @@
 <%@page import="co.edu.ufps.Sisvencat.models.ClasesDTO.Campaña"%>
 <%@page import="java.util.List"%>
 <%@page import="co.edu.ufps.Sisvencat.facade.SisvencatFacade"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -56,9 +56,6 @@
                     </div>
 
                     <jsp:include page="../public/includes/admin/panelAdmin.jsp" />
-                    <div>
-
-                        <div>
                             <div class="col-md-9">
                                 <div id="results" class="box">
                                     <h1 class="text-primary">Gestión de Campañas</h1>
@@ -69,8 +66,8 @@
                                         <p>Desde esta sección podrás listar las campañas registradas y modificar la información de la campaña activa o finalizarla si es necesario.</p>
 
                                         <%
-                                            if (Fachada.getAdminN().getCampañaActiva() != null) {
-                                                Campaña campañaactiva = Fachada.getAdminN().getCampañaActiva();
+                                            if (Fachada.getCampañaActiva() != null) {
+                                                Campaña campañaactiva = Fachada.getCampañaActiva();
                                         %>
                                         <h3 class="text-center text-primary lead">Campaña Activa</h3>
                                         <div class="table-responsive">
@@ -91,10 +88,10 @@
                                                         <td class="text-center"><%=campañaactiva.getFechaFinString()%></td>
                                                         <td class="text-center"><%=campañaactiva.getTema()%></td>
                                                         <td class="text-center">
-                                                            <button name="modificarcampaña" type="submit" id="<%=campañaactiva.getCodigo_cam()%>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modificar"><i class="fa fa-cogs"></i></button>
+                                                            <button id="btnModificarCampaña" type="submit" valor="<%=campañaactiva.getCodigo_cam()%>" class="btn btn-xs btn-primary" data-toggle="tooltip" title="Modificar"><i class="fa fa-cogs"></i></button>
                                                         </td>
                                                         <td class="text-center">
-                                                            <button name="desactivarcampaña" type="submit" id="<%=campañaactiva.getCodigo_cam()%>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Desactivar"><i class="fa fa-trash-o"></i></button>
+                                                            <button id="btnDesactivarCampaña" type="submit" valor="<%=campañaactiva.getCodigo_cam()%>" class="btn btn-xs btn-success" data-toggle="tooltip" title="Desactivar"><i class="fa fa-trash-o"></i></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -135,10 +132,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                    </div>
                     <!-- /.container -->
                 </div>
                 <!-- /#content -->
@@ -150,11 +143,7 @@
 
         <script src="../public/js/jquery-1.11.0.min.js"></script>
         <script src="../public/js/bootstrap/bootstrap.min.js"></script>
-        <script src="../public/js/jquery.cookie.js"></script>
-        <script src="../public/js/waypoints.min.js"></script>
-        <script src="../public/js/bootstrap/bootstrap-hover-dropdown.js"></script>
-        <script src="../public/js/owl.carousel.min.js"></script>
-        <script src="../public/js/front.js"></script>
+        <script src="../public/js/Campaña.js" type="text/javascript"></script>
     </body>
     <%
     } catch (SQLException e) {

@@ -50,7 +50,7 @@ public class PedidoDAO implements Serializable, IDAOPedido {
         PreparedStatement stateiditem = null;
         PreparedStatement stateidpedido = null;
         ResultSet rs = null;
-        
+
         try {
             if (con == null) {
                 con = new Conexion();
@@ -58,20 +58,20 @@ public class PedidoDAO implements Serializable, IDAOPedido {
             con.getConexion().setAutoCommit(false);
             stateiditem = con.getConexion().prepareStatement(consultaiditem);
             stateidpedido = con.getConexion().prepareStatement(consultaidpedido);
-            
-            int idp =0, idi=0;
+
+            int idp = 0, idi = 0;
             rs = stateiditem.executeQuery();
-            
-            while(rs.next()){
-                idi=rs.getInt(1);
+
+            while (rs.next()) {
+                idi = rs.getInt(1);
             }
-            
+
             rs = stateidpedido.executeQuery();
-            
-            while(rs.next()){
-                idp=rs.getInt(1);
+
+            while (rs.next()) {
+                idp = rs.getInt(1);
             }
-            
+
             state3 = con.getConexion().prepareStatement(consulta3);
             state = con.getConexion().prepareStatement(consulta);
             state2 = con.getConexion().prepareStatement(consulta2);
@@ -80,21 +80,21 @@ public class PedidoDAO implements Serializable, IDAOPedido {
             state3.setLong(2, codigo_cam);
             state3.setInt(3, pedido.getValorTotal());
             state3.setInt(4, idp);
-            
+
             state2.setLong(1, idp);
-            
+
             for (Item item : pedido.getItems()) {
                 state.setLong(1, item.getProducto().getCodigo_p());
                 state.setInt(2, item.getCantidad());
                 state.setInt(3, item.getValorTotal());
                 state.setInt(4, idi);
-                
+
                 state2.setLong(2, idi);
                 state.addBatch();
                 state2.addBatch();
                 idi++;
             }
-            
+
             state3.execute();
             state.executeBatch();
             state2.executeBatch();
@@ -141,31 +141,45 @@ public class PedidoDAO implements Serializable, IDAOPedido {
     @Override
     public List<Pedido> listarPorCampaña(Campaña cam) throws SQLException, ParseException {
 
-        String consulta = "SELECT pedido.*,persona.*,premio.* FROM pedido INNER JOIN premio ON "
-                + "pedido.Premio_Codigo_prem=premio.Codigo_prem WHERE "
-                + "pedido.Campana_Codigo_cam=?";
+        String consulta = "SELECT * FROM pedido WHERE Campana_Codigo_cam=?";
         List<Pedido> pedidos = new ArrayList();
+        PreparedStatement state = null;
+        ResultSet rs = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setLong(1, cam.getCodigo_cam());
+            rs = state.executeQuery();
+
+            Pedido p = null;
+
+            while (rs.next()) {
+                Calendar fechapedido = Calendar.getInstance();
+                fechapedido.setTime(formater.parse(rs.getString("Fecha_pedido")));
+
+                p = new Pedido(rs.getInt("Codigo_pedido"), rs.getString("Vendedor_Persona_Cedula"), rs.getInt("Valor_total"), fechapedido);
+                p.setItems(new ItemDAO().getItemsPorPedido(p.getCodigo_pedido()));
+                p.setEstado(rs.getByte("estado"));
+                pedidos.add(p);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
 
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setLong(1, cam.getCodigo_cam());
-        ResultSet rs = state.executeQuery();
-
-        Pedido p = null;
-
-        while (rs.next()) {
-            Calendar fechapedido = Calendar.getInstance();
-            fechapedido.setTime(formater.parse(rs.getString("Fecha_pedido")));
-
-            p = new Pedido(rs.getInt("Codigo_pedido"), rs.getString("Vendedor_Persona_Cedula"), rs.getInt("Valor_total"), fechapedido);
-            p.setItems(new ItemDAO().getItemsPorPedido(p.getCodigo_pedido()));
-            p.setEstado(rs.getByte("estado"));
-            pedidos.add(p);
-        }
-        this.closeConn();
         return pedidos;
     }
 

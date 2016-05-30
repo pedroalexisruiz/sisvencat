@@ -10,6 +10,7 @@ import co.edu.ufps.Sisvencat.models.ClasesDTO.Gerente;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Pedido;
 import co.edu.ufps.Sisvencat.models.ClasesDTO.Vendedor;
 import co.edu.ufps.Sisvencat.models.util.Conexion;
+import co.edu.ufps.Sisvencat.models.util.Encriptador;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -99,22 +100,31 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     public boolean modificar(Vendedor ven) throws SQLException {
 
         String consulta = "UPDATE persona SET Nombre=?, Apellido=?, Correo=?, Direccion=?, Telefono=? WHERE cedula=?";
+        PreparedStatement state = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setString(1, ven.getNombre());
+            state.setString(2, ven.getApellido());
+            state.setString(3, ven.getCorreo());
+            state.setString(4, ven.getDireccion());
+            state.setString(5, ven.getTelefono());
+            state.setString(6, ven.getCedula());
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setString(1, ven.getNombre());
-        state.setString(2, ven.getApellido());
-        state.setString(3, ven.getCorreo());
-        state.setString(4, ven.getDireccion());
-        state.setString(5, ven.getTelefono());
-        state.setString(6, ven.getCedula());
-        state.execute();
-
-        state.close();
-
-        this.closeConn();
 
         return true;
     }
@@ -129,7 +139,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             if (con == null) {
                 con = new Conexion();
             }
-            
+
             state = con.getConexion().prepareStatement(consulta);
             state.setInt(1, puntos);
             state.setString(2, cedula);
@@ -161,7 +171,7 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
             }
 
             state = con.getConexion().prepareStatement(consulta);
-            state.setString(1, ven.getContraseña());
+            state.setString(1, new Encriptador().encriptar(ven.getContraseña()));
             state.setString(2, ven.getCedula());
 
             state.execute();
@@ -183,19 +193,27 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
     public boolean cambiarEstado(Vendedor ven) throws SQLException {
 
         String consulta = "UPDATE persona SET estado=? WHERE Cedula=?";
+        PreparedStatement state = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            state.setInt(1, ven.getEstado());
+            state.setString(2, ven.getCedula());
+            state.execute();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        state.setInt(1, ven.getEstado());
-        state.setString(2, ven.getCedula());
-        state.execute();
-
-        state.close();
-
-        this.closeConn();
 
         return true;
     }
@@ -206,29 +224,40 @@ public class VendedorDAO implements Serializable, IDAOVendedor {
         List<Vendedor> vendedores = new ArrayList();
 
         String consulta = "SELECT persona.*,vendedor.Puntaje_Acumulado from persona INNER JOIN vendedor ON persona.Cedula=vendedor.Persona_Cedula";
+        PreparedStatement state = null;
+        ResultSet rs = null;
 
-        if (con == null) {
-            con = new Conexion();
+        try {
+            if (con == null) {
+                con = new Conexion();
+            }
+
+            state = con.getConexion().prepareStatement(consulta);
+            rs = state.executeQuery();
+            Vendedor vendedor = null;
+
+            while (rs.next()) {
+
+                vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"), rs.getString("Cedula"),
+                        rs.getString("Nombre"), rs.getString("Apellido"), rs.getString("Correo"),
+                        rs.getString("Direccion"), rs.getString("Telefono"), rs.getString("contrasena"),
+                        rs.getInt("TipoUsuario"));
+                vendedor.setEstado(rs.getInt("estado"));
+                vendedores.add(vendedor);
+            }
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (state != null) {
+                state.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
+            if (con != null) {
+                this.closeConn();
+            }
         }
-
-        PreparedStatement state = con.getConexion().prepareStatement(consulta);
-        ResultSet rs = state.executeQuery();
-        Vendedor vendedor = null;
-
-        while (rs.next()) {
-
-            vendedor = new Vendedor(rs.getInt("Puntaje_Acumulado"), rs.getString("Cedula"),
-                    rs.getString("Nombre"), rs.getString("Apellido"), rs.getString("Correo"),
-                    rs.getString("Direccion"), rs.getString("Telefono"), rs.getString("contrasena"),
-                    rs.getInt("TipoUsuario"));
-            vendedor.setEstado(rs.getInt("estado"));
-            vendedores.add(vendedor);
-        }
-
-        state.close();
-        rs.close();
-
-        this.closeConn();
 
         return vendedores;
     }

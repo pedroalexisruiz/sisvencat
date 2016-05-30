@@ -39,5 +39,7 @@ public interface IDAOProducto {
     
     public boolean existe(Producto p) throws SQLException;
     
+    public boolean descontarUnidades(long codigo_pro, int unidades) throws SQLException;
+    
     public void closeConn() throws SQLException ;
 }

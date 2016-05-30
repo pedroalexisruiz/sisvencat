@@ -95,7 +95,7 @@ public class ImagenProductoDAO implements Serializable, IDAOImagenProducto {
     @Override
     public boolean eliminarImagenesDeProducto(Producto pro) throws SQLException {
 
-        String consulta = "DELETE * from imagenesdeproductos WHERE Codigo_Producto=?";
+        String consulta = "DELETE from imagenesdeproductos WHERE Codigo_Producto=?";
         PreparedStatement state = null;
 
         try {

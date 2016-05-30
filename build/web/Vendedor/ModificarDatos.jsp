@@ -54,7 +54,7 @@
                     <div>
                         <div class="col-md-9">
                             <div id="results" class="box">
-                                <h1>Modificar Datos</h1>
+                                <h1 class="text-center text-primary">Modificar Datos</h1>
                                 <p class="lead">Cambia tus datos Personales o tu contraseña en esta sección.</p>
                                 <p class="text-muted">Ten en cuenta que el departamento no se podrá cambiar, si te mudarás a otro contacta con tu gerente de zona <a>aquí</a>.</p>
 
